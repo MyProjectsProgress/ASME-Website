@@ -29,7 +29,7 @@ exports.createFormValidator = [
         .isEmail()
         .withMessage('Invalid email address')
         .custom((val) => {
-            Form.findOne({ email: val }).then((found) => {
+            return Form.findOne({ email: val }).then((found) => {
                 if (found) {
                     return Promise.reject(new Error('E-mail is in use'));
                 }
