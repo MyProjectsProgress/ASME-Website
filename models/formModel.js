@@ -5,15 +5,10 @@ const formSchema = new mongoose.Schema(
         name: {
             type: String,
             required: [true, 'You must enter your name'],
-            trim: true,
             minlength: [9, 'You must enter your full name'],
-            maxlength: [40, 'You must type shorter than 40 characters']
-        },
-
-        slug: {
-            type: String,
-            required: true,
+            maxlength: [40, 'You must type shorter than 40 characters'],
             lowercase: true,
+            trim: true,
         },
 
         phoneNumber: {
@@ -69,6 +64,10 @@ const formSchema = new mongoose.Schema(
         },
 
         comment: {
+            type: String
+        },
+
+        previousExperience: {
             type: String
         }
     },

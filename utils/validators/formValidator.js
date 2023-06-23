@@ -1,4 +1,3 @@
-const slugify = require('slugify');
 const { check, body } = require('express-validator');
 
 const validatorMiddleware = require('../../middlewares/validatorMiddleware');
@@ -8,14 +7,11 @@ const Form = require('../../models/formModel');
 exports.createFormValidator = [
     check('name')
         .notEmpty()
-        .withMessage('Name is required')
+        .withMessage('Name should be between 9 and 40 characters')
         .isLength({ min: 9 })
         .withMessage('Too short name')
-        .custom((val, { req }) => {
-            req.body.slug = slugify(val);
-            return true;
-        }),
-
+        .isLength({ max: 40 })
+        .withMessage('Name should be between 9 and 40 characters'),
 
     check('phoneNumber')
         .notEmpty()
@@ -40,19 +36,25 @@ exports.createFormValidator = [
         .notEmpty()
         .withMessage('university is required')
         .isLength({ min: 2 })
-        .withMessage('Too short name'),
+        .withMessage('University name should be between 2 and 40 characters')
+        .isLength({ max: 40 })
+        .withMessage('University name should be between 2 and 40 characters'),
 
     check('faculty')
         .notEmpty()
-        .withMessage('faculty is required')
+        .withMessage('Faculty is required')
         .isLength({ min: 2 })
-        .withMessage('Too short faculty name'),
+        .withMessage('Faculty name should be between 2 and 40 characters')
+        .isLength({ max: 40 })
+        .withMessage('Faculty name should be between 2 and 40 characters'),
 
-    check('faculty')
+    check('department')
         .notEmpty()
-        .withMessage('deparment is required')
+        .withMessage('Deparment is required')
         .isLength({ min: 2 })
-        .withMessage('Too short department name'),
+        .withMessage('Department name should be between 2 and 40 characters')
+        .isLength({ max: 40 })
+        .withMessage('Department name should be between 2 and 40 characters'),
 
     check('graduationYear')
         .notEmpty()
