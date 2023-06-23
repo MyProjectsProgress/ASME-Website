@@ -4,7 +4,7 @@
   "description": "Asme Website Packages.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/MyProjectsProgress/ASME-Website/issues"
   },
-  "homepage": "https://github.com/MyProjectsProgress/ASME-Website#readme"
+  "homepage": "https://github.com/MyProjectsProgress/ASME-Website#readme",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "express-validator": "^7.0.1",
+    "mongoose": "^7.3.1",
+    "morgan": "^1.10.0",
+    "slugify": "^1.6.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
