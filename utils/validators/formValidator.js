@@ -7,9 +7,9 @@ const Form = require('../../models/formModel');
 exports.createFormValidator = [
     check('name')
         .notEmpty()
-        .withMessage('Name should be between 9 and 40 characters')
+        .withMessage('Name is required')
         .isLength({ min: 9 })
-        .withMessage('Too short name')
+        .withMessage('Name should be between 9 and 40 characters')
         .isLength({ max: 40 })
         .withMessage('Name should be between 9 and 40 characters'),
 
@@ -17,7 +17,7 @@ exports.createFormValidator = [
         .notEmpty()
         .withMessage('Phone number is required')
         .isMobilePhone(['ar-EG'])
-        .withMessage('invalid phone number, accept Egyptian phone numbers only'),
+        .withMessage('Invalid phone number, accept Egyptian phone numbers only'),
 
     check('email')
         .notEmpty()
@@ -27,14 +27,14 @@ exports.createFormValidator = [
         .custom((val) => {
             return Form.findOne({ email: val }).then((found) => {
                 if (found) {
-                    return Promise.reject(new Error('E-mail is in use'));
+                    return Promise.reject(new Error('Email is in use'));
                 }
             })
         }),
 
     check('university')
         .notEmpty()
-        .withMessage('university is required')
+        .withMessage('University is required')
         .isLength({ min: 2 })
         .withMessage('University name should be between 2 and 40 characters')
         .isLength({ max: 40 })
@@ -58,7 +58,7 @@ exports.createFormValidator = [
 
     check('graduationYear')
         .notEmpty()
-        .withMessage('graduationYear is required'),
+        .withMessage('Graduation year is required'),
 
     validatorMiddleware,
 ];

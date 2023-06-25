@@ -13,12 +13,14 @@ const ApiError = require('./utils/apiError');
 const globalError = require('./middlewares/errorMiddleware');
 
 // Importing Routes
-const formRoute = require('./routes/formRoute')
+const formRoute = require('./routes/formRoute');
+const adminRoute = require('./routes/adminRoute');
 
 // Connect the database
 dbConncetion();
 
 const app = express();
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 // Middlewares
 app.use(express.json());
@@ -30,6 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Mount Routes
 app.use('/api/v1/form', formRoute);
+app.use('/api/v1/admin', adminRoute);
 
 // WORKS WHEN THE URL IS NOT IN THE PREDEFINED URIS
 app.all("*", (req, res, next) => {
