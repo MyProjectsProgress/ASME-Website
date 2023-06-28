@@ -1,33 +1,35 @@
 const express = require('express');
 
+const {
+    createAdminValidator,
+    getAdminValidator,
+    updateAdminValidator,
+    deleteAdminValidator,
+    changeAdminPasswordValidator,
+} = require('../utils/validators/adminValidator');
+
+const {
+    createAdmin,
+    getAdmin,
+    getAdmins,
+    updateAdmin,
+    deleteAdmin,
+    deleteAll,
+    changeAdminPassword,
+} = require('../controllers/adminController');
+
 const router = express.Router();
 
-const {
-    createMemberValidator,
-    getMemberValidator,
-    updateMemberValidator,
-    deleteMemeberValidator
-} = require('../utils/validators/memberValidator');
-
-const {
-    createMember,
-    getMember,
-    getMembers,
-    updateMember,
-    deleteMember,
-    deleteAll,
-    imageProcessing,
-    uploadImage,
-} = require('../controllers/memberController');
+router.put('/changePassword/:id', changeAdminPasswordValidator, changeAdminPassword);
 
 router.route('/')
-    .get(getMembers)
-    .post(uploadImage, imageProcessing, createMemberValidator, createMember)
+    .get(getAdmins)
+    .post(createAdminValidator, createAdmin)
     .delete(deleteAll)
 
 router.route('/:id')
-    .get(getMemberValidator, getMember)
-    .put(uploadImage, imageProcessing, updateMemberValidator, updateMember)
-    .delete(deleteMemeberValidator, deleteMember)
+    .get(getAdminValidator, getAdmin)
+    .put(updateAdminValidator, updateAdmin)
+    .delete(deleteAdminValidator, deleteAdmin)
 
 module.exports = router;

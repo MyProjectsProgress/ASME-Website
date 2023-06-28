@@ -25,7 +25,7 @@ exports.createMemberValidator = [
         .withMessage('Email is required')
         .isEmail()
         .withMessage('Invalid email address')
-        .custom((val) => {
+        .custom(async (val) => {
             return Member.findOne({ email: val }).then((found) => {
                 if (found) {
                     return Promise.reject(new Error('Email is in use'));
@@ -71,7 +71,7 @@ exports.updateMemberValidator = [
         .optional()
         .isEmail()
         .withMessage('Invalid email address')
-        .custom((val) => {
+        .custom(async (val) => {
             return Member.findOne({ email: val }).then((found) => {
                 if (found) {
                     return Promise.reject(new Error('Email is in use'));
@@ -82,7 +82,7 @@ exports.updateMemberValidator = [
     validatorMiddleware,
 ];
 
-exports.deleteMemeberValidator = [
+exports.deleteMemberValidator = [
     check('id')
         .isMongoId()
         .withMessage('Invalid Category ID Format'),

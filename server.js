@@ -9,12 +9,14 @@ const morgan = require('morgan');
 // Project Files
 dotenv.config({ path: 'config.env' });
 const dbConncetion = require('./config/database');
-const ApiError = require('./utils/apiError');
 const globalError = require('./middlewares/errorMiddleware');
+const ApiError = require('./utils/apiError');
 
 // Importing Routes
 const formRoute = require('./routes/formRoute');
+const memberRoute = require('./routes/memberRoute');
 const adminRoute = require('./routes/adminRoute');
+const authRoute = require('./routes/authRoute');
 
 // Connect the database
 dbConncetion();
@@ -32,7 +34,9 @@ if (process.env.NODE_ENV === 'development') {
 
 // Mount Routes
 app.use('/api/v1/form', formRoute);
+app.use('/api/v1/member', memberRoute);
 app.use('/api/v1/admin', adminRoute);
+app.use('/api/v1/auth', authRoute);
 
 // WORKS WHEN THE URL IS NOT IN THE PREDEFINED URIS
 app.all("*", (req, res, next) => {

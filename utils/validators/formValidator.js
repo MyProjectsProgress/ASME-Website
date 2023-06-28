@@ -24,7 +24,7 @@ exports.createFormValidator = [
         .withMessage('Email is required')
         .isEmail()
         .withMessage('Invalid email address')
-        .custom((val) => {
+        .custom(async (val) => {
             return Form.findOne({ email: val }).then((found) => {
                 if (found) {
                     return Promise.reject(new Error('Email is in use'));

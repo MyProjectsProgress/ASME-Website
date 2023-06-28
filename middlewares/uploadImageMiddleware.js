@@ -1,6 +1,7 @@
 const multer = require('multer');
 const ApiError = require('../utils/apiError');
 
+// @desc    Uploading single image
 exports.uploadImage = () => {
 
     // memory storage is used to store image as a buffer so that we could apply image processing on it
