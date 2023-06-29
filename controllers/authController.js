@@ -1,6 +1,5 @@
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
 const { createToken, comparePasswords } = require('../utils/helperFunctions');
@@ -13,7 +12,7 @@ const Admin = require('../models/adminModel');
 // @access Public
 exports.adminLogin = asyncHandler(async (req, res, next) => {
     // 1- check if password and email in the body (validation layer)
-    // 2- check if user exist & check if password matches the password admin password in database
+    // 2- check if admin exist & check if password matches the password admin password in database
     const admin = await Admin.findOne({ email: req.body.email });
 
     let isEqual = false
@@ -23,7 +22,7 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
     };
 
     if (!admin || !isEqual) {
-        // can't clearify that the problem in the password only to not allow user to keep trying different passwords, 401 unauthenticated
+        // can't clearify that the problem in the password only to not allow admin to keep trying different passwords, 401 unauthenticated
         return next(new ApiError('Incorrect Email Or Password', 401));
     };
     // 3- generate token
@@ -34,7 +33,7 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
 
 });
 
-// @desc    make sure the user is logged in
+// @desc    make sure the admin is logged in
 exports.protect = asyncHandler(async (req, res, next) => {
     // 1- Check if token exist, if true get it
     let token;
@@ -62,7 +61,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
         // if admin changed password then we parse the time changed at then convert it to seconds from ms
         const passwordChangedTimeStamp = parseInt(currentAdmin.passwordChangedAt.getTime() / 1000, 10);
 
-        // if true "time of changing password is after his token creation" so password changed after token created (Error, user must login again so we redirect user to the login page)
+        // if true "time of changing password is after his token creation" so password changed after token created (Error, admin must login again so we redirect admin to the login page)
         if (passwordChangedTimeStamp > decoded.iat) {
             return next(new ApiError('Admin has recently changed his password. Please login again..'), 401);
         };
@@ -80,7 +79,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
 // closures
 exports.allowedTo = (...roles) => asyncHandler(async (req, res, next) => {
     // 1- access roles
-    // 2- access registered user
+    // 2- access registered admin
     if (!roles.includes(req.admin.role)) {
         return next(new ApiError('You are not allowed to access this route', 403));
     };
@@ -89,61 +88,54 @@ exports.allowedTo = (...roles) => asyncHandler(async (req, res, next) => {
 });
 
 
-// @desc   Login
-// @route  POST /api/v1/auth/login
+// @desc   Forget Password
+// @route  POST /api/v1/auth/forgetPassowrd
 // @access Public
 exports.forgetPassword = asyncHandler(async (req, res, next) => {
-    // 1- Get user by email
-    const user = await Admin.findOne({ email: req.body.email });
-    if (!user) {
-        return next(new ApiError(`There is no user with that email: ${req.body.email}`, 404));
+    // 1- Get admin by email
+    const admin = await Admin.findOne({ email: req.body.email });
+    if (!admin) {
+        return next(new ApiError(`There is no admin with that email: ${req.body.email}`, 404));
     };
-    // 2- if user exists "email in database", generate 6 digits radnomly and save it in db then hash them
+    // 2- if admin exists "email in database", generate 6 digits radnomly and save it in db then hash them
     const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // hashing password reset code before saving it in database 
     const cryptedResetCode = crypto.createHash('sha256').update(resetCode).digest('hex');
 
     // save hashed password reset code into database
-    user.passwordResetCode = cryptedResetCode;
+    admin.passwordResetCode = cryptedResetCode;
 
     // add expiration time for password reset code "10 minute"
-    user.passwordResetExpiration = Date.now() + 10 * 60 * 1000;
+    admin.passwordResetExpiration = Date.now() + 10 * 60 * 1000;
 
-    // verify vode is false by default
-    user.passwordResetVerification = false;
+    // verify code is false by default
+    admin.passwordResetVerification = false;
 
-    await user.save();
+    await admin.save();
 
     const message =
-        `Hi ${user.name}, \n
-        We recieved a request to reset the password on your E-shop Account. \n
-        ${resetCode} \n
-        Enter this code to complete the reset. \n
-        Tahnks for helping us keep your account secure
-        The E-shop Team
-        `;
-    // Playing arround with my friends
-    //     `Hi ${user.name}, \n
-    //     We noticed your efforts and knowledge regarding the global climate issue through the form and we decided to give you a paid intern in our company.\n
-    //     Please check this link for further information: https://docs.google.com/document/d/1RKdTW12M6go9eSSgeeGLCzjL_QrgP6_uqj-FhPsZyqU/edit?usp=sharing\n
-    //     Green Climate Fund Org Team.
-    // `;
+        `<p>Dear ${admin.email.split('@')[0].split('.')[0]},</p>
+    <p>We have received a request to reset your password. Please enter the following code to complete the process.</p>
+    <p>${resetCode}</p>
+    <p>Thanks for helping us keep your account secure</p>
+    <p>Best regards,<br>ASME CUSB Team</p>`
 
     // 3- Send the reset code via email
     // asyncHandler catches error by try catch here is used to set the attributes to undefined to not be stored in database and the response is failed asln!
     try {
         await sendEmail({
-            email: user.email,
+            email: admin.email,
             subject: 'Your Password Reset  Code (Valid For 10 Minutes)',
-            // subject: 'Congratulations!, You are accepted in Green Climate Fund Internship!',
             message: message,
         });
 
     } catch (error) {
-        user.passwordResetCode = undefined;
-        user.passwordResetExpiration = undefined;
-        user.passwordResetVerification = undefined;
+        admin.passwordResetCode = undefined;
+        admin.passwordResetExpiration = undefined;
+        admin.passwordResetVerification = undefined;
 
-        await user.save();
+        await admin.save();
         return (new ApiError('There is an error in sending email'));
     };
 
@@ -154,7 +146,7 @@ exports.forgetPassword = asyncHandler(async (req, res, next) => {
 // @route  POST /api/v1/auth/verifyResetCode
 // @access Public
 exports.verifyPassResetCode = asyncHandler(async (req, res, next) => {
-    // 1- get user based on his reset code that is encrypted
+    // 1- get admin based on his reset code that is encrypted
 
     // crypting the body reset code to compare to the one in database
     const cryptedResetCode =
@@ -162,19 +154,19 @@ exports.verifyPassResetCode = asyncHandler(async (req, res, next) => {
             .update(req.body.resetCode)
             .digest('hex');
 
-    // getting the user based on the reset code and checking its expiraiton validity
-    const user = await Admin.findOne({
+    // getting the admin based on the reset code and checking its expiraiton validity
+    const admin = await Admin.findOne({
         passwordResetCode: cryptedResetCode,
         passwordResetExpiration: { $gte: Date.now() },
     });
 
-    if (!user) {
+    if (!admin) {
         return next(new ApiError('Reset code invalid or expired'));
     };
 
-    user.passwordResetVerification = true;
+    admin.passwordResetVerification = true;
 
-    await user.save();
+    await admin.save();
 
     res.status(200).json({
         status: 'success',
@@ -185,28 +177,28 @@ exports.verifyPassResetCode = asyncHandler(async (req, res, next) => {
 // @route  POST /api/v1/auth/resetPassword
 // @access Public
 exports.resetPassword = asyncHandler(async (req, res, next) => {
-    // get user based on email
-    const user = await Admin.findOne({ email: req.body.email });
+    // get admin based on email
+    const admin = await Admin.findOne({ email: req.body.email });
 
-    if (!user) {
-        return next(new ApiError(`There is no user with this email: ${req.body.email}`, 404));
+    if (!admin) {
+        return next(new ApiError(`There is no admin with this email: ${req.body.email}`, 404));
     };
 
     // check if reset code is veified
-    if (!user.passwordResetVerification) {
+    if (!admin.passwordResetVerification) {
         return next(new ApiError('Reset code is not verified', 400));
     };
 
     // if verified update the reset values to undefined
-    user.password = req.body.newPassword;
-    user.passwordResetCode = undefined;
-    user.passwordResetExpiration = undefined;
-    user.passwordResetVerification = undefined;
+    admin.password = req.body.newPassword;
+    admin.passwordResetCode = undefined;
+    admin.passwordResetExpiration = undefined;
+    admin.passwordResetVerification = undefined;
 
-    await user.save();
+    await admin.save();
 
-    // generate new token for the user ba2a
-    const token = await createToken(user._id);
+    // generate new token for the admin ba2a
+    const token = await createToken(admin._id);
 
     res.status(200).json({ token: token });
 });

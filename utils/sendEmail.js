@@ -14,10 +14,10 @@ const sendEmail = async (options) => {
 
     // 2- define email options "from - to - subject - content"
     const mailOptions = {
-        from: `E-Shop App <${process.env.EMAIL_USERNAME}>`,
+        from: `ASME CUSB <${process.env.EMAIL_USERNAME}>`,
         to: options.email,
         subject: options.subject,
-        text: options.message,
+        html: options.message,
     };
 
     // 3- send email
