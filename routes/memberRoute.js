@@ -1,6 +1,6 @@
 const express = require('express');
 
-const router = express.Router();
+const { protect, allowedTo } = require('../controllers/authController');
 
 const {
     createMemberValidator,
@@ -19,6 +19,13 @@ const {
     imageProcessing,
     uploadImage,
 } = require('../controllers/memberController');
+
+const router = express.Router();
+
+router.use(protect);
+
+// Admin
+router.use(allowedTo('admin'));
 
 router.route('/')
     .get(getMembers)

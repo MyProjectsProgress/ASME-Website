@@ -20,6 +20,12 @@ const sendErrorForProd = (err, res) => {
     });
 };
 
+// when payload is changed 
+const handleJwtInvalidSignature = () => new ApiError('Invalid token, please login again', 401);
+
+// when token expired "the 90d configured in .env"
+const handleJwtExpired = () => new ApiError('Expired token, please login again', 401);
+
 /*
 we use this function in server.js, in express it consider any function 
 with 4 arguments an error function and provide the first parameter as error

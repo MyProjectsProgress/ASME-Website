@@ -1,5 +1,7 @@
 const express = require('express');
 
+const { protect, allowedTo } = require('../controllers/authController');
+
 const {
     createAdminValidator,
     getAdminValidator,
@@ -20,11 +22,16 @@ const {
 
 const router = express.Router();
 
+router.use(protect);
+
 router.put('/changePassword/:id', changeAdminPasswordValidator, changeAdminPassword);
+
+// Admin
+router.use(allowedTo('admin'));
 
 router.route('/')
     .get(getAdmins)
-    .post(createAdminValidator, createAdmin)
+    .post(protect, createAdminValidator, createAdmin)
     .delete(deleteAll)
 
 router.route('/:id')

@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
 
 const factory = require('./handlersFactory');
-const createToken = require('../utils/createToken');
+const { createToken } = require('../utils/helperFunctions');
 const Admin = require('../models/adminModel');
 
 // @desc   Create New Admin
@@ -14,6 +14,7 @@ exports.createAdmin = asyncHandler(async (req, res, next) => {
         email: req.body.email,
         // passowrd will be hashed in adminModel.js
         password: req.body.password,
+        role: req.body.role,
     });
 
     // 2- Generate Json Web Token
@@ -42,6 +43,7 @@ exports.updateAdmin = asyncHandler(async (req, res, next) => {
     const document = await Admin.findByIdAndUpdate(req.params.id,
         {
             email: req.body.email,
+            role: req.body.role,
         },
         { new: true });
 
@@ -60,7 +62,8 @@ exports.changeAdminPassword = asyncHandler(async (req, res, next) => {
     // updating password
     const document = await Admin.findByIdAndUpdate(req.params.id,
         {
-            password: await bcrypt.hash(req.body.password, 12)
+            password: await bcrypt.hash(req.body.password, 12),
+            passwordChangedAt: Date.now(),
         },
         { new: true });
 

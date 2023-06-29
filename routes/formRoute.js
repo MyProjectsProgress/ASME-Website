@@ -1,10 +1,10 @@
 const express = require('express');
 
-const router = express.Router();
-
 const { createForm } = require('../controllers/formController');
 
 const { createFormValidator } = require('../utils/validators/formValidator');
+
+const router = express.Router();
 
 router.route('/').post(createFormValidator, createForm);
 

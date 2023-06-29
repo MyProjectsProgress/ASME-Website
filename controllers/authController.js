@@ -3,29 +3,34 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 
-const createToken = require('../utils/createToken');
+const { createToken, comparePasswords } = require('../utils/helperFunctions');
 const sendEmail = require('../utils/sendEmail');
-const factory = require('./handlersFactory');
 const ApiError = require('../utils/apiError');
 const Admin = require('../models/adminModel');
 
 // @desc   Login
-// @route  GET /api/v1/auth/login
+// @route  POST /api/v1/auth/login
 // @access Public
 exports.adminLogin = asyncHandler(async (req, res, next) => {
     // 1- check if password and email in the body (validation layer)
-    // 2- check if user exist & check if password matches the password user password in database
-    const user = await Admin.findOne({ email: req.body.email });
+    // 2- check if user exist & check if password matches the password admin password in database
+    const admin = await Admin.findOne({ email: req.body.email });
 
-    if (!user || !(await bcrypt.compare(req.body.password, user.password))) {
-        // can't clearify that the problem in the password only to not allow user to keep trying different passwords
+    let isEqual = false
+
+    if (admin) {
+        isEqual = await comparePasswords(req.body.password, admin.password);
+    };
+
+    if (!admin || !isEqual) {
+        // can't clearify that the problem in the password only to not allow user to keep trying different passwords, 401 unauthenticated
         return next(new ApiError('Incorrect Email Or Password', 401));
     };
     // 3- generate token
-    const token = await createToken(user._id);
+    const token = await createToken(admin._id);
 
     // 4- send response to client side
-    res.status(200).json({ data: user, token });
+    res.status(200).json({ data: admin, token });
 
 });
 
@@ -46,16 +51,16 @@ exports.protect = asyncHandler(async (req, res, next) => {
     // 2- Verify token (no change is made in payload, expired token)
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY); // returns the payload of the token "_id"
 
-    // 3- Check if user exists
-    const currentUser = await Admin.findById(decoded.userId);
-    if (!currentUser) {
+    // 3- Check if admin exists in database
+    const currentAdmin = await Admin.findById(decoded.adminId);
+    if (!currentAdmin) {
         return next(new ApiError('Admin that belong to this token does no longer exist', 401));
     }
 
-    // 4- Check if user change his password after token is created
-    if (currentUser.passwordChangedAt) {
-        // if user changed password then we parse the time changed at then convert it to seconds from ms
-        const passwordChangedTimeStamp = parseInt(currentUser.passwordChangedAt.getTime() / 1000, 10);
+    // 4- Check if admin change his password after token is created
+    if (currentAdmin.passwordChangedAt) {
+        // if admin changed password then we parse the time changed at then convert it to seconds from ms
+        const passwordChangedTimeStamp = parseInt(currentAdmin.passwordChangedAt.getTime() / 1000, 10);
 
         // if true "time of changing password is after his token creation" so password changed after token created (Error, user must login again so we redirect user to the login page)
         if (passwordChangedTimeStamp > decoded.iat) {
@@ -64,19 +69,19 @@ exports.protect = asyncHandler(async (req, res, next) => {
     };
 
     // to access the request for next middleware "allowedTo"
-    req.user = currentUser;
+    req.admin = currentAdmin;
 
     next();
 });
 
 // @ desc   Authorization (Admin Permissions)
-// roles: ['admin', 'manager']
+// roles: ['admin', 'sub-admin']
 // (..roles) is a function that return async middleware
 // closures
 exports.allowedTo = (...roles) => asyncHandler(async (req, res, next) => {
     // 1- access roles
     // 2- access registered user
-    if (!roles.includes(req.user.role)) {
+    if (!roles.includes(req.admin.role)) {
         return next(new ApiError('You are not allowed to access this route', 403));
     };
 
