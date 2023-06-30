@@ -1,0 +1,226 @@
+/* Import "Poppins" google font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Animation */
+@keyframes rotate {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(-180deg);}
+}
+
+/* General Page Styling */
+*{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background-color: rgb(240, 240, 240);
+    scroll-behavior: smooth;
+}
+
+body{
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    padding: 30px 0px;
+}
+
+/* Form */
+.recruitment-form{
+    max-width: 95%;
+    margin: 0 auto;
+    font-size: 16px;
+    display: flex;
+    box-shadow: 5px 5px 20px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Left part content */
+.visualization-side{
+    width: clamp(min(100px), 400px, max(400px));
+    background-image: linear-gradient(rgba(227, 227, 227, 0.9), rgba(26, 25, 25, 0.8)), url(../images/form_cover.jpg);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* logo image */
+.logo{
+    margin-top: 60px;
+    max-width: 250px;
+}
+
+.logo img{
+    width: 100%;
+    height: 200px;
+}
+
+/* Slogan Text */
+.slogan{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 45px;
+    font-weight: 500;
+}
+
+.slogan p{
+    color: #FCFCFD;
+    margin-bottom: 10px;
+    text-shadow: 0.1em 0.1em  1px rgba(0,0,0,0.3);
+}
+
+.circle {
+    margin: 40px auto ;
+    min-height: 140px;
+    max-width: 140px;
+    border-radius: 100%;
+    background: #272728;
+    display: flex;
+}
+
+.circle h1 {
+    margin-left: -35px;
+    color: #FCFCFD;
+    text-align: center;
+    line-height: 30px;
+    /* transform: scale(1) rotate(-5deg) skewX(1deg) skewY(1deg); */
+    text-shadow: 1px 1px #084480, 2px 2px #084480, 3px 3px #084480, 4px 4px #084480,
+    5px 5px #084480, 6px 6px #084480, 7px 7px #084480, 8px 8px #084480, 9px 9px #072e56;
+}
+
+span:nth-child(3){ 
+    font-size: 45px;
+}
+span:nth-child(1), span:nth-child(5)  {
+    font-size: 65px;
+}
+
+.circle img{
+    position: relative;
+    transform: translateX(-15px) translateY(20px);
+    /* transform: rotate3d(1,0,0,180deg) translateX(100px) translateY(0px); */
+    width: 100%;
+    height: 55px;
+    transition: 0.6s ease-out;
+}
+
+.circle:hover img{
+    /* transform: translateX(-15px) translateY(20px); */
+    transform: rotate3d(1,0,0,180deg) translateX(-15px) translateY(-20px);
+}
+
+/* Right part application */
+.application-side{
+    position: relative;
+    background-color: #FCFCFD;
+    max-width: 800px;
+    padding: 50px;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Input fields*/
+form .input-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+form .input-field label{
+    margin-bottom: 2px;
+    font-weight: 500;
+}
+
+form .input-field input{
+    max-width: 250px;
+}
+
+textarea {
+    resize: none;
+}
+
+form .input-field input, select, textarea{
+    background-color: rgb(246, 246, 246);
+    border-radius: 5px;
+    border: solid 2px rgb(182, 182, 182);
+    padding: 5px 8px;
+    outline: none;
+    transition: 0.5s;
+    /* box-shadow: inset 1px 1px 3px 0px rgba(0, 0, 0, 0.2); */
+}
+
+form .input-field input:focus, select:focus, textarea:focus{
+    border: solid 2px rgba(15, 90, 170,0.7);
+    /* box-shadow: inset 1px 1px 3px 0px rgba(15, 90, 170, 0.2); */
+}
+
+form .mulitple-input{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+form .mulitple-input input{
+    max-width: 120px;
+}
+
+/* Submit Button */
+.submit-btn{
+    margin-top: 25px;
+    text-align: center;
+}
+
+.submit-btn button{
+    background-color: rgba(15, 90, 170,0.8);
+    border-radius: 5px;
+    border-width: 0px;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
+    /* color: #36395A; */
+    color: white;
+    cursor: pointer;
+    height: 42px;
+    padding: 0 18px;
+    transition: box-shadow .25s,transform .25s;
+    touch-action: manipulation;
+    will-change: box-shadow,transform;
+    font-size: 20px;
+}
+
+.submit-btn img{
+    position: relative;
+    top: 4px;
+    margin-left: 3px;
+    width: 22px;
+    height: 22px;
+}
+
+.submit-btn button:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.submit-btn button:focus {
+    box-shadow: rgba(10, 59, 110, 0.8) 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
+}
+
+.submit-btn button:active {
+    box-shadow: rgba(10, 59, 110, 0.8) 0 3px 7px inset;
+    transform: translateY(2px);
+}
+
+.submit-btn button:hover img{
+    animation: rotate 1.5s ease-out;
+}
+
+/* Media Queries */
+@media screen and (max-width: 700px) {
+    .visualization-side {
+        display: none;
+    }
+}

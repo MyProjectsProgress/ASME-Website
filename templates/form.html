@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required Meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../static/css/form.css">
+
+    <title>Recruitment form</title>
+</head>
+
+<body>
+<div class="recruitment-form">
+
+    <div class="visualization-side">
+        <div class="logo">
+            <img src="../static/images/asme-logo.png" alt="">
+        </div>
+
+        <div class="slogan">
+            <p>Join Us Now</p>
+            
+            <div class="circle">
+                <h1><span>Gear</span><br/><span>the</span><br/><span>World</span></h1>
+                <img src="../static/images/gear_the_world.png" alt="">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="application-side">
+        <form action="#">
+
+            <div class="input-field">
+                <label>Full Name</label>
+                <input type="text" required class="input">
+            </div>
+
+            <div class="input-field">
+                <label>Phone Number</label>
+                <input type="tel" pattern="[0-9]{11}" required class="input">
+            </div>
+
+            <div class="input-field">
+                <label>Email</label>
+                <input type="email" required class="input">
+            </div>
+
+            <div class="mulitple-input">
+                <div class="input-field">
+                    <label>University</label>
+                    <input type="text" required class="input">
+                </div>
+
+                <div class="input-field">
+                    <label>Faculty</label>
+                    <input type="text" required class="input">
+                </div>
+            </div>
+
+            <div class="mulitple-input">
+                <div class="input-field">
+                    <label>Department</label>
+                    <input type="text" required class="input">
+                </div>
+
+                <div class="input-field">
+                    <label>Major</label>
+                    <input type="text" required class="input">
+                </div>
+
+                <div class="input-field">
+                    <label>Graduation year</label>
+                    <select class="input" required>
+                        <option value="">Select a year</option>
+                        <option>2024</option>
+                        <option>2025</option>
+                        <option>2026</option>
+                        <option>2027</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-field">
+                <label>Position</label>
+                <input type="text" required class="input">
+            </div>
+            
+            <div class="input-field">
+                <label>Previous experience</label>
+                <textarea rows="4" placeholder="" class="input"></textarea>
+            </div>
+
+            <div class="input-field">
+                <label>Comment</label>
+                <textarea rows="4" placeholder="" class="input"></textarea>
+            </div>
+
+            <div class="submit-btn">
+                <button> Submit <img src="..\static\images\gear.png"></button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+
+<!-- JS Implementation-->
+    <script src="../static/js/form.js"></script>
+
+</body>
+
+</html>
