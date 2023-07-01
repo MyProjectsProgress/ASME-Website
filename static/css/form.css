@@ -218,6 +218,33 @@ form .mulitple-input input{
     animation: rotate 1.5s ease-out;
 }
 
+/* Succession page */
+.succession-side{
+    background-color: #FCFCFD;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.succession-side img{
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.succession-side h1{
+    font-size: 45px;
+}
+
+.succession-side p{
+    font-size: 20px;
+}
+
 /* Media Queries */
 @media screen and (max-width: 700px) {
     .visualization-side {
