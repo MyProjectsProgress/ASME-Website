@@ -1,13 +1,19 @@
 var inputs = document.querySelectorAll(".input");
 
-for (let input of inputs){
+for (let input of inputs) {
 
-    input.addEventListener("input", () => {
-        if(input.value !== ""){
+    input.addEventListener("input", async () => {
+        const formData = new FormData(form); // Get form data
+
+        if (input.value !== "") {
             input.style.border = "solid 2px rgba(15, 90, 170,0.7)";
+            const response = await fetch('/form', {
+                method: 'POST',
+                body: formData
+            });
         }
 
-        else{
+        else {
             input.style.border = "solid 2px rgb(182, 182, 182)";
         }
     });
@@ -15,6 +21,6 @@ for (let input of inputs){
     input.addEventListener("invalid", () => {
         input.style.border = "solid 2px rgba(211, 25, 15, 0.6)";
     });
-    
+
 }
 
