@@ -1,5 +1,6 @@
 // Core Modules
 const path = require('path');
+const bodyParser = require('body-parser');
 
 // Third Party Modules
 const express = require('express');
@@ -22,10 +23,17 @@ const authRoute = require('./routes/authRoute');
 dbConncetion();
 
 const app = express();
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, 'static')));
+app.use(express.static(path.join(__dirname, 'templates')));
 
 // Middlewares
 app.use(express.json());
+
+app.get('/api/v1/form', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/form.html'));
+});
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
@@ -51,7 +59,7 @@ app.use(globalError);
 const PORT = process.env.PORT || 8000;
 
 const server = app.listen(PORT, () => {
-    console.log(`App is Runinng  on Port ${PORT}`);
+    console.log(`App is Runinng  on Port localhost:${PORT}`);
 });
 
 // HANDLING REJECTION OUTSIDE EXPRESS

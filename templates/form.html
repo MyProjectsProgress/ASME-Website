@@ -8,111 +8,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../static/css/form.css">
+    <link rel="stylesheet" href="/css/form.css">
 
     <title>Recruitment form</title>
 </head>
 
 <body>
-<div class="recruitment-form">
+    <div class="recruitment-form">
 
-    <div class="visualization-side">
-        <div class="logo">
-            <img src="../static/images/asme-logo.png" alt="">
+        <div class="visualization-side">
+            <div class="logo">
+                <img src="/images/asme-logo.png" alt="">
+            </div>
+
+            <div class="slogan">
+                <p>Join Us Now</p>
+
+                <div class="circle">
+                    <h1><span>Gear</span><br /><span>the</span><br /><span>World</span></h1>
+                    <img src="/images/gear_the_world.png" alt="">
+                </div>
+
+            </div>
         </div>
 
-        <div class="slogan">
-            <p>Join Us Now</p>
-            
-            <div class="circle">
-                <h1><span>Gear</span><br/><span>the</span><br/><span>World</span></h1>
-                <img src="../static/images/gear_the_world.png" alt="">
-            </div>
+        <div class="application-side">
+            <form id="form">
+                <div class="input-field">
+                    <label>Full Name</label>
+                    <input type="text" name="full-name" id="full-name" class="input">
+                </div>
 
+                <div class="input-field">
+                    <label>Phone Number</label>
+                    <input type="text" required name="phone-number" id="phone-number" class="input">
+                </div>
+
+                <div class="input-field">
+                    <label>Email</label>
+                    <input type="email" required name="email" id="email" class="input">
+                </div>
+
+                <div class="mulitple-input">
+                    <div class="input-field">
+                        <label>University</label>
+                        <input type="text" required name="university" id="university" class="input">
+                    </div>
+
+                    <div class="input-field">
+                        <label>Faculty</label>
+                        <input type="text" required name="faculty" id="faculty" class="input">
+                    </div>
+                </div>
+
+                <div class="mulitple-input">
+                    <div class="input-field">
+                        <label>Department</label>
+                        <input type="text" required name="department" id="department" class="input">
+                    </div>
+
+                    <div class="input-field">
+                        <label>Major</label>
+                        <input type="text" required name="major" id="major" class="input">
+                    </div>
+
+                    <div class="input-field">
+                        <label>Graduation year</label>
+                        <select class="input" name="graduation-year" id="graduation-year" required>
+                            <option value="">Select a year</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                            <option>2026</option>
+                            <option>2027</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <label>Position</label>
+                    <input type="text" required name="position" id="position" class="input">
+                </div>
+
+                <div class="input-field">
+                    <label>Previous experience</label>
+                    <textarea rows="4" placeholder="" name="previous-experience" id="previous-experience"
+                        class="input"></textarea>
+                </div>
+
+                <div class="input-field">
+                    <label>Comment</label>
+                    <textarea rows="4" placeholder="" name="comment" id="comment" class="input"></textarea>
+                </div>
+
+                <div class="submit">
+                    <button> Submit <img src="/images/gear.png"></button>
+                </div>
+
+            </form>
         </div>
+
     </div>
 
-    <div class="application-side">
-        <form action="form-succession.html">
+    <!-- axios -->
 
-            <div class="input-field">
-                <label>Full Name</label>
-                <input type="text" required class="input">
-            </div>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <!-- JS Implementation-->
+    <!-- <script src="../static/js/form.js"></script> -->
+    <script>
+        var inputs = document.querySelectorAll(".input");
+        const form = document.querySelector("#form");
+        const fullName = document.querySelector("#full-name");
+        const phoneNumber = document.querySelector("#phone-number");
+        const email = document.querySelector("#email");
+        const university = document.querySelector("#university");
+        const faculty = document.querySelector("#faculty");
+        const department = document.querySelector("#department");
+        const major = document.querySelector("#major");
+        const graduationYear = document.querySelector("#graduation-year");
+        const position = document.querySelector("#position");
+        const previousExperience = document.querySelector("#previous-experience");
+        const comment = document.querySelector("#comment");
 
-            <div class="input-field">
-                <label>Phone Number</label>
-                <input type="tel" pattern="[0-9]{11}" required class="input">
-            </div>
+        form.addEventListener('submit', (event) => {
 
-            <div class="input-field">
-                <label>Email</label>
-                <input type="email" required class="input">
-            </div>
+            event.preventDefault();
 
-            <div class="mulitple-input">
-                <div class="input-field">
-                    <label>University</label>
-                    <input type="text" required class="input">
-                </div>
+            formData = new FormData(form);
 
-                <div class="input-field">
-                    <label>Faculty</label>
-                    <input type="text" required class="input">
-                </div>
-            </div>
+            console.log(phoneNumber.value)
 
-            <div class="mulitple-input">
-                <div class="input-field">
-                    <label>Department</label>
-                    <input type="text" required class="input">
-                </div>
+            axios.post(`/api/v1/form`, {
 
-                <div class="input-field">
-                    <label>Major</label>
-                    <input type="text" required class="input">
-                </div>
+                name: fullName.value,
+                phoneNumber: phoneNumber.value,
+                email: email.value,
+                university: university.value,
+                faculty: faculty.value,
+                department: department.value,
+                major: major.value,
+                graduationYear: graduationYear.value,
+                position: position.value,
+                previousExperience: previousExperience.value,
+                comment: comment.value,
 
-                <div class="input-field">
-                    <label>Graduation year</label>
-                    <select class="input" required>
-                        <option value="">Select a year</option>
-                        <option>2024</option>
-                        <option>2025</option>
-                        <option>2026</option>
-                        <option>2027</option>
-                    </select>
-                </div>
-            </div>
+            }).catch((error) => {
+                console.error(error.response.status);
+                console.error(error.response.statusText);
+                console.error(error.response.data);
+            });
+        });
 
-            <div class="input-field">
-                <label>Position</label>
-                <input type="text" required class="input">
-            </div>
-            
-            <div class="input-field">
-                <label>Previous experience</label>
-                <textarea rows="4" placeholder="" class="input"></textarea>
-            </div>
+        for (let input of inputs) {
 
-            <div class="input-field">
-                <label>Comment</label>
-                <textarea rows="4" placeholder="" class="input"></textarea>
-            </div>
+            input.addEventListener("input", async () => {
+                const formData = new FormData(form); // Get form data
 
-            <div class="submit-btn">
-                <button> Submit <img src="..\static\images\gear.png"></button>
-            </div>
+                if (input.value !== "") {
+                    input.style.border = "solid 2px rgba(15, 90, 170,0.7)";
+                }
 
-        </form>
-    </div>
+                else {
+                    input.style.border = "solid 2px rgb(182, 182, 182)";
+                }
+            });
 
-</div>
+            input.addEventListener("invalid", () => {
+                input.style.border = "solid 2px rgba(211, 25, 15, 0.6)";
+            });
 
-
-<!-- JS Implementation-->
-    <script src="../static/js/form.js"></script>
-
+        }
+    </script>
 </body>
 
 </html>

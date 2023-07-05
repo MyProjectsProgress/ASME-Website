@@ -6,3 +6,5 @@ const Form = require('../models/formModel');
 // @route  PUT /api/v1/member
 // @access Public
 exports.createForm = factory.createOne(Form);
+
+exports.getForms = factory.getAll(Form);
