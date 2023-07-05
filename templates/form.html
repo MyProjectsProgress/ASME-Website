@@ -151,6 +151,10 @@
                 previousExperience: previousExperience.value,
                 comment: comment.value,
 
+            }).then((res) => {
+
+                window.location.href = '../templates/form-succession.html';
+
             }).catch((error) => {
                 console.error(error.response.status);
                 console.error(error.response.statusText);

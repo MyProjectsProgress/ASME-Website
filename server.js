@@ -35,6 +35,10 @@ app.get('/api/v1/form', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates/form.html'));
 });
 
+app.get('/api/templates/form-succession.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
+});
+
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
     console.log(`${process.env.NDOE_ENV}`);
