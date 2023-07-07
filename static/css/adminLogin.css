@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body{
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --input-border: #8b8a8b;
+    --input-focus-h: 245;
+    --input-focus-s: 100%;
+    --input-focus-l: 42%;
+  }
+
+
+.container{
+    /* background-color:#757c88; */
+    background-color:#f0f0f0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.carry{
+    display: flex;
+    width: 1400px;
+    height: 800px;
+    border-radius:30px;
+    overflow: hidden;
+    box-shadow: 5px 5px 20px 15px rgba(0, 0, 0, 0.2);
+}
+
+.right-container{
+width: 55%;
+background-color: white;
+position: relative;
+ text-align: center;
+
+}
+.left-container{
+    width: 50%;
+    background-image: url("../images/loginhq.jpg");
+    background-size: cover; 
+    background-position:center; 
+}
+
+.welcome-statement{
+  margin-top: 20%;
+  font-size: 40px;
+  /* font-family:'Times New Roman', Times, serif; */
+
+  color: #2d76dc;
+  text-shadow: 0 1px 0 hsl(174,5%,50%),
+  0 2px 0 hsl(174,5%,65%),
+  0 3px 0 hsl(174,5%,60%),
+  0 2px 0 hsl(174,5%,56%),
+  0 2px 0 hsl(174,5%,54%),
+  0 3px 0 hsl(174,5%,52%),
+  0 3px 0 hsl(174,5%,51%),
+  0 3px 0 hsl(174,5%,50%),
+  0 0 3px rgba(0, 0, 255, .03),
+  0 1px 2px rgba(0, 0, 255, .1);
+}
+.inputs{
+
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+}
+
+.inputs label{
+  font-size: 20px;
+}
+
+
+/* textfileds style */
+.adminInput{
+
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    font-size: 16px;
+    width: 400px;
+    font-size: Max(16px, 1em);
+    padding: 0.1em .5em;
+    border: 2px solid var(--input-border);
+    border-radius: 8px;
+    transition: 300ms box-shadow ease-in-out;
+    
+}
+.adminInput:focus {
+    border-color: hsl(
+      var(--input-focus-h),
+      var(--input-focus-s),
+      var(--input-focus-l)
+    );
+    box-shadow: 0 0 0 3px
+      hsla(
+        var(--input-focus-h),
+        var(--input-focus-s),
+        calc(var(--input-focus-l) + 40%),
+        0.8
+      );
+    outline: 3px solid transparent;
+  }
+  
+  .adminInput:not(textarea) {
+    line-height: 1;
+    height: 2.25rem;
+    text-align: left; 
+  }
+  
+  
+  
+  
+  label {
+    margin-top: 50px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 2;
+  }
+  
+  .adminInput + label {
+    margin-top: 2rem;
+  }
+  
+  .form-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* button and forget password style */
+.login-button {
+  
+    display: inline-block;
+    padding: 0.5em 2em;
+    border-radius: 4px;
+    background-color: #0a253b;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #174978;
+    
+    cursor: pointer;
+}
+
+.forgot-password {
+    margin-left: 1em;
+    color: darkblue;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+
+
+
+/* clear default show pssword icon  */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"]::-webkit-contacts-auto-fill-button {
+  display: none;
+}
+
+
+
+/* Password input container */
+.password-input-container {
+  position: relative;
+}
+
+/* Password toggle icon */
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-78%);
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover {
+  color: #666;
+}
+.adminInput[type="text"]:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.adminInput[type="text"]:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+/* Add hover effect on the password input */
+.adminInput[type="password"]:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Add focus style on the password input */
+.adminInput[type="password"]:focus {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* make page responsive */
+@media only screen and (max-width: 768px) {
+  .carry {
+      flex-direction: column;
+      height: auto;
+      width: 100%;
+      border-radius: 0;
+  }
+
+  .left-container,
+  .right-container {
+      width: 100%;
+  }
+
+  .right-container {
+      padding: 2rem;
+  }
+
+  .welcome-statement {
+      font-size: 30px;
+      margin-top: 10%;
+  }
+
+  .adminInput {
+      padding: 0.5em 1em;
+  }
+}
