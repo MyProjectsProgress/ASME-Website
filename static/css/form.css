@@ -232,7 +232,7 @@ form .mulitple-input input {
 /* Succession page */
 .succession-side {
     background-color: #FCFCFD;
-    padding: 80px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
