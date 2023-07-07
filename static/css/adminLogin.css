@@ -40,18 +40,39 @@ position: relative;
 
 }
 .left-container{
-    width: 50%;
-    background-image: url("../images/loginhq.jpg");
-    background-size: cover; 
-    background-position:center; 
+  width: clamp(min(100px), 700px, max(700px));
+  background-image: linear-gradient(rgb(95 92 92 / 90%), rgba(26, 25, 25, 0.8)), url(../images/50426.jpg); 
+   background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  user-select: none;
+  -webkit-user-select: none;
 }
+
+/* logo image */
+.logo{
+  margin-top:500px;
+  max-width: 250px;
+}
+
+.logo img{
+  margin-left: 40px;
+  width: 70%;
+  height: 170px;
+
+}
+
+
 
 .welcome-statement{
   margin-top: 20%;
   font-size: 40px;
   /* font-family:'Times New Roman', Times, serif; */
 
-  color: #2d76dc;
+  color: #095096;
   text-shadow: 0 1px 0 hsl(174,5%,50%),
   0 2px 0 hsl(174,5%,65%),
   0 3px 0 hsl(174,5%,60%),
