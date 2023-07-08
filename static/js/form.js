@@ -17,10 +17,6 @@ form.addEventListener('submit', (event) => {
 
     event.preventDefault();
 
-    formData = new FormData(form);
-
-    console.log(phoneNumber.value)
-
     axios.post(`/api/v1/form`, {
 
         name: fullName.value,
@@ -34,6 +30,11 @@ form.addEventListener('submit', (event) => {
         position: position.value,
         previousExperience: previousExperience.value,
         comment: comment.value,
+
+    }).then((res) => {
+
+        const data = res.data
+        console.log(data)
 
     }).catch((error) => {
         console.error(error.response.status);

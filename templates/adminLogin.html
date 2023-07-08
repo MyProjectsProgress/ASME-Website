@@ -78,6 +78,8 @@
             }).then((res) => {
                 // redirect to admin page here
                 // ex: window.location.href = '../templates/form-succession.html';
+                const data = res.data
+                console.log(data)
             }).catch((error) => {
                 console.error(error.response.status);
                 console.error(error.response.statusText);

@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="submit">
-                    <button> Submit <img src="/images/gear.png"></button>
+                    <button id="submit"> Submit <img src="/images/gear.png"></button>
                 </div>
 
             </form>
@@ -127,14 +127,11 @@
         const position = document.querySelector("#position");
         const previousExperience = document.querySelector("#previous-experience");
         const comment = document.querySelector("#comment");
+        const submitButton = document.querySelector("#submit");
 
-        form.addEventListener('submit', (event) => {
+        submitButton.addEventListener('click', (event) => {
 
             event.preventDefault();
-
-            formData = new FormData(form);
-
-            console.log(phoneNumber.value)
 
             axios.post(`/api/v1/form`, {
 
@@ -152,6 +149,8 @@
 
             }).then((res) => {
 
+                const data = res.data
+                console.log(data)
                 window.location.href = '../templates/form-succession.html';
 
             }).catch((error) => {
