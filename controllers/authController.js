@@ -25,12 +25,14 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
         // can't clearify that the problem in the password only to not allow admin to keep trying different passwords, 401 unauthenticated
         return next(new ApiError('Incorrect Email Or Password', 401));
     };
+
     // 3- generate token
     const token = await createToken(admin._id);
 
     // 4- send response to client side
     res.status(200).json({ data: admin, token });
 
+    res.authorization = token
 });
 
 // @desc    make sure the admin is logged in
@@ -38,6 +40,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     // 1- Check if token exist, if true get it
     let token;
     // making sure authorization exist with bearer keyword
+
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         // accessing token
         token = req.headers.authorization.split(' ')[1];

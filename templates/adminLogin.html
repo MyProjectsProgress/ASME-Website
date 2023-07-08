@@ -3,14 +3,13 @@
 
 <head>
     <!-- Required Meta -->
-
     <meta charset="UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="../static/css/adminLogin.css">
+    <link rel="stylesheet" href="/css/adminLogin.css">
+
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
@@ -25,38 +24,85 @@
             <div class="left-container">
 
             </div>
-            
+
             <!-- Right container -->
             <div class="right-container">
                 <div class="right-container-content">
                     <h2 class="welcome-statement">Login To Your Account!</h2>
                     <form class="form" action="#" method="POST">
+                        <div class="inputs">
+                            <!-- Email input field -->
+                            <label for="email">Email</label>
+                            <input class="adminInput" type="email" id="email" required>
 
-                    <div class="inputs">
-                        <!-- Email input field -->
-                        <label for="email">Email</label>
-                        <input class="adminInput" type="email" id="email" required>
-    
-                        <!-- Password input field -->
-                        <label for="password">Password</label>
+                            <!-- Password input field -->
+                            <label for="password">Password</label>
                             <input class="adminInput" type="password" id="password" required>
-                    <!-- Form actions (Login button and Forgot Password link) -->
-    
-                        <div class="form-actions">
-                            <button class="login-button" type="submit">Login</button>
-                            <a class="forgot-password" href="#" >Forgot Password?</a>
-                        </div>
+
+                            <!-- Form actions (Login button and Forgot Password link) -->
+                            <div class="form-actions">
+                                <button class="login-button" type="submit" id="loginButton">Login</button>
+                                <a class="forgot-password" id="forgetPassword" href="#">Forgot Password?</a>
+                            </div>
                     </form>
-                    </div>
-    
-    
                 </div>
-                
             </div>
+
         </div>
     </div>
-    <script src="../static/js/adminLogin.js"></script>
+    </div>
 
+    <!-- axios -->
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+    <!-- JS Implementation -->
+    <!-- <script src="/js/adminLogin.js"></script> -->
+    <script>
+        const email = document.querySelector("#email");
+        const password = document.querySelector("#password");
+        const forgetPasswordButton = document.querySelector("#forgetPassword")
+        const loginButton = document.querySelector('#loginButton');
+
+        forgetPasswordButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.location.href = '../templates/forgetPassword.html';
+        });
+
+        loginButton.addEventListener('click', (event) => {
+
+            event.preventDefault();
+
+            axios.post(`/api/v1/auth/adminLogin`, {
+                email: email.value,
+                password: password.value,
+            }).then((res) => {
+                // redirect to admin page here
+                // ex: window.location.href = '../templates/form-succession.html';
+            }).catch((error) => {
+                console.error(error.response.status);
+                console.error(error.response.statusText);
+                console.error(error.response.data);
+            });
+        });
+
+        window.addEventListener("DOMContentLoaded", function () {
+            var adminInput = document.querySelectorAll(".adminInput");
+
+            for (let input of adminInput) {
+                input.addEventListener("input", function () {
+                    if (input.value !== "") {
+                        input.style.border = "solid 2px rgba(15, 90, 170, 0.7)";
+                    } else {
+                        input.style.border = "solid 2px rgb(182, 182, 182)";
+                    }
+                });
+
+                input.addEventListener("invalid", function () {
+                    input.style.border = "solid 2px rgba(211, 25, 15, 0.6)";
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

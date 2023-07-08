@@ -39,9 +39,26 @@ app.get('/api/templates/form-succession.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
 });
 
+app.get('/api/v1/auth/adminLogin', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/adminLogin.html'));
+});
+
+app.get('/api/v1/templates/forgetPassword.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'templates', 'forgetPassword.html'));
+});
+
+app.get('/api/v1/templates/Vcodepage.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'templates', 'Vcodepage.html'));
+});
+
+app.get('/api/v1/templates/newPassword.html', (req, res) => {
+    console.log(__dirname, 'templates', 'newPassword.html')
+    res.sendFile(path.join(__dirname, 'templates', 'newPassword.html'));
+});
+
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
-    console.log(`${process.env.NDOE_ENV}`);
+    console.log(`${process.env.NODE_ENV}`);
 }
 
 // Mount Routes
@@ -63,7 +80,7 @@ app.use(globalError);
 const PORT = process.env.PORT || 8000;
 
 const server = app.listen(PORT, () => {
-    console.log(`App is Runinng  on Port http://localhost:${PORT}`);
+    console.log(`App is Runinng  on Port http://localhost:${PORT}/api/v1/`);
 });
 
 // HANDLING REJECTION OUTSIDE EXPRESS
