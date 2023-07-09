@@ -25,22 +25,22 @@
                 <p class="instruction">6-digit code sent to your email.</p>
                 <div class="inputs-conatiner">
                     <input class="square-input" id="input1" type="number" required oninput="Validation(event)"
-                        onkeyup="func(this,'input1')" autofocus>
+                        onkeyup="addPinNumber(this,'input1')" autofocus>
 
                     <input class="square-input" id="input2" type="number" required oninput="Validation(event)"
-                        onkeyup="func(this,'input2')">
+                        onkeyup="addPinNumber(this,'input2')">
 
                     <input class="square-input" id="input3" type="number" required oninput="Validation(event)"
-                        onkeyup="func(this,'input3')">
+                        onkeyup="addPinNumber(this,'input3')">
 
                     <input class="square-input" id="input4" type="number" required oninput="Validation(event)"
-                        onkeyup="func(this,'input4')">
+                        onkeyup="addPinNumber(this,'input4')">
 
                     <input class="square-input" id="input5" type="number" required oninput="Validation(event)"
-                        onkeyup="func(this,'input5')">
+                        onkeyup="addPinNumber(this,'input5')">
 
                     <input class="square-input" id="input6" type="number" required oninput="Validation(event)"
-                        onkeyup="func(this,'input6')">
+                        onkeyup="addPinNumber(this,'input6')">
                 </div>
                 <p class="resend"><a href="#"> Resend code?</a></p>
             </div>
@@ -56,10 +56,38 @@
 
         let resetCode = '';
 
-        function func(first, last) {
+        const input1 = document.getElementById('input1');
+        const input2 = document.getElementById('input2');
+        const input3 = document.getElementById('input3');
+        const input4 = document.getElementById('input4');
+        const input5 = document.getElementById('input5');
+        const input6 = document.getElementById('input6');
+
+        input1.addEventListener('input', handleInput);
+        input2.addEventListener('input', handleInput);
+        input3.addEventListener('input', handleInput);
+        input4.addEventListener('input', handleInput);
+        input5.addEventListener('input', handleInput);
+        input6.addEventListener('input', handleInput);
+
+        function handleInput(event) {
+            const value = event.target.value;
+            let index = parseInt(event.target.id.slice(-1)) - 1;
+
+            if (value === '') {
+                let chars = resetCode.split('');
+                chars[index] = ' ';
+                resetCode = chars.join('');
+            }
+        }
+
+        function addPinNumber(first, last) {
             if (first.value.length) {
+                let index = parseInt(first.id.slice(-1)) - 1;
                 const input = document.querySelector(`#${last}`).value;
-                resetCode = resetCode + input;
+                let chars = resetCode.split('');
+                chars[index] = input;
+                resetCode = chars.join('');
             }
 
             if (last === 'input6') {
@@ -75,7 +103,6 @@
                     console.error(error.response.data);
                 });
             }
-
         }
 
         function Validation(event) {
@@ -87,7 +114,7 @@
             }
         }
 
-        var fields = document.getElementsByClassName('square-input')
+        var fields = document.getElementsByClassName('square-input');
 
         Array.from(fields).forEach(function (fields) {
 
@@ -96,7 +123,7 @@
                 if (event.keyCode === 13 || fields.value.length == 1) {
                     // Focus on the next sibling
                     try {
-                        fields.nextElementSibling.focus()
+                        fields.nextElementSibling.focus();
                     }
                     catch {
                         //pass
