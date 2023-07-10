@@ -1,6 +1,3 @@
-
-let resetCode = '';
-
 const input1 = document.getElementById('input1');
 const input2 = document.getElementById('input2');
 const input3 = document.getElementById('input3');
@@ -14,6 +11,33 @@ input3.addEventListener('input', handleInput);
 input4.addEventListener('input', handleInput);
 input5.addEventListener('input', handleInput);
 input6.addEventListener('input', handleInput);
+
+const resendCode = document.querySelector("#resendCode");
+
+resendCode.addEventListener('click', (event) => {
+
+  event.preventDefault();
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const email = urlParams.get('variable');
+
+  axios.post(`/api/v1/auth/forgetPassword`, {
+    email: email
+  }).then((res) => {
+
+    const data = res.data
+    console.log(data)
+    window.location.href = '../templates/verificationCode.html';
+
+  }).catch((error) => {
+    console.error(error.response.status);
+    console.error(error.response.statusText);
+    console.error(error.response.data);
+  });
+});
+
+let resetCode = '';
 
 function handleInput(event) {
   const value = event.target.value;
