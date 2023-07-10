@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required Meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/Vcodepage.css">
+
+    <title>Verification</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- <div class="logo">
+        <img src="../static/images/asme-logo.png" alt="">
+    </div>   -->
+        <div class="carry">
+            <div class="content">
+                <h2 class="welcome-statement">Enter OTP Code</h2>
+                <p class="instruction">6-digit code sent to your email.</p>
+                <div class="inputs-conatiner">
+                    <input class="square-input" id="input1" type="number" required oninput="Validation(event)"
+                        onkeyup="addPinNumber(this,'input1')" autofocus>
+
+                    <input class="square-input" id="input2" type="number" required oninput="Validation(event)"
+                        onkeyup="addPinNumber(this,'input2')">
+
+                    <input class="square-input" id="input3" type="number" required oninput="Validation(event)"
+                        onkeyup="addPinNumber(this,'input3')">
+
+                    <input class="square-input" id="input4" type="number" required oninput="Validation(event)"
+                        onkeyup="addPinNumber(this,'input4')">
+
+                    <input class="square-input" id="input5" type="number" required oninput="Validation(event)"
+                        onkeyup="addPinNumber(this,'input5')">
+
+                    <input class="square-input" id="input6" type="number" required oninput="Validation(event)"
+                        onkeyup="addPinNumber(this,'input6')">
+                </div>
+                <p class="resend"><a href="#"> Resend code?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- axios -->
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+
+    <!-- JS Implementation-->
+    <!-- <script src="/js/Vcodepage.js"></script> -->
+    <script src="/js/verificationCode.js"></script>
+</body>
+
+</html>

@@ -1,5 +1,4 @@
 var inputs = document.querySelectorAll(".input");
-
 const form = document.querySelector("#form");
 const fullName = document.querySelector("#full-name");
 const phoneNumber = document.querySelector("#phone-number");
@@ -12,8 +11,9 @@ const graduationYear = document.querySelector("#graduation-year");
 const position = document.querySelector("#position");
 const previousExperience = document.querySelector("#previous-experience");
 const comment = document.querySelector("#comment");
+const submitButton = document.querySelector("#submit");
 
-form.addEventListener('submit', (event) => {
+submitButton.addEventListener('click', (event) => {
 
     event.preventDefault();
 
@@ -35,6 +35,7 @@ form.addEventListener('submit', (event) => {
 
         const data = res.data
         console.log(data)
+        window.location.href = '../templates/form-succession.html';
 
     }).catch((error) => {
         console.error(error.response.status);

@@ -47,8 +47,8 @@ app.get('/api/v1/templates/forgetPassword.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'forgetPassword.html'));
 });
 
-app.get('/api/v1/templates/Vcodepage.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'templates', 'Vcodepage.html'));
+app.get('/api/v1/templates/verificationCode.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'templates', 'verificationCode.html'));
 });
 
 app.get('/api/v1/templates/newPassword.html', (req, res) => {
