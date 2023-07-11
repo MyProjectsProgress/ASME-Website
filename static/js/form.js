@@ -17,8 +17,7 @@ submitButton.addEventListener('click', (event) => {
 
     event.preventDefault();
 
-    axios.post(`/api/v1/form`, {
-
+    const requestObject = {
         name: fullName.value,
         phoneNumber: phoneNumber.value,
         email: email.value,
@@ -30,18 +29,13 @@ submitButton.addEventListener('click', (event) => {
         position: position.value,
         previousExperience: previousExperience.value,
         comment: comment.value,
+    }
 
-    }).then((res) => {
+    const url = `/api/v1/form`;
 
-        const data = res.data
-        console.log(data)
-        window.location.href = '../templates/form-succession.html';
+    const nextPage = '../templates/form-succession.html';
 
-    }).catch((error) => {
-        console.error(error.response.status);
-        console.error(error.response.statusText);
-        console.error(error.response.data);
-    });
+    axiosRequest(url, requestObject, nextPage);
 });
 
 for (let input of inputs) {

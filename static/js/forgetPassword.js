@@ -6,20 +6,14 @@ submitButton.addEventListener('click', (event) => {
 
     event.preventDefault();
 
-    const url = `verificationCode.html?variable=${encodeURIComponent(email.value)}`;
-    window.location.href = url;
+    const addEmailToURL = `verificationCode.html?variable=${encodeURIComponent(email.value)}`;
+    window.location.href = addEmailToURL;
 
-    axios.post(`/api/v1/auth/forgetPassword`, {
-        email: email.value
-    }).then((res) => {
+    const requestObject = { email: email.value }
 
-        const data = res.data
-        console.log(data)
-        window.location.href = '../templates/verificationCode.html';
+    const url = `/api/v1/auth/forgetPassword`;
 
-    }).catch((error) => {
-        console.error(error.response.status);
-        console.error(error.response.statusText);
-        console.error(error.response.data);
-    });
+    const nextPage = '../templates/verificationCode.html';
+
+    axiosRequest(url, requestObject, nextPage);
 });

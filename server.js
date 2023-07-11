@@ -39,6 +39,10 @@ app.get('/api/templates/form-succession.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
 });
 
+app.get('/api/v1/templates/form-succession.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
+});
+
 app.get('/api/v1/auth/adminLogin', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates/adminLogin.html'));
 });

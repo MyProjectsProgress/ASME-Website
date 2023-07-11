@@ -12,19 +12,17 @@ loginButton.addEventListener('click', (event) => {
 
   event.preventDefault();
 
-  axios.post(`/api/v1/auth/adminLogin`, {
+  const requestObject = {
     email: email.value,
     password: password.value,
-  }).then((res) => {
-    // redirect to admin page here
-    // ex: window.location.href = '../templates/form-succession.html';
-    const data = res.data
-    console.log(data)
-  }).catch((error) => {
-    console.error(error.response.status);
-    console.error(error.response.statusText);
-    console.error(error.response.data);
-  });
+  }
+
+  const url = `/api/v1/auth/adminLogin`;
+
+  const nextPage = '../templates/form-succession.html';
+
+  axiosRequest(url, requestObject, nextPage);
+
 });
 
 window.addEventListener("DOMContentLoaded", function () {

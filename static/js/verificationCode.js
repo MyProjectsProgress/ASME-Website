@@ -22,19 +22,14 @@ resendCode.addEventListener('click', (event) => {
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get('variable');
 
-  axios.post(`/api/v1/auth/forgetPassword`, {
-    email: email
-  }).then((res) => {
+  const requestObject = { email: email }
 
-    const data = res.data
-    console.log(data)
-    window.location.href = '../templates/verificationCode.html';
+  const url = `/api/v1/auth/forgetPassword`;
 
-  }).catch((error) => {
-    console.error(error.response.status);
-    console.error(error.response.statusText);
-    console.error(error.response.data);
-  });
+  const nextPage = '../templates/verificationCode.html';
+
+  axiosRequest(url, requestObject, nextPage);
+
 });
 
 let resetCode = '';
@@ -60,17 +55,14 @@ function addPinNumber(first, last) {
   }
 
   if (last === 'input6') {
-    axios.post(`/api/v1/auth/verifyResetCode`, {
-      resetCode: resetCode
-    }).then((res) => {
 
-      window.location.href = '../templates/newPassword.html';
+    const requestObject = { resetCode: resetCode }
 
-    }).catch((error) => {
-      console.error(error.response.status);
-      console.error(error.response.statusText);
-      console.error(error.response.data);
-    });
+    const url = `/api/v1/auth/verifyResetCode`;
+
+    const nextPage = '../templates/newPassword.html';
+
+    axiosRequest(url, requestObject, nextPage);
   }
 }
 
