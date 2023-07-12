@@ -1,0 +1,18 @@
+[
+        {
+            "title": "ASME Welcome Party",
+            "date": "24 / 7 / 2023",
+            "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe recusandae maxime quos reiciendis provident ut eos a qui, odio modi voluptates illum quis nostrum eligendi repudiandae amet temporibus accusamus pariatur?",
+            "background_src": "../static/images/event1.jpeg",
+            "pic_src": "../static/images/welcome.png",
+            "pic_id": "img1"
+        },
+        {
+            "title": "Meeting With Heads",
+            "date": "6 / 8 / 2023",
+            "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam itaque perferendis pariatur sequi ab perspiciatis eveniet nam praesentium maxime veritatis, quo eius quaerat molestias consequatur eaque, repellat fugiat? Temporibus, totam?",
+            "background_src": "../static/images/event2.jpg",
+            "pic_src": "../static/images/heads.png",
+            "pic_id": "img2"
+        }
+    ]
