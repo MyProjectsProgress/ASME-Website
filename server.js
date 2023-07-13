@@ -13,11 +13,8 @@ const dbConncetion = require('./config/database');
 const globalError = require('./middlewares/errorMiddleware');
 const ApiError = require('./utils/apiError');
 
-// Importing Routes
-const formRoute = require('./routes/formRoute');
-const memberRoute = require('./routes/memberRoute');
-const adminRoute = require('./routes/adminRoute');
-const authRoute = require('./routes/authRoute');
+// REQUIRING ROUTES
+const mountRoutes = require('./routes');
 
 // Connect the database
 dbConncetion();
@@ -30,6 +27,9 @@ app.use(express.static(path.join(__dirname, 'templates')));
 
 // Middlewares
 app.use(express.json());
+
+// MOUNT ROUTES
+mountRoutes(app);
 
 app.get('/api/v1/form', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates/form.html'));
@@ -64,12 +64,6 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
     console.log(`${process.env.NODE_ENV}`);
 }
-
-// Mount Routes
-app.use('/api/v1/form', formRoute);
-app.use('/api/v1/member', memberRoute);
-app.use('/api/v1/admin', adminRoute);
-app.use('/api/v1/auth', authRoute);
 
 // WORKS WHEN THE URL IS NOT IN THE PREDEFINED URIS
 app.all("*", (req, res, next) => {
