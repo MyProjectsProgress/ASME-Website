@@ -5,52 +5,92 @@ fetch("../data/db.json")
   })
 
   .then((data) => {
-    setEvents(data);
+    data.map((event) => {
+      addslide(event);
+    });
+
+    swiper.update();
   });
 
-function setEvents(events){
+let slider = document.getElementById("event-slider");
+let event_pics = document.getElementById("event_pics");
+let first_event = true;
 
-  let event_pics = document.getElementById("event_pics");
-  let slider = document.getElementById("event-slider");
-  let db_pics = "";
-  let event_elements = "";
+function addslide(event) {
+  let img_div = document.createElement("div");
+  let item = document.createElement("div");
+  let card = document.createElement("div");
+  let content = document.createElement("div");
+  let ctr = document.createElement("div");
+  let btm = document.createElement("div");
+  let overlay = document.createElement("div");
 
-  events.map((event) => {
+  let event_img = document.createElement("img");
+  let background = document.createElement("img");
+  let title = document.createElement("h1");
+  let date = document.createElement("span");
+  let description = document.createElement("p");
+  let apply = document.createElement("button");
 
-    db_pics += `
-      <div class="event-img__item" id="${event.pic_id}">
-        <img src="${event.pic_src}" alt="" class="event-img__img">
-      </div>
-    `;
+  item.className = "event-slider__item";
+  item.classList.add("swiper-slide");
+  card.className = "event-slider__card";
+  content.className = "event-slider__content";
 
-    // event_elements += `
-    //               <div class="event-slider__item swiper-slide" data-target="${event.pic_id}">
-    //                 <div class="event-slider__card">
-    //                   <img src="${event.background_src}" alt="" class="event-slider__cover">
-    //                   <div class="event-slider__cover-overlay"></div>
-                        
-    //                   <div class="event-slider__content">
-    //                     <h1 class="event-slider__title">${event.title}</h1>
-    //                     <span class="event-slider__date">${event.date}</span>
+  img_div.className = "event-img__item";
+  event_img.className = "event-img__img";
+  background.className = "event-slider__cover";
+  overlay.className = "event-slider__cover-overlay";
 
-    //                     <div class="event-ctr">
-    //                       <p>${event.description}</p>
-    //                     </div>
+  if (first_event) {
+    img_div.classList.add("active");
+    first_event = false;
+  }
 
-    //                     <div class="event-slider__bottom">
-    //                         <button class="event-slider__apply"> Apply now </button>
-    //                     </div>
+  ctr.className = "event-ctr";
+  btm.className = "event-slider__bottom";
 
-    //                   </div>
-    //                 </div>
-    //               </div>
-    // `;
-  });
+  title.className = "event-slider__title";
+  date.className = "event-slider__date";
+  apply.className = "event-slider__apply";
 
-  event_pics.innerHTML = db_pics;
-  // slider.innerHTML = event_elements;
-  ;
+  item.dataset.target = event.pic_id;
+  img_div.id = event.pic_id;
+  event_img.src = event.pic_src;
+  background.src = event.background_src;
+
+  let titleText = document.createTextNode(event.title);
+  let dateText = document.createTextNode(event.date);
+  let descriptionText = document.createTextNode(event.description);
+
+  let applyText = document.createTextNode("Apply now");
+
+  img_div.appendChild(event_img);
+
+  title.appendChild(titleText);
+  date.appendChild(dateText);
+  description.appendChild(descriptionText);
+  apply.appendChild(applyText);
+
+  ctr.appendChild(description);
+  btm.appendChild(apply);
+
+  content.appendChild(title);
+  content.appendChild(date);
+  content.appendChild(ctr);
+  content.appendChild(btm);
+
+  card.appendChild(background);
+  card.appendChild(overlay);
+  card.appendChild(content);
+
+  item.appendChild(card);
+
+  event_pics.appendChild(img_div);
+  slider.appendChild(item);
 }
+
+// --------------------------------------------------------------
 
 // Swiper Functions
 var swiper = new Swiper(".event-slider", {
@@ -74,13 +114,9 @@ var swiper = new Swiper(".event-slider", {
 
   on: {
     init: function () {
-
-
       var index = this.activeIndex;
 
       var target = $(".event-slider__item").eq(index).data("target");
-
-      // console.log(target);
 
       $(".event-img__item").removeClass("active");
       $(".event-img__item#" + target).addClass("active");
@@ -92,8 +128,6 @@ swiper.on("slideChange", function () {
   var index = this.activeIndex;
 
   var target = $(".event-slider__item").eq(index).data("target");
-
-  // console.log(target);
 
   $(".event-img__item").removeClass("active");
   $(".event-img__item#" + target).addClass("active");
@@ -111,16 +145,3 @@ swiper.on("slideChange", function () {
     $(".prev").removeClass("disabled");
   }
 });
-
-
-// add event main pic
-// let img_div = document.createElement("div");
-// img_div.className = "event-img__item";
-// img_div.id = event.pic_id;
-
-// let event_img = document.createElement("img");
-// event_img.src = event.pic_src;
-// event_img.className = "event-img__img";
-
-// img_div.appendChild(event_img);
-// event_pics.appendChild(img_div);
