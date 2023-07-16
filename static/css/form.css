@@ -144,9 +144,9 @@ form .input-field label {
     font-weight: 500;
 }
 
-form .input-field input {
-    max-width: 250px;
-}
+/* form .input-field input {
+    max-width: 100%;
+} */
 
 textarea {
     resize: none;
@@ -177,9 +177,9 @@ form .mulitple-input {
     gap: 10px;
 }
 
-form .mulitple-input input {
+/* form .mulitple-input input {
     max-width: 120px;
-}
+} */
 
 /* Submit Button */
 .submit {
@@ -257,8 +257,74 @@ form .mulitple-input input {
 }
 
 /* Media Queries */
+
+@media screen and (max-width: 1100px) {
+
+    form .mulitple-input :nth-child(3){
+        min-width: 100%;
+        margin-top: 40px;
+    }
+
+    form .mulitple-input :nth-child(4) {
+        position: absolute;
+        margin-top: 70px;
+    }
+
+}
+
+@media screen and (max-width: 928px) {
+
+    form .mulitple-input :nth-child(3){
+        display: none;
+    }
+
+    form .mulitple-input :nth-child(4) {
+        position: relative;
+        margin-top: -10px;
+    }
+}
+
+@media screen and (max-width: 827px) {
+
+    form .mulitple-input {
+        flex-direction: column;
+    }
+
+    form .mulitple-input :nth-child(4) {
+        margin-top: 0px;
+    }
+
+    .application-side {
+        min-width: 60%;
+    }
+    
+}
+
 @media screen and (max-width: 700px) {
     .visualization-side {
         display: none;
     }
+
+    form .mulitple-input {
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width: 516px) {
+    .recruitment-form{
+        min-width: 90%;
+    }
+
+    form .mulitple-input {
+        flex-direction: column;
+    }
+
+    .application-side {
+        min-width: 100%;
+    }
+
+    input{
+        width: 100%;
+    }
+
 }
