@@ -4,15 +4,120 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>ASME</title>
 
-   <link rel="stylesheet" href="../static/css/slider.css">
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- Add icon library -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
    <!-- Slider Import -->
    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css" rel="stylesheet" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js"></script>
+
+   <!-- css -->
+   <link rel="stylesheet" href="../static/css/home.css">
+   <link rel="stylesheet" href="../static/css/events-section.css">
+
+   <title>ASME</title>
 
 </head>
+
+
 <body>
+   
+<header class="header">
+
+   <section class="flex">
+
+      <a href="home.html" class="logo"><img class="image-header" src="../static/images/logo.png"></a>
+
+      <nav class="navbar">
+         <a href="#home">Home</a>
+         <a href="#pages">Pages</a>
+         <a href="#courses">Courses</a>
+         <a href="#competitions">Competitions</a>
+         <a href="#projects">Projects</a>
+         <a href="#blog">Blog</a>
+      </nav>
+
+      <div class="icons">
+         <a href="https://web.facebook.com/ASMECUSS" class="fa fa-facebook"></a>
+         <a href="#" class="fa fa-twitter"></a>
+         <a href="#" class="fa fa-instagram"><span></span></a>
+         <div id="menu-btn" class="fas fa-bars"></div>
+
+      </div>
+
+
+   </section>
+
+</header>
+
+<section class="home">
+
+   <div class="content">
+      <div class="name">Welcome To ASME</div>
+      <div class="des">Want to become a member and join our team?</div>
+      <button class="button-reg">Register NOW!</button>
+   </div>
+   
+   <div class="container">
+      <div id="slide">
+         <div class="item" style="background-image: url(../static/images/home1.jpg);">
+         </div>
+         <div class="item" style="background-image: url(../static/images/begin.jpg);">
+         </div>
+         <div class="item" style="background-image: url(../static/images/home2.jpg);">
+         </div>
+         <div class="item" style="background-image: url(../static/images/home3.jpg);">
+         </div>
+         <div class="item" style="background-image: url(../static/images/home4.jpg);">
+         </div>
+         <div class="item" style="background-image: url(../static/images/home5.jpg);">
+      </div>
+
+      </div>
+
+      <div class="buttons">
+         <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
+         <button id="next"><i class="fa-solid fa-angle-right"></i></button>
+      </div>
+   </div>
+
+</section>
+
+<!-- <section class="about">
+   <div class="box-container">
+
+      <div class="box">
+         <h3>1880</h3>
+         <a>Active Volunteers</a>
+
+      </div>
+
+      <div class="box">
+         <h3>85,000+</h3>
+         <a>Yearly Participants</a>
+      </div>
+
+      <div class="box">
+         <h3>135+</h3>
+         <a>Events Done</a>
+      </div>
+
+      <div class="box"> 
+         <h3>5,000</h3>
+         <a >Awards</a>
+
+      </div>
+
+   </div>
+
+<section class="board">
+</section> -->
+
 
 <section class="events">
 
@@ -28,18 +133,7 @@
                <img src="../static/images/GeartheWorld.png" alt="">
          </div>
 
-         <div class="event-img" id="event_pics">
-
-               <!-- <div class="event-img__item" id="img1">
-                  <img src="../static/images/welcome.png" alt="" class="event-img__img">
-               </div>
-
-               <div class="event-img__item" id="img2">
-                  <img src="../static/images/heads.png" alt="" class="event-img__img">
-               </div> -->
-
-         </div>
-
+         <div class="event-img" id="event_pics"></div>
 
          <div class="event-slider">
 
@@ -55,83 +149,28 @@
                   </span>
                </button>
 
-
-               <div class="event-slider__wrp swiper-wrapper" id="event-slider">
-                  
-                  <!-- First Item -->
-                  <div class="event-slider__item swiper-slide" data-target="img1">
-                     <div class="event-slider__card">
-                           <img src="../static/images/event1.jpeg" alt="" class="event-slider__cover">
-                           <div class="event-slider__cover-overlay"></div>
-                           
-                           <div class="event-slider__content">
-                              <h1 class="event-slider__title"> ASME Welcome Party</h1>
-                              <span class="event-slider__date">24 / 7 / 2023</span>
-
-                              <div class="event-ctr">
-                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe recusandae maxime quos reiciendis provident ut eos a qui, odio modi voluptates illum quis nostrum eligendi repudiandae amet temporibus accusamus pariatur?</p>
-                              </div>
-
-                              <div class="event-slider__bottom">
-                                 <button class="event-slider__apply"> Apply now </button>
-                              </div>
-
-                           </div>
-                     </div>
-                  </div>
-
-                  <!-- Second Item -->
-                  <div class="event-slider__item swiper-slide" data-target="img2">
-                     <div class="event-slider__card">
-                           <img src="../static/images/event2.jpg" alt="" class="event-slider__cover">
-                           <div class="event-slider__cover-overlay"></div>
-
-                           <div class="event-slider__content">
-                              <h1 class="event-slider__title"> Meeting With Heads</h1>
-                              <span class="event-slider__date">6 / 8 / 2023</span>
-
-                              <div class="event-ctr">
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam itaque perferendis pariatur sequi ab perspiciatis eveniet nam praesentium maxime veritatis, quo eius quaerat molestias consequatur eaque, repellat fugiat? Temporibus, totam?</p>
-                              </div>
-
-                              <div class="event-slider__bottom">
-                                 <button class="event-slider__apply"> Apply now </button>
-                              </div>
-
-                           </div>
-                     </div>
-                  </div>
-               </div>
-
+               <div class="event-slider__wrp swiper-wrapper" id="event-slider"></div>
                <div class="swiper-pagination event-slider-panigation"></div>
                
          </div>
       </div>
    </div>
+</section>
 
+<section class="workshops">
 
+   <div class="headline">
+      <h1>Workshops</h1>
+   </div>
 
+   <div class="workshops-wrap" id="workshops-wrap"></div>
 
 </section>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-   <!-- Swiper -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js"></script>
-
-   <script src="../static/js/slider.js"></script>
+   <script src="../static/js/home.js"></script>
 
 
 

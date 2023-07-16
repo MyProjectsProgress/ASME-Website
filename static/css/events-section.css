@@ -1,24 +1,10 @@
-.events {
-    padding: 45px 0 90px;
-    background-color: rgb(216, 216, 216);
-}
-
-.headline h1 {
-    font-size: 48px;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
 .events img{
     max-width: 100%;
 }
 
 .event-wrapper {
     width: 100%;
-    /* background: linear-gradient(rgba(216, 216, 216,0.3), rgba(216, 216, 216,0.3)), url("../images/background.jpg") center no-repeat; */
-    /* background-size: cover; */
     position: relative;
-    /* overflow: hidden; */
     display: flex;
 }
 
@@ -75,7 +61,6 @@
 }
 
 .next:active, .prev:active{
-    /* outline: none; */
     scale: 0.95;
 }
 
@@ -253,9 +238,6 @@
     letter-spacing: 3px;
     font-size: 16px;
     margin-bottom: 10px;
-    /* padding: 20px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.6); */
 }
 
 .event-slider__bottom{
@@ -266,7 +248,7 @@
 }
 
 .event-slider__apply{
-    box-shadow: 0 7px 99px 0 rgba(8, 68, 128, 0.6);
+    box-shadow: 0 7px 30px 0 rgba(8, 68, 128, 0.6);
     background-image: linear-gradient(-45deg, rgb(8, 68, 128) 0%, rgb(62, 122, 187) 100%);
     border: none;
     color: #fff;
@@ -278,7 +260,18 @@
     letter-spacing: 2px;
     margin-right: 40px;
     cursor: pointer;
+
+    transition: all 0.3s ease;
 }
+
+.event-slider__apply:hover{
+    box-shadow: 0px 2px 20px 2px rgb(0, 87, 153);
+}
+
+.event-slider__apply:active{
+    scale: 0.95;
+}
+
 
 .event-img{
     position: absolute;
@@ -290,7 +283,6 @@
 }
 
 .event-img__item{
-    /* background-color: #084480; */
     display: flex;
     align-items: center;
     position: absolute;
@@ -316,30 +308,16 @@
 }
 
 .event-slider-panigation{
-    position: relative;
-    top: 420px;
+    top: 425px;
 }
-
-
-
-
 
 /* Media Queries */
 
-/* 1200 */
 @media screen and (max-width: 1200px){
+    
     .event-content{
         max-width: 920px;
     }
-
-    /* .event-bg-shape{
-        width: 40%;
-    }
-
-    .event-bg-shape img{
-        width: 430px;
-        left: 10px;
-    } */
 
     .prev{
         left: -21%;
@@ -369,49 +347,18 @@
         width: 370px;
         left: 20%;
     }
+
 }
 
-
-/* 992 */
 @media screen and (max-width: 992px) {
-    /* .event-wrapper{
-        height: auto;
-        min-height: 100vh;
-    } */
 
     .event-content{
-        /* max-width: 920px; */
-        /* margin-top: 100px; */
         height: auto;
-        /* min-height: 100vh; */
     }
 
     .event-bg-shape{
         display: none;
-        /* top: 0;
-        width: 85%;
-        height: 200px;
-        align-items: flex-start;
-        padding: 50px;
-        left: 50%;
-        transform: translateX(-50%); */
     }
-
-    /* .event-bg-shape img{
-        transform: none;
-        width: 100%;
-        position: relative;
-        left: auto;
-        margin-left: auto;
-        margin-right: auto;
-        object-fit: contain;
-        height: 100%;
-        object-position: top center;
-    } */
-
-    /* .next, .prev{
-        top: 170px;
-    } */
 
     .prev{
         left: 0;
@@ -475,19 +422,7 @@
     }
 }
 
-
-
-/* 767 */
 @media screen and (max-width: 767px) {
-    /* .event-content{
-        margin-top: 20px;
-    } */
-
-    /* .event-bg-shape{
-        padding: 30px;
-        width: 95%;
-        border-radius: 20px;
-    } */
 
     .event-slider{
         border-radius: 20px;
@@ -539,53 +474,11 @@
         top: 480px;
     }
 
-    /* .event-ctr{
-        justify-content: center;
-        flex-wrap: wrap;
-    } */
-
-    /* .event-img{
-        width: 100%;
-        max-width: 340px;
-        top: 30px;
-        height: 390px;
-    } */
-
-    /* .event-slider__apply{
-        margin-right: 30px;
-    } */
-
 }
 
-
-
-/* 576 */
 @media screen and (max-width: 576px) {
-    /* .event-content{
-        margin-top: 20px;
-        margin-bottom: 20px;
-    } */
-
-    /* .event-bg-shape{
-        height: 200px;
-        padding: 30px;
-    } */
-
-    /* .prev{
-        transform: translate(20%, -50%);
-    }
-
-    .next{
-        transform: translate(-20%, -50%);
-    } */
-
-    /* .event-img{
-        max-width: 300px;
-        height: 300px;
-    } */
 
     .event-slider{
-        /* width: 85%; */
         margin-top: 130px;
     }
 
@@ -637,8 +530,8 @@
     .event-slider-panigation{
         top: 585px;
     }
-}
 
+}
 
 @media screen and (max-width: 280px) {
     
