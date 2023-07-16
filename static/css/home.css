@@ -257,6 +257,7 @@ section{
    padding:10px 20px;
    border:none;
    opacity: 1;
+   cursor: pointer;
 }
 
 .button-reg:hover{
@@ -291,22 +292,12 @@ section{
    border:1px solid #555;
    transition: 0.5s;
    margin-right: 20px;
-}.buttons button:hover{
+   cursor: pointer;
+}
+.buttons button:hover{
    background-color: var(--darkblue);
    color: var(--white);
 }
- 
-
-
-
-
-
-
-
-
-
-
-
 
 @media (max-width:991px){
 
@@ -360,4 +351,125 @@ section{
       grid-template-columns: 1fr;
    }
 
+}
+
+
+/* Events Section */
+.events {
+   padding: 45px 0 90px;
+   background-color: rgb(216, 216, 216);
+}
+
+.headline h1 {
+   font-size: 48px;
+   text-align: center;
+   margin-bottom: 30px;
+}
+
+
+/* Workshops Section */
+.workshops{
+   padding: 40px 0;
+}
+
+.workshops-wrap{
+   display: flex;
+   flex-wrap: wrap;
+   justify-content:space-evenly;
+   margin-top: 60px;
+}
+
+.workshops-card{
+   background-color: white;
+   border-radius: 14px;
+   width: 380px;
+   height: 520px;
+   box-shadow: -1px 15px 30px -12px black, rgba(0, 0, 0, 0.3) 0px -3px 0px inset;
+   margin: 0 15px 60px;
+
+   position: relative;
+   display: inline-block;
+   text-align: center;
+   transition: 0.5s ease-out;
+   cursor: pointer;
+
+}
+
+.workshops-card:hover{
+   /* scale: 1.02; */
+   transform: translateY(-25px);
+   box-shadow: 0px 25px 30px -6px rgb(0, 87, 153), rgba(0, 139, 248, 0.6) 0px -3px 0px inset;
+}
+
+.workshop-image{
+   width: 100%;
+   height: 220px;
+   margin-bottom: 25px;
+}
+
+.workshop-image img{
+   width: 100%;
+   height: 100%;
+   border-radius: 14px;
+   object-fit: cover;
+   border-bottom-left-radius: 0;
+   border-bottom-right-radius: 0;
+}
+
+.workshop-title{
+   font-size: 26px;
+   font-weight: 900;
+   margin-bottom: 20px;
+   position: relative;
+}
+
+.workshop-title::after{
+   content: "";
+   position: absolute;
+   width: 40%;
+   height: 3.5px;
+   top: 30px;
+   left: 30%;
+   background: linear-gradient(90deg, rgba(15,143,170,1) 0%, rgba(10,59,110,1) 100%);
+}
+
+.workshop-description{
+   padding: 0 15px;
+   font-size: 16px;
+   color: #808080;
+}
+
+.register-btn{
+   position: absolute;
+   bottom: 30px;
+   width: 100%;
+   text-align: center;
+}
+
+.register-btn button{
+   background-color: rgba(15, 90, 170,0.8);
+   border-radius: 5px;
+   border-width: 0px;
+   box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
+   color: white;
+   cursor: pointer;
+   height: 40px;
+   padding: 0 16px;
+   transition: box-shadow .25s,transform .25s;
+   touch-action: manipulation;
+   font-size: 18px;
+}
+
+.register-btn button:hover {
+   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
+   transform: translateY(-2px);
+}
+
+.register-btn button:focus {
+   box-shadow: rgba(10, 59, 110, 0.8) 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
+}
+
+.register-btn button:active {
+   box-shadow: rgba(10, 59, 110, 0.8) 0 3px 7px inset;
+   transform: translateY(2px);
 }

@@ -8,7 +8,7 @@ document.getElementById('prev').onclick = function(){
 }
 
 
-//--------------------------- Events Section
+//--------------------------- Events and Workshops fetching
 
 // Fetching Events data
 fetch("../../data/db.json")
@@ -17,17 +17,23 @@ fetch("../../data/db.json")
     })
 
     .then((data) => {
-        data.map((event) => {
-            addslide(event);
+        data["events"].map((event) => {
+            addEvent(event);
     });
         swiper.update();
+
+        data["workshops"].map((workshop) => {
+            addWorkshop(workshop);
+        });
     });
 
 let slider = document.getElementById("event-slider");
 let event_pics = document.getElementById("event_pics");
 let first_event = true;
 
-function addslide(event) {
+let workshops_wrap = document.getElementById("workshops-wrap");
+
+function addEvent(event) {
     let img_div = document.createElement("div");
     let item = document.createElement("div");
     let card = document.createElement("div");
@@ -100,6 +106,44 @@ function addslide(event) {
 
     event_pics.appendChild(img_div);
     slider.appendChild(item);
+}
+
+function addWorkshop(workshop){
+    let card = document.createElement("div");
+    let img_div = document.createElement("div");
+    let description_div = document.createElement("div");
+    let register = document.createElement("div");
+
+    let workshop_img = document.createElement("img");
+    let title = document.createElement("h3");
+    let description = document.createElement("p");
+    let register_btn = document.createElement("button");
+
+    let titleText = document.createTextNode(workshop.title);
+    let descriptionText = document.createTextNode(workshop.description);
+    let registerText = document.createTextNode("Register");
+
+    workshop_img.src = workshop.img_src;
+    title.appendChild(titleText);
+    description.appendChild(descriptionText);
+    register_btn.appendChild(registerText);
+
+    card.className = "workshops-card";
+    img_div.className = "workshop-image";
+    description_div.className = "workshop-description";
+    register.className = "register-btn";
+    title.className = "workshop-title";
+
+    img_div.appendChild(workshop_img);
+    description_div.appendChild(description);
+    register.appendChild(register_btn);
+
+    card.appendChild(img_div);
+    card.appendChild(title);
+    card.appendChild(description_div);
+    card.appendChild(register);
+
+    workshops_wrap.appendChild(card);
 }
 
 // --------------------------------------------------------------
