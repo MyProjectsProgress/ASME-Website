@@ -10,6 +10,8 @@ const Event = require('../models/eventModel');
 
 exports.uploadImage = uploadImage('backgroundImage');
 
+// exports.uploadImage = uploadImage('foregroundImage');
+
 // @desc   Apply some changes on uploaded picture
 exports.eventImageProcessing = asyncHandler(async (req, res, next) => {
 
