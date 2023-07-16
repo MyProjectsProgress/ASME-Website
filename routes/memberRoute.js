@@ -22,10 +22,7 @@ const {
 
 const router = express.Router();
 
-router.use(protect);
-
-// Admin
-router.use(allowedTo('admin'));
+router.use(protect, allowedTo('admin'));
 
 router.route('/')
     .get(getMembers)

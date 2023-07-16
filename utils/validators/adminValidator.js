@@ -68,7 +68,7 @@ exports.updateAdminValidator = [
                 if (found) {
                     return Promise.reject(new Error('Email is in use'));
                 }
-            })
+            });
         }),
 
     validatorMiddleware,

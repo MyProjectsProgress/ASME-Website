@@ -8,7 +8,7 @@ const { uploadImage } = require('../middlewares/uploadImageMiddleware');
 
 const Member = require('../models/memberModel');
 
-exports.uploadImage = uploadImage();
+exports.uploadImage = uploadImage('image');
 
 // @desc   Apply some changes on uploaded picture
 exports.imageProcessing = asyncHandler(async (req, res, next) => {

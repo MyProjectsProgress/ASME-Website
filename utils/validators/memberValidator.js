@@ -85,7 +85,7 @@ exports.updateMemberValidator = [
 exports.deleteMemberValidator = [
     check('id')
         .isMongoId()
-        .withMessage('Invalid Category ID Format'),
+        .withMessage('Invalid Event ID Format'),
 
     validatorMiddleware,
 ];

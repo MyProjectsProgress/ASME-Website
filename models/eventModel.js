@@ -29,7 +29,10 @@ const eventSchema = new mongoose.Schema(
             type: String,
         },
 
-        imageID: String
+        expired: {
+            type: Boolean,
+            default: false,
+        },
 
     },
     { timestamps: true }

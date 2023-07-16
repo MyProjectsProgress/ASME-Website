@@ -2,14 +2,34 @@ const express = require('express');
 
 const { protect, allowedTo } = require('../controllers/authController');
 
-const { createEvent, getEvents, imageProcessing, uploadImage } = require('../controllers/eventController');
+const {
+    createEventValidator,
+    deleteEventValidator,
+    getEventValidator,
+    updateEventValidator
+} = require('../utils/validators/eventValidator');
 
-const { createEventValidator } = require('../utils/validators/eventValidator');
+const {
+    createEvent,
+    updateEvent,
+    getEvents,
+    getEvent,
+    deleteEvent,
+    eventImageProcessing,
+    uploadImage
+} = require('../controllers/eventController');
 
 const router = express.Router();
 
+router.use(protect, allowedTo('admin'));
+
 router.route('/')
-    .get(protect, allowedTo('admin'), getEvents)
-    .post(createEventValidator, uploadImage, imageProcessing, createEvent);
+    .get(getEvents)
+    .post(uploadImage, eventImageProcessing, createEventValidator, createEvent);
+
+router.route('/:id')
+    .get(getEventValidator, getEvent)
+    .put(uploadImage, eventImageProcessing, updateEventValidator, updateEvent)
+    .delete(deleteEventValidator, deleteEvent);
 
 module.exports = router;

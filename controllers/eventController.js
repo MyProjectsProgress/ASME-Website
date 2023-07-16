@@ -1,6 +1,6 @@
-const asyncHandler = require('express-async-handler');
-const sharp = require('sharp');
 const { v4: uuidv4 } = require('uuid');
+const sharp = require('sharp');
+const asyncHandler = require('express-async-handler');
 const slugify = require('slugify');
 
 const factory = require('./handlersFactory');
@@ -8,17 +8,24 @@ const { uploadImage } = require('../middlewares/uploadImageMiddleware');
 
 const Event = require('../models/eventModel');
 
-exports.uploadImage = uploadImage();
+exports.uploadImage = uploadImage('backgroundImage');
 
 // @desc   Apply some changes on uploaded picture
-exports.imageProcessing = asyncHandler(async (req, res, next) => {
-
-    console.log(req.body)
+exports.eventImageProcessing = asyncHandler(async (req, res, next) => {
 
     if (req.file) {
+
         const randomID = uuidv4();
-        req.body.slug = slugify(req.body.title);
-        const filename = `${randomID}-${Date.now()}.jpeg`;
+
+        if (req.body.title) {
+            req.body.slug = slugify(req.body.title);
+        } else {
+            let query = Event.findById(req.params.id);
+            const document = await query;
+            req.body.slug = document.slug;
+        }
+
+        const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
 
         await sharp(req.file.buffer)
             .resize(600, 600)
@@ -36,11 +43,26 @@ exports.imageProcessing = asyncHandler(async (req, res, next) => {
 });
 
 // @desc   Create New Participant
-// @route  PUT /api/v1/member
-// @access Public
+// @route  PUT /api/v1/event
+// @access Private/admin
 exports.createEvent = factory.createOne(Event);
 
-// @desc   Get all participants
-// @route  PUT /api/v1/member
+// @desc   Get All Participants
+// @route  PUT /api/v1/event
 // @access Private/admin
 exports.getEvents = factory.getAll(Event);
+
+// @desc   Get Specific Event
+// @route  GET /api/v1/event
+// @access Private
+exports.getEvent = factory.getOne(Event);
+
+// @desc   Update Event's Data
+// @route  PUT /api/v1/event
+// @access Private/admin
+exports.updateEvent = factory.updateOne(Event);
+
+// @desc   Delete Event' Data
+// @route  DELETE /api/v1/event
+// @access Private/admin
+exports.deleteEvent = factory.deleteOne(Event);
