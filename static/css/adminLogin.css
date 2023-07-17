@@ -112,7 +112,6 @@ body {
 
 .adminInput:focus {
   border:solid 2px rgba(15, 90, 170,0.7);
-  box-shadow: 0 0 0 3px hsla(var(--input-focus-h), var(--input-focus-s), calc(var(--input-focus-l) + 40%), 0.8);
   outline: 3px solid transparent;
 }
 
@@ -140,11 +139,11 @@ body {
     will-change: box-shadow,transform;
     font-size: 17px;
 }
-.login-button button:focus {
+.login-button:focus {
   box-shadow: rgba(10, 59, 110, 0.8) 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
 }
 
-.login-button button:active {
+.login-button:active {
   box-shadow: rgba(10, 59, 110, 0.8) 0 3px 7px inset;
 }
 
@@ -192,3 +191,4 @@ body {
     padding: 0.5em 1em;
   }
 }
+
