@@ -1,5 +1,16 @@
 /* Import "Poppins" google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap');
+
+:root{
+    --background_white: #fff;
+    --background_grey: #f0f0f0;
+    --black:#222;
+    --logo-blue: #34478e;
+    --light-blue: rgba(15, 90, 170, 0.8);
+    --dark-blue: rgba(10, 59, 110, 0.8);
+    --error-red: rgba(255, 34, 22, 0.6);
+}
 
 /* Animation */
 @keyframes rotate {
@@ -14,14 +25,14 @@
 
 /* General Page Styling */
 * {
-    font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
+    color: var(--black);
     margin: 0;
     padding: 0;
 }
 
 html {
-    background-color: rgb(240, 240, 240);
+    background-color: var(--background_grey);
     scroll-behavior: smooth;
 }
 
@@ -34,6 +45,7 @@ body {
 
 /* Form */
 .recruitment-form {
+    font-family: 'Rubik', sans-serif;
     max-width: 95%;
     margin: 0 auto;
     font-size: 16px;
@@ -43,6 +55,7 @@ body {
 
 /* Left part content */
 .visualization-side {
+    font-family: 'Poppins', sans-serif;
     width: clamp(min(100px), 400px, max(400px));
     background-image: linear-gradient(rgba(227, 227, 227, 0.9), rgba(26, 25, 25, 0.8)), url(../images/form_cover.jpg);
     background-size: cover;
@@ -75,7 +88,7 @@ body {
 }
 
 .slogan p {
-    color: #FCFCFD;
+    color: white;
     margin-bottom: 10px;
     text-shadow: 0.1em 0.1em 1px rgba(0, 0, 0, 0.3);
 }
@@ -85,18 +98,22 @@ body {
     min-height: 140px;
     max-width: 140px;
     border-radius: 100%;
-    background: #272728;
+    background: var(--black);
     display: flex;
 }
 
 .circle h1 {
     margin-left: -35px;
-    color: #FCFCFD;
+    color: white;
     text-align: center;
     line-height: 30px;
     /* transform: scale(1) rotate(-5deg) skewX(1deg) skewY(1deg); */
-    text-shadow: 1px 1px #084480, 2px 2px #084480, 3px 3px #084480, 4px 4px #084480,
-        5px 5px #084480, 6px 6px #084480, 7px 7px #084480, 8px 8px #084480, 9px 9px #072e56;
+    text-shadow: 1px 1px var(--logo-blue), 2px 2px var(--logo-blue), 3px 3px var(--logo-blue), 4px 4px var(--logo-blue),
+        5px 5px var(--logo-blue), 6px 6px var(--logo-blue), 7px 7px var(--logo-blue), 8px 8px var(--logo-blue), 9px 9px #072e56;
+}
+
+.circle span{
+    color: white;
 }
 
 span:nth-child(3) {
@@ -125,7 +142,7 @@ span:nth-child(5) {
 /* Right part application */
 .application-side {
     position: relative;
-    background-color: #FCFCFD;
+    background-color: var(--background_white);
     max-width: 800px;
     padding: 50px;
     user-select: none;
@@ -144,10 +161,6 @@ form .input-field label {
     font-weight: 500;
 }
 
-/* form .input-field input {
-    max-width: 100%;
-} */
-
 textarea {
     resize: none;
 }
@@ -161,14 +174,12 @@ textarea {
     padding: 5px 8px;
     outline: none;
     transition: 0.5s;
-    /* box-shadow: inset 1px 1px 3px 0px rgba(0, 0, 0, 0.2); */
 }
 
 form .input-field input:focus,
 select:focus,
 textarea:focus {
-    border: solid 2px rgba(15, 90, 170, 0.7);
-    /* box-shadow: inset 1px 1px 3px 0px rgba(15, 90, 170, 0.2); */
+    border: solid 2px var(--light-blue);
 }
 
 form .mulitple-input {
@@ -177,22 +188,18 @@ form .mulitple-input {
     gap: 10px;
 }
 
-/* form .mulitple-input input {
-    max-width: 120px;
-} */
-
 /* Submit Button */
-.submit {
+.submit, .back_home {
     margin-top: 25px;
     text-align: center;
 }
 
 .submit button {
-    background-color: rgba(15, 90, 170, 0.8);
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-blue);
     border-radius: 5px;
     border-width: 0px;
-    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
-    /* color: #36395A; */
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, var(--dark-blue) 0 -3px 0 inset;
     color: white;
     cursor: pointer;
     height: 42px;
@@ -211,27 +218,23 @@ form .mulitple-input {
     height: 22px;
 }
 
-.submit button:hover {
-    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
+.submit button:hover, .back_home a:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, var(--dark-blue) 0 -3px 0 inset;
     transform: translateY(-2px);
 }
 
-.submit button:focus {
-    box-shadow: rgba(10, 59, 110, 0.8) 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgba(10, 59, 110, 0.8) 0 -3px 0 inset;
-}
-
-.submit button:active {
-    box-shadow: rgba(10, 59, 110, 0.8) 0 3px 7px inset;
+.submit button:active, .back_home a:active {
+    box-shadow: var(--dark-blue) 0 3px 7px inset;
     transform: translateY(2px);
 }
 
-.submit button:hover img {
+.submit button:hover img, .back_home:hover img {
     animation: rotate 1.5s ease-out;
 }
 
 /* Succession page */
 .succession-side {
-    background-color: #FCFCFD;
+    background-color: var(--background_white);
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -254,6 +257,32 @@ form .mulitple-input {
 
 .succession-side p {
     font-size: 20px;
+}
+
+.back_home a{
+    display: flex;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light-blue);
+    border-radius: 5px;
+    border-width: 0px;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, var(--dark-blue) 0 -3px 0 inset;
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    padding: 6px 12px;
+    transition: box-shadow .25s, transform .25s;
+    touch-action: manipulation;
+    will-change: box-shadow, transform;
+    font-size: 16px;
+}
+
+.back_home img{
+    position: relative;
+    top: 3px;
+    margin-left: 7px;
+    max-width: 18px;
+    max-height: 18px;
 }
 
 /* Media Queries */

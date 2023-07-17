@@ -44,7 +44,7 @@ for (let input of inputs) {
         const formData = new FormData(form); // Get form data
 
         if (input.value !== "") {
-            input.style.border = "solid 2px rgba(15, 90, 170,0.7)";
+            input.style.border = "solid 2px var(--light-blue)";
         }
 
         else {
@@ -53,7 +53,7 @@ for (let input of inputs) {
     });
 
     input.addEventListener("invalid", () => {
-        input.style.border = "solid 2px rgba(211, 25, 15, 0.6)";
+        input.style.border = "solid 2px var(--error-red)";
     });
 
 }
