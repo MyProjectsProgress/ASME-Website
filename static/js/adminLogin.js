@@ -1,6 +1,6 @@
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
-const forgetPasswordButton = document.querySelector("#forgetPassword")
+const forgetPasswordButton = document.querySelector("#forgetPassword");
 const loginButton = document.querySelector('#loginButton');
 
 forgetPasswordButton.addEventListener('click', (event) => {
@@ -19,7 +19,7 @@ loginButton.addEventListener('click', (event) => {
 
   const url = `/api/v1/auth/adminLogin`;
 
-  const nextPage = '../templates/form-succession.html';
+  const nextPage = '../templates/adminPanel.html';
 
   axiosRequest(url, requestObject, nextPage);
 

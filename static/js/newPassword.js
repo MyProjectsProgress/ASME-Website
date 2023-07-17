@@ -10,8 +10,8 @@ submitButton.addEventListener('click', (event) => {
         email: email.value,
         newPassword: password.value,
     }).then((res) => {
-        // render the amdin page here
-        // ex: window.location.href = '../templates/form-succession.html';
+
+        window.location.href = '../templates/adminPanel.html';
         const data = res.data
         console.log(data)
 

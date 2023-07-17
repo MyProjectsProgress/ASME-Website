@@ -1,6 +1,7 @@
 node_modules/
 
-config.env
-package.json
+config.env/
 
-uploads
+package.json/
+
+uploads/

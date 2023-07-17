@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,8 +18,8 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js"></script>
 
    <!-- css -->
-   <link rel="stylesheet" href="../static/css/home.css">
-   <link rel="stylesheet" href="../static/css/events-section.css">
+   <link rel="stylesheet" href="/css/home.css">
+   <link rel="stylesheet" href="/css/events-section.css">
 
    <title>ASME</title>
 
@@ -26,69 +27,69 @@
 
 
 <body>
-   
-<header class="header">
 
-   <section class="flex">
+   <header class="header">
 
-      <a href="home.html" class="logo"><img class="image-header" src="../static/images/logo.png"></a>
+      <section class="flex">
 
-      <nav class="navbar">
-         <a href="#home">Home</a>
-         <a href="#pages">Pages</a>
-         <a href="#courses">Courses</a>
-         <a href="#competitions">Competitions</a>
-         <a href="#projects">Projects</a>
-         <a href="#blog">Blog</a>
-      </nav>
+         <a href="home.html" class="logo"><img class="image-header" src="/images/logo.png"></a>
 
-      <div class="icons">
-         <a href="https://web.facebook.com/ASMECUSS" class="fa fa-facebook"></a>
-         <a href="#" class="fa fa-twitter"></a>
-         <a href="#" class="fa fa-instagram"><span></span></a>
-         <div id="menu-btn" class="fas fa-bars"></div>
+         <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#pages">Pages</a>
+            <a href="#courses">Courses</a>
+            <a href="#competitions">Competitions</a>
+            <a href="#projects">Projects</a>
+            <a href="#blog">Blog</a>
+         </nav>
 
+         <div class="icons">
+            <a href="https://web.facebook.com/ASMECUSS" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-twitter"></a>
+            <a href="#" class="fa fa-instagram"><span></span></a>
+            <div id="menu-btn" class="fas fa-bars"></div>
+
+         </div>
+
+
+      </section>
+
+   </header>
+
+   <section class="home">
+
+      <div class="content">
+         <div class="name">Welcome To ASME</div>
+         <div class="des">Want to become a member and join our team?</div>
+         <button class="button-reg">Register NOW!</button>
       </div>
 
+      <div class="container">
+         <div id="slide">
+            <div class="item" style="background-image: url(/images/home1.jpg);">
+            </div>
+            <div class="item" style="background-image: url(/images/begin.jpg);">
+            </div>
+            <div class="item" style="background-image: url(/images/home2.jpg);">
+            </div>
+            <div class="item" style="background-image: url(/images/home3.jpg);">
+            </div>
+            <div class="item" style="background-image: url(/images/home4.jpg);">
+            </div>
+            <div class="item" style="background-image: url(/images/home5.jpg);">
+            </div>
+
+         </div>
+
+         <div class="buttons">
+            <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
+            <button id="next"><i class="fa-solid fa-angle-right"></i></button>
+         </div>
+      </div>
 
    </section>
 
-</header>
-
-<section class="home">
-
-   <div class="content">
-      <div class="name">Welcome To ASME</div>
-      <div class="des">Want to become a member and join our team?</div>
-      <button class="button-reg">Register NOW!</button>
-   </div>
-   
-   <div class="container">
-      <div id="slide">
-         <div class="item" style="background-image: url(../static/images/home1.jpg);">
-         </div>
-         <div class="item" style="background-image: url(../static/images/begin.jpg);">
-         </div>
-         <div class="item" style="background-image: url(../static/images/home2.jpg);">
-         </div>
-         <div class="item" style="background-image: url(../static/images/home3.jpg);">
-         </div>
-         <div class="item" style="background-image: url(../static/images/home4.jpg);">
-         </div>
-         <div class="item" style="background-image: url(../static/images/home5.jpg);">
-      </div>
-
-      </div>
-
-      <div class="buttons">
-         <button id="prev"><i class="fa-solid fa-angle-left"></i></button>
-         <button id="next"><i class="fa-solid fa-angle-right"></i></button>
-      </div>
-   </div>
-
-</section>
-
-<!-- <section class="about">
+   <!-- <section class="about">
    <div class="box-container">
 
       <div class="box">
@@ -119,60 +120,60 @@
 </section> -->
 
 
-<section class="events">
+   <section class="events">
 
-   <div class="headline">
-      <h1>Events</h1>
-   </div>
+      <div class="headline">
+         <h1>Events</h1>
+      </div>
 
-   <div class="event-wrapper">
+      <div class="event-wrapper">
 
-      <div class="event-content">
+         <div class="event-content">
 
-         <div class="event-bg-shape">
-               <img src="../static/images/GeartheWorld.png" alt="">
-         </div>
+            <div class="event-bg-shape">
+               <img src="/images/GeartheWorld.png" alt="">
+            </div>
 
-         <div class="event-img" id="event_pics"></div>
+            <div class="event-img" id="event_pics"></div>
 
-         <div class="event-slider">
+            <div class="event-slider">
 
                <button class="prev disabled">
                   <span class="slider-icon">
-                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M400-80 0-480l400-400 56 57-343 343 343 343-56 57Z"/></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
+                        <path d="M400-80 0-480l400-400 56 57-343 343 343 343-56 57Z" />
+                     </svg>
                   </span>
                </button>
 
                <button class="next">
                   <span class="slider-icon">
-                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z"/></svg>
+                     <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
+                        <path d="m304-82-56-57 343-343-343-343 56-57 400 400L304-82Z" />
+                     </svg>
                   </span>
                </button>
 
                <div class="event-slider__wrp swiper-wrapper" id="event-slider"></div>
                <div class="swiper-pagination event-slider-panigation"></div>
-               
+
+            </div>
          </div>
       </div>
-   </div>
-</section>
+   </section>
 
-<section class="workshops">
+   <section class="workshops">
 
-   <div class="headline">
-      <h1>Workshops</h1>
-   </div>
+      <div class="headline">
+         <h1>Workshops</h1>
+      </div>
 
-   <div class="workshops-wrap" id="workshops-wrap"></div>
+      <div class="workshops-wrap" id="workshops-wrap"></div>
 
-</section>
+   </section>
 
-
-
-
-   <script src="../static/js/home.js"></script>
-
-
+   <script src="/js/home.js"></script>
 
 </body>
+
 </html>

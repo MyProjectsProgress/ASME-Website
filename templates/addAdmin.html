@@ -10,8 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Stylesheets -->
-    <!-- <link rel="stylesheet" href="../static/css/newPassword.css"> -->
-    <link rel="stylesheet" href="../static/css/forgotPassword.css">
+    <link rel="stylesheet" href="/css/addAdmin.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
@@ -19,45 +18,46 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="carry">
-        <div class="content">
-            <h2 class="welcome-statement">Add Admin</h2>
+    <div class="container">
+        <div class="carry">
+            <div class="content">
+                <h2 class="welcome-statement">Add Admin</h2>
 
-            <form class="form" action="#" method="POST">
-                <div class="input-field">
-                    <label for="Email">Email:</label>
-                    <input type="Email" class='adminInput'  id="password" name="password" required>
-                </div>
-                <div class="input-field">
-                    <label for="Email">phone number:</label>
-                    <input type="Email" class='adminInput'  name="password" required>
-                </div>
-                <div class="input-field">
-                    <label for="password">New Password:</label>
-                    <input type="password"  class='adminInput' id="password" name="password" required>
-                </div>
-                <div class="input-field">
-                    <label for="confirm-password">Confirm Password:</label>
-                    <input  class='adminInput' type="password" id="confirm-password" name="confirm-password " required>
-                </div>
-                <label for="role">role:</label>
-                <select id="role" name="roles" required>
-                    <option value="Admin">Admin</option>
-                    <option value="User">User</option>
-
-                    <!-- Add more options as needed -->
-                </select>
-                <button type="submit">Submit</button>
-            </form>
+                <form class="form" action="#" method="POST">
+                    <div class="input-field">
+                        <label for="Email">Email:</label>
+                        <input type="Email" class="adminInput" id="email" name="email" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="password">Password:</label>
+                        <input type="password" class="adminInput" id="password" name="password" required>
+                    </div>
+                    <div class="input-field">
+                        <label for="confirm-password">Confirm Password:</label>
+                        <input class="adminInput" type="password" id="confirm-password" name="confirm-password"
+                            required>
+                    </div>
+                    <div class="input-field">
+                        <label for="role">Role:</label>
+                        <select id="role" name="roles" id="role" required>
+                            <option value="admin">Admin</option>
+                            <option value="sub-admin">Sub Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button class="submit" type="submit" id="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
-
-    
     </div>
 
+    <!-- axios -->
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
-</div>
-<script src="../static/js/adminPanel.js"></script>
+    <!-- JS Implementation -->
+    <script src="/js/addAdmin.js"></script>
+    <script src="/js/axiosRequest.js"></script>
 </body>
 
 </html>

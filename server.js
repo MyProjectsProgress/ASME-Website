@@ -31,20 +31,20 @@ app.use(express.json());
 // MOUNT ROUTES
 mountRoutes(app);
 
-app.get('/api/v1/form', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'templates/form.html'));
+app.get('/api/v1/templates/home.html', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates', 'home.html'));
 });
 
-app.get('/api/templates/form-succession.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
+app.get('/api/v1/templates/adminPanel.html', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates', 'adminPanel.html'));
 });
 
-app.get('/api/v1/templates/form-succession.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
+app.get('/api/v1/templates/addAdmin.html', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates', 'addAdmin.html'));
 });
 
-app.get('/api/v1/auth/adminLogin', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'templates/adminLogin.html'));
+app.get('/api/v1/auth/templates/adminLogin', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates', 'adminLogin.html'));
 });
 
 app.get('/api/v1/templates/forgetPassword.html', (req, res) => {
@@ -59,6 +59,15 @@ app.get('/api/v1/templates/newPassword.html', (req, res) => {
     console.log(__dirname, 'templates', 'newPassword.html')
     res.sendFile(path.join(__dirname, 'templates', 'newPassword.html'));
 });
+
+app.get('/api/v1/templates/form.html', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/form.html'));
+});
+
+app.get('/api/templates/form-succession.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
+});
+
 
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
@@ -78,7 +87,8 @@ app.use(globalError);
 const PORT = process.env.PORT || 8000;
 
 const server = app.listen(PORT, () => {
-    console.log(`App is Runinng  on Port http://localhost:${PORT}/api/v1/`);
+    // console.log(res);
+    console.log(`App is Runinng  on Port http://localhost:${PORT}/api/v1/templates/home.html`);
 });
 
 // HANDLING REJECTION OUTSIDE EXPRESS
