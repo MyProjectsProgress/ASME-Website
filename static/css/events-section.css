@@ -5,7 +5,7 @@
     --logo-blue: #34478e;
     --light-blue: rgba(15, 90, 170, 0.8);
     --dark-blue: rgba(10, 59, 110, 0.8);
-    --error-red: rgba(255, 34, 22, 0.6);
+    --error-red: rgba(255, 34, 22);
 }
 
 .events img{

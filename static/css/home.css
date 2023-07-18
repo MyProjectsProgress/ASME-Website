@@ -10,6 +10,7 @@
    --black: #222;
    --light-blue: rgb(15, 90, 170);
    --dark-blue: rgb(10, 59, 110);
+   
    --border:.2rem solid rgba(0,0,0,.1);
    --box-shadow:0 .5rem 1rem rgba(0, 0, 0, 0.514);
 }

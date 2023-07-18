@@ -57,3 +57,27 @@ for (let input of inputs) {
     });
 
 }
+
+function showError(field, message){
+    let errorMessage = document.createElement("div");
+    let errorSpan = document.createElement("span");
+    let text = document.createTextNode(message);
+
+    errorMessage.className = "error-message";
+    errorSpan.appendChild(text);
+    errorMessage.appendChild(errorSpan)
+
+    field.insertAdjacentElement("afterend", errorMessage);
+}
+
+function clearErrors() {
+    let messages = document.querySelectorAll(".error-message");
+    
+    messages.forEach((message) => {
+        message.remove();
+    });
+}
+
+
+// showError(email, "hello");    
+// clearErrors();

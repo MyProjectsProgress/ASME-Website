@@ -9,7 +9,7 @@
     --logo-blue: #34478e;
     --light-blue: rgba(15, 90, 170, 0.8);
     --dark-blue: rgba(10, 59, 110, 0.8);
-    --error-red: rgba(255, 34, 22, 0.6);
+    --error-red: rgba(255, 34, 22);
 }
 
 /* Animation */
@@ -20,6 +20,18 @@
 
     100% {
         transform: rotate(-180deg);
+    }
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
     }
 }
 
@@ -186,6 +198,19 @@ form .mulitple-input {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+/* Error Message */
+
+.error-message{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    animation: appear .5s ease-in;
+}
+
+.error-message span{
+    color: var(--error-red);
+    font-size: 16px;
 }
 
 /* Submit Button */
