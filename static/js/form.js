@@ -17,7 +17,7 @@ submitButton.addEventListener('click', (event) => {
 
     event.preventDefault();
 
-    const requestObject = {
+    const body = {
         name: fullName.value,
         phoneNumber: phoneNumber.value,
         email: email.value,
@@ -31,11 +31,15 @@ submitButton.addEventListener('click', (event) => {
         comment: comment.value,
     }
 
-    const url = `/api/v1/form`;
+    requestObject = {
+        url: '/api/v1/form',
+        method: 'POST',
+        data: body,
+    }
 
-    const nextPage = '../templates/form-succession.html';
+    const nextPage = './form-succession';
 
-    axiosRequest(url, requestObject, nextPage);
+    axiosRequest(requestObject, nextPage);
 });
 
 for (let input of inputs) {

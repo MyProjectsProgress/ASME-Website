@@ -5,24 +5,40 @@ const loginButton = document.querySelector('#loginButton');
 
 forgetPasswordButton.addEventListener('click', (event) => {
   event.preventDefault();
-  window.location.href = '../templates/forgetPassword.html';
+  window.location.href = './forgetPassword';
 });
 
 loginButton.addEventListener('click', (event) => {
 
   event.preventDefault();
 
-  const requestObject = {
+  const body = {
     email: email.value,
     password: password.value,
-  }
+  };
 
-  const url = `/api/v1/auth/adminLogin`;
+  const requestObject = {
+    url: '/api/v1/auth/adminLogin',
+    method: 'POST',
+    data: body,
+  };
 
-  const nextPage = '../templates/adminPanel.html';
+  const nextPage = '../adminPanel';
 
-  axiosRequest(url, requestObject, nextPage);
-
+  axiosRequest(requestObject, nextPage).then((token) => {
+    // console.log(token);
+    const addBearerToeknToURL = `../adminPanel?variable=${encodeURIComponent(token)}`;
+    // window.location.href = addBearerToeknToURL;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    // window.location.href = nextPage;
+    axios.defaults.headers.common = {
+      'Authorization': `Bearer ${token}`
+    };
+    // window.location.href = addBearerToeknToURL;
+  })
+    .catch((error) => {
+      console.error(error);
+    });
 });
 
 window.addEventListener("DOMContentLoaded", function () {

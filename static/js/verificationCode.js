@@ -22,11 +22,15 @@ resendCode.addEventListener('click', (event) => {
   const urlParams = new URLSearchParams(queryString);
   const email = urlParams.get('variable');
 
-  const requestObject = { email: email }
+  const body = { email: email }
 
-  const url = `/api/v1/auth/forgetPassword`;
+  const requestObject = {
+    url: '/api/v1/auth/forgetPassword',
+    method: 'POST',
+    data: body
+  };
 
-  const nextPage = '../templates/verificationCode.html';
+  const nextPage = './verificationCode';
 
   axiosRequest(url, requestObject, nextPage);
 
@@ -42,8 +46,8 @@ function handleInput(event) {
     let chars = resetCode.split('');
     chars[index] = ' ';
     resetCode = chars.join('');
-  }
-}
+  };
+};
 
 function addPinNumber(first, last) {
   if (first.value.length) {
@@ -52,19 +56,23 @@ function addPinNumber(first, last) {
     let chars = resetCode.split('');
     chars[index] = input;
     resetCode = chars.join('');
-  }
+  };
 
   if (last === 'input6') {
 
-    const requestObject = { resetCode: resetCode }
+    const body = { resetCode: resetCode }
 
-    const url = `/api/v1/auth/verifyResetCode`;
+    const requestObject = {
+      url: '/api/v1/auth/verifyResetCode',
+      method: 'POST',
+      data: body
+    };
 
-    const nextPage = '../templates/newPassword.html';
+    const nextPage = './newPassword';
 
-    axiosRequest(url, requestObject, nextPage);
-  }
-}
+    axiosRequest(requestObject, nextPage);
+  };
+};
 
 function Validation(event) {
   const input = event.target;
@@ -72,8 +80,8 @@ function Validation(event) {
   const validNumber = /^[0-9]$/;
   if (!validNumber.test(value)) {
     input.value = '';
-  }
-}
+  };
+};
 
 var fields = document.getElementsByClassName('square-input');
 
@@ -88,7 +96,7 @@ Array.from(fields).forEach(function (fields) {
       }
       catch {
         //pass
-      }
-    }
+      };
+    };
   });
 });

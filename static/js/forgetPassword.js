@@ -9,11 +9,15 @@ submitButton.addEventListener('click', (event) => {
     const addEmailToURL = `verificationCode.html?variable=${encodeURIComponent(email.value)}`;
     window.location.href = addEmailToURL;
 
-    const requestObject = { email: email.value }
+    const body = { email: email.value }
 
-    const url = `/api/v1/auth/forgetPassword`;
+    const requestObject = {
+        url: '/api/v1/auth/forgetPassword',
+        method: 'POST',
+        data: body
+    };
 
-    const nextPage = '../templates/verificationCode.html';
+    const nextPage = './verificationCode';
 
-    axiosRequest(url, requestObject, nextPage);
+    axiosRequest(requestObject, nextPage);
 });

@@ -30,6 +30,8 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
     const token = await createToken(admin._id);
 
     // 4- send response to client side
+    res.setHeader('Authorization', `Bearer ${token}`);
+
     res.status(200).json({ data: admin, token });
 
     res.authorization = token

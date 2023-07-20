@@ -6,18 +6,33 @@ submitButton.addEventListener('click', (event) => {
 
     event.preventDefault();
 
-    axios.put(`/api/v1/auth/resetPassword`, {
+    const body = {
         email: email.value,
         newPassword: password.value,
-    }).then((res) => {
+    }
 
-        window.location.href = '../templates/adminPanel.html';
-        const data = res.data
-        console.log(data)
+    const requestObject = {
+        url: '/api/v1/auth/resetPassword',
+        method: 'PUT',
+        data: body
+    };
 
-    }).catch((error) => {
-        console.error(error.response.status);
-        console.error(error.response.statusText);
-        console.error(error.response.data);
-    });
+    const nextPage = './adminPanel';
+
+    axiosRequest(requestObject, nextPage);
+
+    // axios.put(`/api/v1/auth/resetPassword`, {
+    //     email: email.value,
+    //     newPassword: password.value,
+    // }).then((res) => {
+
+    //     window.location.href = './adminPanel';
+    //     const data = res.data
+    //     console.log(data)
+
+    // }).catch((error) => {
+    //     console.error(error.response.status);
+    //     console.error(error.response.statusText);
+    //     console.error(error.response.data);
+    // });
 });

@@ -1,3 +1,5 @@
+// const axiosRequest = require("./axiosRequest");
+
 function editRow(rowId) {
   var nameInput = document.getElementById("nameInput" + rowId);
   var phoneInput = document.getElementById("phoneInput" + rowId);
@@ -142,5 +144,27 @@ function showPasswordFields(rowId) {
 const addAdminButton = document.getElementById("addAdminButton");
 
 addAdminButton.addEventListener("click", () => {
-  window.location.href = '../templates/addAdmin.html';
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const token = urlParams.get('variable');
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'My-Custom-Header': 'foobar'
+  };
+
+  const requestObject = {
+    url: 'api/v1/form', // api/v1/form
+    method: 'GET',
+  };
+
+  const nextPage = './form';
+
+  axiosRequest(requestObject, nextPage, headers).then((token) => {
+    // console.log(token)
+  }).catch((error) => {
+    console.error(error);
+  });
+
 });

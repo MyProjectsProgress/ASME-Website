@@ -10,6 +10,7 @@ const router = express.Router();
 
 router.route('/')
     .get(protect, allowedTo('admin'), getForms)
+    // .get(getForms)
     .post(createFormValidator, createForm);
 
 module.exports = router;

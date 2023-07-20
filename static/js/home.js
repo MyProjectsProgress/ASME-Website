@@ -1,8 +1,8 @@
-document.getElementById('next').onclick = function(){
+document.getElementById('next').onclick = function () {
     let lists = document.querySelectorAll('.item');
     document.getElementById('slide').appendChild(lists[0]);
 }
-document.getElementById('prev').onclick = function(){
+document.getElementById('prev').onclick = function () {
     let lists = document.querySelectorAll('.item');
     document.getElementById('slide').prepend(lists[lists.length - 1]);
 }
@@ -19,7 +19,7 @@ fetch("../../data/db.json")
     .then((data) => {
         data["events"].map((event) => {
             addEvent(event);
-    });
+        });
         swiper.update();
 
         data["workshops"].map((workshop) => {
@@ -108,7 +108,7 @@ function addEvent(event) {
     slider.appendChild(item);
 }
 
-function addWorkshop(workshop){
+function addWorkshop(workshop) {
     let card = document.createElement("div");
     let img_div = document.createElement("div");
     let description_div = document.createElement("div");
@@ -170,15 +170,15 @@ var swiper = new Swiper(".event-slider", {
 
     on: {
         init: function () {
-        var index = this.activeIndex;
+            var index = this.activeIndex;
 
-        var target = $(".event-slider__item").eq(index).data("target");
+            var target = $(".event-slider__item").eq(index).data("target");
 
-        $(".event-img__item").removeClass("active");
-        $(".event-img__item#" + target).addClass("active");
+            $(".event-img__item").removeClass("active");
+            $(".event-img__item#" + target).addClass("active");
         },
     },
-    });
+});
 
 swiper.on("slideChange", function () {
     var index = this.activeIndex;
