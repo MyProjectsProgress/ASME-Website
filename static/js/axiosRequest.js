@@ -20,6 +20,6 @@ const axiosRequest = async function axiosRequest(requestObject, nextPage, header
         console.error(error.response.status);
         console.error(error.response.statusText);
         console.error(error.response.data);
-        throw error; // Throw the error for error handling in the calling code
+        return error.response.data; // Throw the error for error handling in the calling code
     };
 }

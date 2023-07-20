@@ -13,6 +13,16 @@ const previousExperience = document.querySelector("#previous-experience");
 const comment = document.querySelector("#comment");
 const submitButton = document.querySelector("#submit");
 
+var errorMap = {
+    name: fullName,
+    phoneNumber: phoneNumber,
+    email: email,
+    university: university,
+    faculty: faculty,
+    department: department,
+    graduationYear: graduationYear
+};
+
 submitButton.addEventListener('click', (event) => {
 
     event.preventDefault();
@@ -39,7 +49,14 @@ submitButton.addEventListener('click', (event) => {
 
     const nextPage = './form-succession';
 
-    axiosRequest(requestObject, nextPage);
+    axiosRequest(requestObject, nextPage)
+        .then((res) => {
+            clearErrors();
+            res["errors"].map((error) => {
+                    showError(errorMap[error.path], error.msg);
+            });
+    })
+
 });
 
 for (let input of inputs) {
@@ -56,9 +73,9 @@ for (let input of inputs) {
         }
     });
 
-    input.addEventListener("invalid", () => {
-        input.style.border = "solid 2px var(--error-red)";
-    });
+    // input.addEventListener("invalid", () => {
+    //     input.style.border = "solid 2px var(--error-red)";
+    // });
 
 }
 
@@ -72,6 +89,8 @@ function showError(field, message){
     errorMessage.appendChild(errorSpan)
 
     field.insertAdjacentElement("afterend", errorMessage);
+    field.style.border = "solid 2px var(--error-red)";
+
 }
 
 function clearErrors() {
@@ -81,7 +100,3 @@ function clearErrors() {
         message.remove();
     });
 }
-
-
-// showError(email, "hello");    
-// clearErrors();

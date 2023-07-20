@@ -9,7 +9,7 @@ const { createFormValidator } = require('../utils/validators/formValidator');
 const router = express.Router();
 
 router.route('/')
-    .get(protect, allowedTo('admin'), getForms)
+    // .get(protect, allowedTo('admin'), getForms)
     // .get(getForms)
     .post(createFormValidator, createForm);
 

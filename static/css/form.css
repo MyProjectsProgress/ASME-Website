@@ -155,7 +155,7 @@ span:nth-child(5) {
 .application-side {
     position: relative;
     background-color: var(--background_white);
-    max-width: 800px;
+    max-width: 620px;
     padding: 50px;
     user-select: none;
     -webkit-user-select: none;

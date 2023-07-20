@@ -9,9 +9,9 @@ exports.createFormValidator = [
         .notEmpty()
         .withMessage('Name is required')
         .isLength({ min: 9 })
-        .withMessage('Name should be between 9 and 40 characters')
+        .withMessage('Please write your first, middle and last name')
         .isLength({ max: 40 })
-        .withMessage('Name should be between 9 and 40 characters'),
+        .withMessage('Name is too long'),
 
     check('phoneNumber')
         .notEmpty()
