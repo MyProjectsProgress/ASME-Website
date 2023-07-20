@@ -343,23 +343,23 @@ section{
 /* Workshops Section */
 .workshops{
    background-color: var(--background_grey);
-   padding: 40px 0;
+   padding: 40px 10px;
 }
 
 .workshops-wrap{
    display: flex;
    flex-wrap: wrap;
    justify-content:space-evenly;
-   margin-top: 60px;
+   margin-top: 30px;
 }
 
 .workshops-card{
    background-color: var(--background_white);
    border-radius: 14px;
-   width: 380px;
-   height: 520px;
+   width: 400px;
+   height: 500px;
    box-shadow: -1px 15px 30px -12px black, rgba(0, 0, 0, 0.3) 0px -3px 0px inset;
-   margin: 0 15px 60px;
+   margin: 0 5px 60px;
 
    position: relative;
    display: inline-block;
@@ -453,6 +453,35 @@ section{
       font-size: 55%;
    }
 
+
+   .workshops-card{
+      width: 360px;
+   }
+
+   .workshop-image{
+      margin-bottom: 15px;
+   }
+
+   .workshop-title{
+      font-size: 22px;
+   }
+
+   .workshop-title::after{
+      width: 35%;
+      top: 27px;
+      left: 32.5%;
+   }
+
+   .workshop-description{
+      font-size: 15px;
+   }
+
+   .register-btn button{
+      height: 36px;
+      padding: 0 14px;
+      font-size: 16px;
+   }
+
 }
 
 @media (max-width:768px){
@@ -506,6 +535,36 @@ section{
    .headline h1::before,
    .headline h1::after {
       display: none;
+   }
+
+
+   .workshops-card{
+      width: 320px;
+   }
+
+   .workshop-title{
+      font-size: 20px;
+   }
+
+   .workshop-title::after{
+      top: 25px;
+   }
+
+   .register-btn{
+      bottom: 25px;
+   }
+
+}
+
+
+@media (max-width:320px){
+
+   .workshop-description{
+      font-size: 14px;
+   }
+
+   .workshop-title{
+      margin-bottom: 10px;
    }
 
 }

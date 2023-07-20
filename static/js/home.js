@@ -132,7 +132,7 @@ function addWorkshop(workshop){
 
     let titleText = document.createTextNode(workshop.title);
     let descriptionText = document.createTextNode(workshop.description);
-    let registerText = document.createTextNode("Register");
+    let registerText = document.createTextNode("Join now");
 
     workshop_img.src = workshop.img_src;
     title.appendChild(titleText);
