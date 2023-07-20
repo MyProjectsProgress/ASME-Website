@@ -7,22 +7,33 @@ document.getElementById('prev').onclick = function () {
     document.getElementById('slide').prepend(lists[lists.length - 1]);
 }
 
-
 //--------------------------- Events and Workshops fetching
 
 // Fetching Events data
-fetch("../../data/db.json")
+fetch("../../data/events.json")
     .then((res) => {
         return res.json();
     })
 
     .then((data) => {
-        data["events"].map((event) => {
+        data.map((event) => {
             addEvent(event);
         });
         swiper.update();
 
         data["workshops"].map((workshop) => {
+            addWorkshop(workshop);
+        });
+    });
+
+
+fetch("../../data/workshops.json")
+    .then((res) => {
+        return res.json();
+    })
+
+    .then((data) => {
+        data.map((workshop) => {
             addWorkshop(workshop);
         });
     });
@@ -121,7 +132,7 @@ function addWorkshop(workshop) {
 
     let titleText = document.createTextNode(workshop.title);
     let descriptionText = document.createTextNode(workshop.description);
-    let registerText = document.createTextNode("Register");
+    let registerText = document.createTextNode("Join now");
 
     workshop_img.src = workshop.img_src;
     title.appendChild(titleText);

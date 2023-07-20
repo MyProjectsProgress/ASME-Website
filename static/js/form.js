@@ -48,7 +48,7 @@ for (let input of inputs) {
         const formData = new FormData(form); // Get form data
 
         if (input.value !== "") {
-            input.style.border = "solid 2px rgba(15, 90, 170,0.7)";
+            input.style.border = "solid 2px var(--light-blue)";
         }
 
         else {
@@ -57,7 +57,31 @@ for (let input of inputs) {
     });
 
     input.addEventListener("invalid", () => {
-        input.style.border = "solid 2px rgba(211, 25, 15, 0.6)";
+        input.style.border = "solid 2px var(--error-red)";
     });
 
 }
+
+function showError(field, message){
+    let errorMessage = document.createElement("div");
+    let errorSpan = document.createElement("span");
+    let text = document.createTextNode(message);
+
+    errorMessage.className = "error-message";
+    errorSpan.appendChild(text);
+    errorMessage.appendChild(errorSpan)
+
+    field.insertAdjacentElement("afterend", errorMessage);
+}
+
+function clearErrors() {
+    let messages = document.querySelectorAll(".error-message");
+    
+    messages.forEach((message) => {
+        message.remove();
+    });
+}
+
+
+// showError(email, "hello");    
+// clearErrors();
