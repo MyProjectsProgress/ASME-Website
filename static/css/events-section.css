@@ -46,10 +46,10 @@
     width: 420px;
     display: block;
     object-position: left center;
-    opacity: .2;
+    opacity: .1;
     transform: rotate(-90deg) translateY(-70%);
     max-width: inherit;
-    left: 10px;
+    left: 95px;
     position: absolute;
 }
 
@@ -357,7 +357,6 @@
         width: 370px;
         left: 20%;
     }
-
 }
 
 @media screen and (max-width: 992px) {
