@@ -149,21 +149,20 @@ addAdminButton.addEventListener("click", () => {
   const urlParams = new URLSearchParams(queryString);
   const token = urlParams.get('variable');
 
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-    'My-Custom-Header': 'foobar'
-  };
-
   const requestObject = {
-    url: 'api/v1/form', // api/v1/form
+    headers: {
+      'Authorization': `Bearer ${token}`, // Include the token in the request headers
+    },
+    url: 'form', // api/v1/form
     method: 'GET',
   };
 
   const nextPage = './form';
 
-  axiosRequest(requestObject, nextPage, headers).then((token) => {
-    // console.log(token)
+  axiosRequest(requestObject, nextPage).then((token) => {
+    console.log(axios.defaults.headers.common['Authorization'])
   }).catch((error) => {
+    console.log(axios.defaults.headers.common['Authorization'])
     console.error(error);
   });
 

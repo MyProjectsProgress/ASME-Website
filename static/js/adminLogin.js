@@ -28,12 +28,13 @@ loginButton.addEventListener('click', (event) => {
   axiosRequest(requestObject, nextPage).then((token) => {
     // console.log(token);
     const addBearerToeknToURL = `../adminPanel?variable=${encodeURIComponent(token)}`;
-    // window.location.href = addBearerToeknToURL;
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    window.location.href = addBearerToeknToURL;
+    // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    // console.log(axios.defaults.headers.common['Authorization']);
     // window.location.href = nextPage;
-    axios.defaults.headers.common = {
-      'Authorization': `Bearer ${token}`
-    };
+    // axios.defaults.headers.common = {
+    //   'Authorization': `Bearer ${token}`
+    // };
     // window.location.href = addBearerToeknToURL;
   })
     .catch((error) => {
