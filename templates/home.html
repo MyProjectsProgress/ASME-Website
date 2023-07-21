@@ -13,15 +13,15 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
    <!-- Slider Import -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css" rel="stylesheet" />
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/js/swiper.min.js"></script>
 
    <!-- css -->
-   <link rel="stylesheet" href="/css/home.css">
-   <link rel="stylesheet" href="/css/events-section.css">
-   <!-- <link rel="stylesheet" href="../static/css/home.css">
-   <link rel="stylesheet" href="../static/css/events-section.css"> -->
+   <link rel="stylesheet" href="../static/css/home.css">
+   <link rel="stylesheet" href="../static/css/events-section.css">
 
    <title>ASME</title>
 
@@ -34,16 +34,13 @@
 
       <section class="flex">
 
-         <a href="home.html" class="logo"><img class="image-header" src="/images/logo.png"></a>
-         <!-- <a href="home.html" class="logo"><img class="image-header" src="../static/images/logo.png"></a> -->
+         <a href="home.html" class="logo"><img class="image-header" src="../static/images/logo.png"></a>
 
          <nav class="navbar">
-            <a href="#home">Home</a>
-            <a href="#pages">Pages</a>
-            <a href="#courses">Courses</a>
-            <a href="#competitions">Competitions</a>
-            <a href="#projects">Projects</a>
-            <a href="#blog">Blog</a>
+            <a href="#home1" id="Home" class="active">Home</a>
+            <a href="#Events1" id="Events">Events</a>
+            <a href="#Workshops1" id="Workshops">Workshops</a>
+            <a href="#About1" id="About">About</a>
          </nav>
 
          <div class="icons">
@@ -59,7 +56,7 @@
 
    </header>
 
-   <section class="home">
+   <section class="home" id="home1">
 
       <div class="content">
          <div class="name">Welcome To ASME</div>
@@ -69,23 +66,17 @@
 
       <div class="container">
          <div id="slide">
-            <div class="item" style="background-image: url(/images/home1.jpg);">
-            <!-- <div class="item" style="background-image: url(../static/images/home1.jpg);"> -->
+            <div class="item" style="background-image: url(../static/images/home1.jpg);">
             </div>
-            <div class="item" style="background-image: url(/images/begin.jpg);">
-            <!-- <div class="item" style="background-image: url(../static/images/begin.jpg);"> -->
+            <div class="item" style="background-image: url(../static/images/begin.jpg);">
             </div>
-            <div class="item" style="background-image: url(/images/home2.jpg);">
-            <!-- <div class="item" style="background-image: url(../static/images/home2.jpg);"> -->
+            <div class="item" style="background-image: url(../static/images/home2.jpg);">
             </div>
-            <div class="item" style="background-image: url(/images/home3.jpg);">
-            <!-- <div class="item" style="background-image: url(../static/images/home3.jpg);"> -->
+            <div class="item" style="background-image: url(../static/images/home3.jpg);">
             </div>
-            <div class="item" style="background-image: url(/images/home4.jpg);">
-            <!-- <div class="item" style="background-image: url(../static/images/home4.jpg);"> -->
+            <div class="item" style="background-image: url(../static/images/home4.jpg);">
             </div>
-            <div class="item" style="background-image: url(/images/home5.jpg);">
-            <!-- <div class="item" style="background-image: url(../static/images/home5.jpg);"> -->
+            <div class="item" style="background-image: url(../static/images/home5.jpg);">
             </div>
 
          </div>
@@ -129,7 +120,7 @@
 </section> -->
 
 
-   <section class="events">
+<section class="events" id="Events1">
 
       <div class="headline">
          <h1>Events</h1>
@@ -140,8 +131,7 @@
          <div class="event-content">
 
             <div class="event-bg-shape">
-               <img src="/images/GeartheWorld.png" alt="">
-               <!-- <img src="../static/images/GeartheWorld.png" alt=""> -->
+               <img src="../static/images/GeartheWorld.png" alt="">
             </div>
 
             <div class="event-img" id="event_pics"></div>
@@ -172,7 +162,7 @@
       </div>
    </section>
 
-   <section class="workshops">
+   <section class="workshops" id="Workshops1">
 
       <div class="headline">
          <h1>Workshops</h1>
@@ -181,9 +171,31 @@
       <div class="workshops-wrap" id="workshops-wrap"></div>
 
    </section>
+   <section class="about" id="About1">
+         <div class="about-content">
+                  <div class="categoryWrapper">
+                     <h1>About Us</h1>
+                     <div class="question-mark">
+                        <i class="fas fa-question-circle"></i>
+                     </div>
+                     <button id="aboutButton">
+                        <span>
+                           <span>
+                              <span class="about-description">
+                                 ASME is a global leading mechanical engineering organization that exists in 130 countries around the world. 
+                                 ASME aims to develop the technology of mechanical engineering students and teaching them how to think, create ,and develop.
+                                 ASME’s vision is enhancing the engineering sense of the engineering students through creating a leading technical community, keeping pace with the current technological
+                                 advance and improving the interpersonal skills of all students for better Egypt                              </span>
+                           </span>
+                        </span>
+               </div>
 
-   <script src="/js/home.js"></script>
-   <!-- <script src="../static/js/home.js"></script> -->
+         </div>
+    
+   </section>
+   
+   
+   <script src="../static/js/home.js"></script>
 
 </body>
 
