@@ -22,8 +22,6 @@ const workshopSchema = new mongoose.Schema(
             type: String,
             required: [true, 'You must upload an image'],
         },
-
-
     },
     { timestamps: true }
 );

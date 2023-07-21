@@ -1,31 +1,60 @@
-document.getElementById('next').onclick = function(){
+document.getElementById('next').onclick = function () {
     let lists = document.querySelectorAll('.item');
     document.getElementById('slide').appendChild(lists[0]);
 }
-document.getElementById('prev').onclick = function(){
+document.getElementById('prev').onclick = function () {
     let lists = document.querySelectorAll('.item');
     document.getElementById('slide').prepend(lists[lists.length - 1]);
 }
 
-
 //--------------------------- Events and Workshops fetching
 
-// Fetching Events data
-fetch("../../data/db.json")
-    .then((res) => {
-        return res.json();
+axios.get('/api/v1/event').then((res) => {
+
+    const events = res.data.data;
+
+    events.map((event) => {
+
+        const {
+            _id,
+            title,
+            slug,
+            date,
+            description,
+            backgroundImage,
+            expired,
+        } = event;
+
+        event.date = date.split('T')[0];
+
+        addEvent(event);
+        swiper.update();
     })
 
-    .then((data) => {
-        data["events"].map((event) => {
-            addEvent(event);
-    });
-        swiper.update();
+}).catch((error) => {
+    console.log(error)
+});
 
-        data["workshops"].map((workshop) => {
-            addWorkshop(workshop);
-        });
-    });
+axios.get('/api/v1/workshop').then((res) => {
+
+    const workshops = res.data.data;
+
+    workshops.map((workshop) => {
+
+        const {
+            _id,
+            title,
+            slug,
+            description,
+            image,
+        } = workshop;
+
+        addWorkshop(workshop);
+    })
+
+}).catch((error) => {
+    console.log(error)
+});
 
 let slider = document.getElementById("event-slider");
 let event_pics = document.getElementById("event_pics");
@@ -34,6 +63,7 @@ let first_event = true;
 let workshops_wrap = document.getElementById("workshops-wrap");
 
 function addEvent(event) {
+
     let img_div = document.createElement("div");
     let item = document.createElement("div");
     let card = document.createElement("div");
@@ -66,14 +96,15 @@ function addEvent(event) {
     title.className = "event-slider__title";
     date.className = "event-slider__date";
 
-    item.dataset.target = event.pic_id;
-    img_div.id = event.pic_id;
-    event_img.src = event.pic_src;
-    background.src = event.background_src;
+    item.dataset.target = event._id;
+    img_div.id = event._id;
+    event_img.src = event.forgroundImage;
+    background.src = event.backgroundImage;
 
     let titleText = document.createTextNode(event.title);
     let dateText = document.createTextNode(event.date);
     let descriptionText = document.createTextNode(event.description);
+
 
     img_div.appendChild(event_img);
 
@@ -108,7 +139,8 @@ function addEvent(event) {
     slider.appendChild(item);
 }
 
-function addWorkshop(workshop){
+function addWorkshop(workshop) {
+
     let card = document.createElement("div");
     let img_div = document.createElement("div");
     let description_div = document.createElement("div");
@@ -123,7 +155,7 @@ function addWorkshop(workshop){
     let descriptionText = document.createTextNode(workshop.description);
     let registerText = document.createTextNode("Register");
 
-    workshop_img.src = workshop.img_src;
+    workshop_img.src = workshop.image;
     title.appendChild(titleText);
     description.appendChild(descriptionText);
     register_btn.appendChild(registerText);
@@ -170,19 +202,18 @@ var swiper = new Swiper(".event-slider", {
 
     on: {
         init: function () {
-        var index = this.activeIndex;
 
-        var target = $(".event-slider__item").eq(index).data("target");
-
-        $(".event-img__item").removeClass("active");
-        $(".event-img__item#" + target).addClass("active");
+            var index = this.activeIndex;
+            var target = $(".event-slider__item").eq(index).data("target");
+            $(".event-img__item").removeClass("active");
+            $(".event-img__item#" + target).addClass("active");
         },
     },
-    });
+});
 
 swiper.on("slideChange", function () {
-    var index = this.activeIndex;
 
+    var index = this.activeIndex;
     var target = $(".event-slider__item").eq(index).data("target");
 
     $(".event-img__item").removeClass("active");
@@ -201,7 +232,7 @@ swiper.on("slideChange", function () {
         $(".prev").removeClass("disabled");
     }
 });
-console.log('a7a')
+
 // Get the button element
 const aboutButton = document.getElementById('aboutButton');
 
@@ -210,18 +241,16 @@ const hasBeenHovered = localStorage.getItem('hasBeenHovered');
 
 // Add the "hovered" class if it hasn't been hovered before
 if (!hasBeenHovered) {
-   aboutButton.addEventListener('mouseover', function () {
-      aboutButton.classList.add('hovered');
-   });
+    aboutButton.addEventListener('mouseover', function () {
+        aboutButton.classList.add('hovered');
+    });
 
-   // Set the flag in local storage to remember the hover state
-   localStorage.setItem('hasBeenHovered', true);
+    // Set the flag in local storage to remember the hover state
+    localStorage.setItem('hasBeenHovered', true);
 }
 
 
 // navbar actions
-
-
 var home = document.getElementById("Home");
 var Events = document.getElementById("Events");
 var Workshops = document.getElementById("Workshops");
@@ -232,29 +261,25 @@ home.onclick = function () {
     Events.setAttribute("Class", "");
     Workshops.setAttribute("Class", "");
     about.setAttribute("Class", "");
-
 }
+
 Events.onclick = function () {
     home.setAttribute("Class", "");
     Events.setAttribute("Class", "active");
     Workshops.setAttribute("Class", "");
     about.setAttribute("Class", "");
-
 }
+
 Workshops.onclick = function () {
     home.setAttribute("Class", "");
     Events.setAttribute("Class", "");
     Workshops.setAttribute("Class", "active");
     about.setAttribute("Class", "");
-
 }
+
 about.onclick = function () {
     home.setAttribute("Class", "");
     Events.setAttribute("Class", "");
     Workshops.setAttribute("Class", "");
     about.setAttribute("Class", "active");
-
 }
-
-
-

@@ -21,15 +21,13 @@ const {
 
 const router = express.Router();
 
-router.use(protect, allowedTo('admin'));
-
 router.route('/')
     .get(getWorkshops)
-    .post(uploadImage, workshopImageProcessing, createWorkshopValidator, createWorkshop);
+    .post(protect, allowedTo('admin'), uploadImage, workshopImageProcessing, createWorkshopValidator, createWorkshop);
 
 router.route('/:id')
-    .get(getWorkshopValidator, getWorkshop)
-    .put(uploadImage, workshopImageProcessing, updateWorkshopValidator, updateWorkshop)
-    .delete(deleteWorkshopValidator, deleteWorkshop);
+    .get(protect, allowedTo('admin'), getWorkshopValidator, getWorkshop)
+    .put(protect, allowedTo('admin'), uploadImage, workshopImageProcessing, updateWorkshopValidator, updateWorkshop)
+    .delete(protect, allowedTo('admin'), deleteWorkshopValidator, deleteWorkshop);
 
 module.exports = router;

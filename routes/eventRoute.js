@@ -21,15 +21,13 @@ const {
 
 const router = express.Router();
 
-router.use(protect, allowedTo('admin'));
-
 router.route('/')
     .get(getEvents)
-    .post(uploadImage, eventImageProcessing, createEventValidator, createEvent);
+    .post(protect, allowedTo('admin'), uploadImage, eventImageProcessing, createEventValidator, createEvent);
 
 router.route('/:id')
-    .get(getEventValidator, getEvent)
-    .put(uploadImage, eventImageProcessing, updateEventValidator, updateEvent)
-    .delete(deleteEventValidator, deleteEvent);
+    .get(protect, allowedTo('admin'), getEventValidator, getEvent)
+    .put(protect, allowedTo('admin'), uploadImage, eventImageProcessing, updateEventValidator, updateEvent)
+    .delete(protect, allowedTo('admin'), deleteEventValidator, deleteEvent);
 
 module.exports = router;

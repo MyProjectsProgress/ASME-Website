@@ -26,8 +26,6 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.static(path.join(__dirname, 'templates')));
 
-app.set('view engine', 'ejs');
-
 // Middlewares
 app.use(express.json());
 
