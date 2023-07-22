@@ -175,6 +175,10 @@ function addWorkshop(workshop) {
     card.appendChild(description_div);
     card.appendChild(register);
 
+    register_btn.addEventListener("click", function () {
+        window.location.href = "http://localhost:8000/api/v1/form";
+    });
+
     workshops_wrap.appendChild(card);
 }
 

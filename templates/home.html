@@ -29,31 +29,24 @@
 
 
 <body>
-
    <header class="header">
-
       <section class="flex">
-
          <a href="home.html" class="logo"><img class="image-header" src="/images/logo.png"></a>
-
          <nav class="navbar">
             <a href="#home1" id="Home" class="active">Home</a>
             <a href="#Events1" id="Events">Events</a>
             <a href="#Workshops1" id="Workshops">Workshops</a>
             <a href="#About1" id="About">About</a>
          </nav>
-
          <div class="icons">
             <a href="https://web.facebook.com/ASMECUSS" class="fa fa-facebook"></a>
-            <a href="#" class="fa fa-twitter"></a>
-            <a href="#" class="fa fa-instagram"><span></span></a>
+            <a href="https://www.linkedin.com/company/14775007" class="fa fa-linkedin"></a>
+            <a href="https://instagram.com/asme_cairo_university?igshid=MzNlNGNkZWQ4Mg=="
+               class="fa fa-instagram"><span></span></a>
+            <a href="https://youtube.com/@asme-cairouniversitystuden7844" class="fa fa-youtube"></a>
             <div id="menu-btn" class="fas fa-bars"></div>
-
          </div>
-
-
       </section>
-
    </header>
 
    <section class="home" id="home1">
@@ -61,7 +54,9 @@
       <div class="content">
          <div class="name">Welcome To ASME</div>
          <div class="des">Want to become a member and join our team?</div>
-         <button class="button-reg">Register NOW!</button>
+         <button class="button-reg">
+            <a href="http://localhost:8000/api/v1/form">Register NOW!</a>
+         </button>
       </div>
 
       <div class="container">
@@ -78,7 +73,6 @@
             </div>
             <div class="item" style="background-image: url(/images/home5.jpg);">
             </div>
-
          </div>
 
          <div class="buttons">
@@ -86,39 +80,7 @@
             <button id="next"><i class="fa-solid fa-angle-right"></i></button>
          </div>
       </div>
-
    </section>
-
-   <!-- <section class="about">
-   <div class="box-container">
-
-      <div class="box">
-         <h3>1880</h3>
-         <a>Active Volunteers</a>
-
-      </div>
-
-      <div class="box">
-         <h3>85,000+</h3>
-         <a>Yearly Participants</a>
-      </div>
-
-      <div class="box">
-         <h3>135+</h3>
-         <a>Events Done</a>
-      </div>
-
-      <div class="box"> 
-         <h3>5,000</h3>
-         <a >Awards</a>
-
-      </div>
-
-   </div>
-
-<section class="board">
-</section> -->
-
 
    <section class="events" id="Events1">
 
@@ -127,17 +89,12 @@
       </div>
 
       <div class="event-wrapper">
-
          <div class="event-content">
-
             <div class="event-bg-shape">
                <img src="/images/GeartheWorld.png" alt="">
             </div>
-
             <div class="event-img" id="event_pics"></div>
-
             <div class="event-slider">
-
                <button class="prev disabled">
                   <span class="slider-icon">
                      <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48">
@@ -155,22 +112,20 @@
                </button>
 
                <div class="event-slider__wrp swiper-wrapper" id="event-slider"></div>
-               <div class="swiper-pagination event-slider-panigation"></div>
 
+               <div class="swiper-pagination event-slider-panigation"></div>
             </div>
          </div>
       </div>
    </section>
 
    <section class="workshops" id="Workshops1">
-
       <div class="headline">
          <h1>Workshops</h1>
       </div>
-
       <div class="workshops-wrap" id="workshops-wrap"></div>
-
    </section>
+
    <section class="about" id="About1">
       <div class="about-content">
          <div class="categoryWrapper">
@@ -192,9 +147,7 @@
                   </span>
                </span>
          </div>
-
       </div>
-
    </section>
 
    <!-- axios -->
