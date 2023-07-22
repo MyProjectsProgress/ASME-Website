@@ -568,3 +568,302 @@ section{
    }
 
 }
+
+
+/* about section  */
+
+.about{
+   margin-top: 20px ;
+   height: 500px;
+   position: relative;
+   padding: 45px 0 90px;
+}
+.about-content{
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%,-50%);
+   text-align: center;
+
+}
+.about-description{
+   width: 1100px;
+   font-size: 24px;
+   line-height: 2;
+   text-align: center;
+}
+
+
+
+.categoryWrapper {
+   position: relative;
+   height: 320px;
+   width: 10000px;
+   background: url("http://ohlookawebsite.com/bathroomtestfull.jpg") no-repeat center center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+
+
+}
+
+.categoryWrapper:after {
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background: rgba(216, 216, 216,.4);
+   content: '';
+   opacity: 1;
+   -webkit-transition: opacity 0.4s ease 0s;
+   border-radius: 13px;
+
+}
+
+.categoryWrapper:hover:after {
+   opacity: 1;
+}
+
+.categoryWrapper h1 {
+   color: black;
+   font-size: 48px;
+   text-align: center;
+  letter-spacing: 2px;
+   -webkit-transition: all 0.15s ease 0s;
+   position: relative;
+   margin-bottom: 150px;
+   z-index: 10;
+}
+
+.categoryWrapper:hover h1 {
+   transform: translateY(-40px);
+}
+
+.categoryWrapper button {
+   position: absolute;
+   transform: translatey(60px);
+   -webkit-appearance: none;
+   border: none;
+   background: none;
+   color: black;
+   width: 250px;
+   height: 50px;
+   font-size: 20px;
+   padding: 0;
+   margin: 0;
+   outline: none;
+   z-index: 10;
+}
+
+.categoryWrapper button span {
+   display: block;
+   position: relative;
+   line-height: 30px;
+   height: 50px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+
+.categoryWrapper button>span:before {
+   content: '';
+   position: absolute;
+   margin-bottom: 200px;
+   width: 10px;
+   border: 2px solid  black;
+   border-right: none;
+   border-bottom: none;
+   border-left: none;
+   border-top: no;
+}
+
+.categoryWrapper:hover button>span:before {
+   width: calc(50% - 1px);
+   height: calc(100% - 2px);
+   transition: width 0.0001s ease-out, height 0.15s ease-out 0.15s;
+}
+
+.categoryWrapper button>span>span:before {
+   content: '';
+   position: absolute;
+   bottom: 0;
+   right: 0%;
+   width: 1px;
+   height: 1px;
+   opacity: 0;
+
+}
+
+
+.categoryWrapper button>span>span>span {
+   color: transparent;
+}
+
+.categoryWrapper:hover button>span>span>span {
+   color: black;
+}
+
+.categoryWrapper button:hover>span>span>span:after {
+   width: 100%;
+}
+
+
+.categoryWrapper .question-mark {
+   position: absolute;
+   bottom: 100px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 60px;
+   height: 60px;
+   background-color: rgba(0, 0, 0, 0.7);
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   opacity: 1;
+   transition: opacity 0.3s ease;
+}
+
+
+
+.categoryWrapper:hover .question-mark {
+   opacity: 0;
+}
+
+.categoryWrapper .question-mark i {
+   color: white;
+   font-size: 40px;
+}
+
+.categoryWrapper:hover .question-mark i {
+   color: transparent;
+}
+
+@media (max-width:991px){
+
+   html{
+      font-size: 55%;
+   }
+
+}
+
+@media (max-width: 620px) {
+   .categoryWrapper {
+     height: 430px;  
+   }
+ 
+   .categoryWrapper h1 {
+      margin-bottom:180px;
+     font-size: 48px;  
+   }
+ 
+
+   .categoryWrapper .about-description {
+     font-size: 14px; 
+     width: 350px; 
+   }
+   .categoryWrapper button>span:before {
+      content: '';
+      position: absolute;
+      margin-bottom: 250px;
+      width: 10px;
+      border: 2px solid  black;
+      border-right: none;
+      border-bottom: none;
+      border-left: none;
+      border-top: no;
+   
+      transition: height 0.15s ease-out, width 0.15s ease-out 0.15s;
+   }
+ }
+
+@media (max-width:450px){
+
+   html{
+      font-size: 50%;
+   }
+   .categoryWrapper .about-description {
+      max-width: 400px;
+      font-weight:30px ; 
+   }
+}
+@media (min-width: 1010px) and (max-width: 1140px) {
+   .categoryWrapper {
+     height: 400px;  
+   }
+ 
+   .categoryWrapper h1 {
+     font-size: 48px;  
+   }
+ 
+   .categoryWrapper .about-description {
+     font-size: 18px; 
+     max-width: 800px; 
+   }
+
+   .categoryWrapper .about-description {
+      font-size: 19px; 
+    }
+ }
+
+@media (min-width: 620px) and (max-width: 1010px) {
+   .categoryWrapper {
+     height: 400px;  
+   }
+ 
+   .categoryWrapper h1 {
+     font-size: 48px;  
+   }
+ 
+   .categoryWrapper .about-description {
+     font-size: 18px; 
+     max-width: 600px; 
+   }
+ }
+ 
+ @media (min-width: 220px) and (max-width: 300px) {
+   .categoryWrapper {
+     height: 600px;  
+   }
+ 
+   .categoryWrapper h1 {
+     font-size: 35px;
+     margin-bottom: 420px; 
+   }
+ 
+   .categoryWrapper .about-description {
+     font-size: 14px; 
+     max-width: 230px; 
+   }
+   .categoryWrapper button>span:before {
+      content: '';
+      position: absolute;
+      margin-bottom: 520px;
+      width: 10px;
+      border: 2px solid  black;
+      border-right: none;
+      border-bottom: none;
+      border-left: none;
+      border-top: no;
+   
+      transition: height 0.15s ease-out, width 0.15s ease-out 0.15s;
+   }
+ }
+ 
+ a.active::after {
+
+   width: 100%;
+
+}
+
+
+.nav a:hover::after {
+
+   width: 100%;
+
+}
+ 
+ 
