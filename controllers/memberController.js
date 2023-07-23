@@ -2,41 +2,72 @@ const { v4: uuidv4 } = require('uuid');
 const sharp = require('sharp');
 const asyncHandler = require('express-async-handler');
 const slugify = require('slugify');
+const multiparty = require('multiparty');
 
 const factory = require('./handlersFactory');
-const { uploadImage } = require('../middlewares/uploadImageMiddleware');
 
 const Member = require('../models/memberModel');
 
-// exports.uploadImage = uploadImage('image');
+async function processAndSaveImage(imageFile, req) {
 
-// // @desc   Apply some changes on uploaded picture
-// exports.imageProcessing = asyncHandler(async (req, res, next) => {
+    const randomID = uuidv4();
+    const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
 
-//     if (req.file) {
-//         const randomID = uuidv4();
-//         req.body.slug = slugify(req.body.name);
-//         const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
+    if (imageFile.fieldName === 'image') {
+        await sharp(imageFile.path)
+            .withMetadata()
+            .toFormat('jpeg')
+            .jpeg({ quality: 99 })
+            .toFile(`uploads/members/${filename}`);
+    }
 
-//         await sharp(req.file.buffer)
-//             .resize(600, 600)
-//             .withMetadata()
-//             .toFormat('jpeg')
-//             .jpeg({ quality: 99 })
-//             .toFile(`uploads/members/${filename}`);
+    return filename;
+};
 
-//         // saving the url in database not only the image name
-//         const imageURL = `${process.env.BASE_URL}/members/${filename}`;
-//         req.body.image = imageURL;
-//     }
 
-//     next();
-// });
+async function processImages(req, res) {
+    try {
+        const image = req.body.image;
+
+        const imageFileName = await processAndSaveImage(image, req);
+
+        const imageURL = `${process.env.BASE_URL}/members/${imageFileName}`;
+        req.body.image = imageURL;
+
+        const document = await Member.create(req.body);
+        res.status(201).json({ data: document });
+
+    } catch (error) {
+        console.error('Image processing error:', error.message);
+    }
+};
 
 // @desc   Create New Member
 // @route  POST /api/v1/member
 // @access Private
-exports.createMember = factory.createOne(Member);
+exports.createMember = asyncHandler(async (req, res) => {
+
+    let form = new multiparty.Form();
+
+    form.parse(req, async function (err, fields, files) {
+
+        if (err) {
+            return res.status(500).json({ error: 'Error parsing form data' });
+        }
+
+        const { name, phoneNumber, email, role } = fields;
+        const { image: imageFile } = files;
+
+        req.body.name = name[0];
+        req.body.slug = slugify(req.body.name);
+        req.body.phoneNumber = phoneNumber[0];
+        req.body.email = email[0]
+        req.body.role = role[0];;
+        req.body.image = imageFile[0];
+
+        processImages(req, res);
+    });
+});
 
 // @desc   Get Specific Member
 // @route  GET /api/v1/member

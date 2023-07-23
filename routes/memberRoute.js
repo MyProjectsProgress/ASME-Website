@@ -22,16 +22,14 @@ const {
 
 const router = express.Router();
 
-router.use(protect, allowedTo('admin'));
-
 router.route('/')
     .get(getMembers)
-    .post(uploadImage, imageProcessing, createMemberValidator, createMember)
-    .delete(deleteAll)
+    .post(protect, allowedTo('admin'), createMember)
+    .delete(protect, allowedTo('admin'), deleteAll)
 
-router.route('/:id')
-    .get(getMemberValidator, getMember)
-    .put(uploadImage, imageProcessing, updateMemberValidator, updateMember)
-    .delete(deleteMemberValidator, deleteMember)
+// router.route('/:id')
+//     .get(getMemberValidator, getMember)
+//     .put(uploadImage, imageProcessing, updateMemberValidator, updateMember)
+//     .delete(deleteMemberValidator, deleteMember)
 
 module.exports = router;

@@ -23,11 +23,11 @@ const router = express.Router();
 
 router.route('/')
     .get(getWorkshops)
-    .post(protect, allowedTo('admin'), uploadImage, workshopImageProcessing, createWorkshopValidator, createWorkshop);
+    .post(protect, allowedTo('admin'), createWorkshop);
 
-router.route('/:id')
-    .get(protect, allowedTo('admin'), getWorkshopValidator, getWorkshop)
-    .put(protect, allowedTo('admin'), uploadImage, workshopImageProcessing, updateWorkshopValidator, updateWorkshop)
-    .delete(protect, allowedTo('admin'), deleteWorkshopValidator, deleteWorkshop);
+// router.route('/:id')
+//     .get(protect, allowedTo('admin'), getWorkshopValidator, getWorkshop)
+//     .put(protect, allowedTo('admin'), uploadImage, workshopImageProcessing, updateWorkshopValidator, updateWorkshop)
+//     .delete(protect, allowedTo('admin'), deleteWorkshopValidator, deleteWorkshop);
 
 module.exports = router;

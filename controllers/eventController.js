@@ -6,7 +6,6 @@ const multiparty = require('multiparty');
 
 const factory = require('./handlersFactory');
 
-const ApiError = require('../utils/apiError');
 const Event = require('../models/eventModel');
 
 async function processAndSaveImage(imageFile, req) {

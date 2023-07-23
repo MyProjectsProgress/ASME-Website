@@ -2,52 +2,70 @@ const { v4: uuidv4 } = require('uuid');
 const sharp = require('sharp');
 const asyncHandler = require('express-async-handler');
 const slugify = require('slugify');
+const multiparty = require('multiparty');
 
 const factory = require('./handlersFactory');
-const { uploadImage } = require('../middlewares/uploadImageMiddleware');
 
 const Workshop = require('../models/workshopModel');
 
-// exports.uploadImage = uploadImage('image');
+async function processAndSaveImage(imageFile, req) {
 
-// @desc   Apply some changes on uploaded picture
-// exports.workshopImageProcessing = asyncHandler(async (req, res, next) => {
+    const randomID = uuidv4();
+    const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
 
-//     console.log(req.file)
+    if (imageFile.fieldName === 'image') {
+        await sharp(imageFile.path)
+            .withMetadata()
+            .toFormat('jpeg')
+            .jpeg({ quality: 99 })
+            .toFile(`uploads/workshops/${filename}`);
+    }
 
-//     if (req.file) {
+    return filename;
+};
 
-//         const randomID = uuidv4();
 
-//         if (req.body.title) {
-//             req.body.slug = slugify(req.body.title);
-//         } else {
-//             let query = Workshop.findById(req.params.id);
-//             const document = await query;
-//             req.body.slug = document.slug;
-//         }
+async function processImages(req, res) {
+    try {
+        const image = req.body.image;
 
-//         const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
+        const imageFileName = await processAndSaveImage(image, req);
 
-//         await sharp(req.file.buffer)
-//             .resize(600, 600)
-//             .withMetadata()
-//             .toFormat('jpeg')
-//             .jpeg({ quality: 99 })
-//             .toFile(`uploads/workshops/${filename}`);
+        const imageURL = `${process.env.BASE_URL}/workshops/${imageFileName}`;
+        req.body.image = imageURL;
 
-//         // saving the url in database not only the image name
-//         const imageURL = `${process.env.BASE_URL}/workshops/${filename}`;
-//         req.body.backgroundImage = imageURL;
-//     }
+        const document = await Workshop.create(req.body);
+        res.status(201).json({ data: document });
 
-//     next();
-// });
+    } catch (error) {
+        console.error('Image processing error:', error.message);
+    }
+};
 
 // @desc   Create New Participant
 // @route  PUT /api/v1/workshop
 // @access Private/admin
-exports.createWorkshop = factory.createOne(Workshop);
+exports.createWorkshop = asyncHandler(async (req, res) => {
+
+    let form = new multiparty.Form();
+
+    form.parse(req, async function (err, fields, files) {
+
+        if (err) {
+            return res.status(500).json({ error: 'Error parsing form data' });
+        }
+
+        const { title, description } = fields;
+        const { image: imageFile } = files;
+
+        req.body.title = title[0];
+        req.body.slug = slugify(req.body.title);
+        req.body.description = description[0];
+        req.body.image = imageFile[0];
+
+        processImages(req, res);
+    });
+});
 
 // @desc   Get All Participants
 // @route  PUT /api/v1/workshop
