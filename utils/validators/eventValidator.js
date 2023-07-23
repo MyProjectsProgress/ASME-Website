@@ -6,16 +6,17 @@ const validatorMiddleware = require('../../middlewares/validatorMiddleware');
 exports.createEventValidator = [
     check('title')
         .notEmpty()
-        .withMessage('Event title is required')
-        .custom(async (val, { req }) => {
-            req.body.slug = slugify(val);
-            return true;
-        }),
+        .withMessage('Event title is required'),
+    // .custom(async (val, { req }) => {
+    //     req.body.slug = slugify(val);
+    //     return true;
+    // }),
 
     check('date')
         .notEmpty()
         .withMessage('Date is required')
         .isDate()
+        // .toDate()
         .withMessage('Invalid date format'),
 
     check('description')
@@ -26,8 +27,18 @@ exports.createEventValidator = [
         .notEmpty()
         .withMessage('Background image is required'),
 
+    check('foregroundImage')
+        .notEmpty()
+        .withMessage('Foreground image is required'),
+
     validatorMiddleware,
 ];
+
+// exports.saveDocument = async (req, res) => {
+//     console.log('success')
+//     const document = await Event.create(req.body);
+//     res.status(201).json({ data: document });
+// }
 
 exports.updateEventValidator = [
     check('title')

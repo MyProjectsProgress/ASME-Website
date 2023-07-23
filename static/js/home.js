@@ -22,6 +22,7 @@ axios.get('/api/v1/event').then((res) => {
             date,
             description,
             backgroundImage,
+            foregroundImage,
             expired,
         } = event;
 
@@ -98,7 +99,7 @@ function addEvent(event) {
 
     item.dataset.target = event._id;
     img_div.id = event._id;
-    event_img.src = event.forgroundImage;
+    event_img.src = event.foregroundImage;
     background.src = event.backgroundImage;
 
     let titleText = document.createTextNode(event.title);

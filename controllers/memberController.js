@@ -8,30 +8,30 @@ const { uploadImage } = require('../middlewares/uploadImageMiddleware');
 
 const Member = require('../models/memberModel');
 
-exports.uploadImage = uploadImage('image');
+// exports.uploadImage = uploadImage('image');
 
-// @desc   Apply some changes on uploaded picture
-exports.imageProcessing = asyncHandler(async (req, res, next) => {
+// // @desc   Apply some changes on uploaded picture
+// exports.imageProcessing = asyncHandler(async (req, res, next) => {
 
-    if (req.file) {
-        const randomID = uuidv4();
-        req.body.slug = slugify(req.body.name);
-        const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
+//     if (req.file) {
+//         const randomID = uuidv4();
+//         req.body.slug = slugify(req.body.name);
+//         const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
 
-        await sharp(req.file.buffer)
-            .resize(600, 600)
-            .withMetadata()
-            .toFormat('jpeg')
-            .jpeg({ quality: 99 })
-            .toFile(`uploads/members/${filename}`);
+//         await sharp(req.file.buffer)
+//             .resize(600, 600)
+//             .withMetadata()
+//             .toFormat('jpeg')
+//             .jpeg({ quality: 99 })
+//             .toFile(`uploads/members/${filename}`);
 
-        // saving the url in database not only the image name
-        const imageURL = `${process.env.BASE_URL}/members/${filename}`;
-        req.body.image = imageURL;
-    }
+//         // saving the url in database not only the image name
+//         const imageURL = `${process.env.BASE_URL}/members/${filename}`;
+//         req.body.image = imageURL;
+//     }
 
-    next();
-});
+//     next();
+// });
 
 // @desc   Create New Member
 // @route  POST /api/v1/member

@@ -27,6 +27,7 @@ const eventSchema = new mongoose.Schema(
 
         foregroundImage: {
             type: String,
+            required: [true, 'You must upload a backgorund image'],
         },
 
         expired: {

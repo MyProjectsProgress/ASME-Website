@@ -1,5 +1,10 @@
 const asyncHandler = require('express-async-handler');
+const multiparty = require('multiparty');
+const sharp = require('sharp');
+const { v4: uuidv4 } = require('uuid');
+const slugify = require('slugify');
 
+const Event = require('../models/eventModel');
 const ApiFeatures = require('../utils/apiFeatures');
 
 // @desc   Delete Model
@@ -20,7 +25,6 @@ exports.deleteOne = (Model) => asyncHandler(async (req, res, next) => {
 // @access Private
 exports.updateOne = (Model) => asyncHandler(async (req, res, next) => {
 
-    // new is true to send the updated data in the response no the old data
     const document = await Model.findByIdAndUpdate(req.params.id, req.body, { new: true });
 
     if (!document) {
@@ -35,6 +39,84 @@ exports.updateOne = (Model) => asyncHandler(async (req, res, next) => {
 exports.createOne = (Model) => asyncHandler(async (req, res) => {
     const document = await Model.create(req.body);
     res.status(201).json({ data: document });
+});
+
+async function processAndSaveImage(imageFile, req) {
+
+    const randomID = uuidv4();
+    const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
+
+    // Use Sharp to resize, format, and save the image
+    if (imageFile.fieldName === 'backgroundImage') {
+        await sharp(imageFile.path)
+            // .resize(600, 600)
+            .withMetadata()
+            .toFormat('jpeg')
+            .jpeg({ quality: 99 })
+            .toFile(`uploads/backgroundImage/${filename}`);
+
+    } else if (imageFile.fieldName === 'foregroundImage') {
+        await sharp(imageFile.path)
+            // .resize(600, 600)
+            .withMetadata()
+            .toFormat('jpeg')
+            .jpeg({ quality: 99 })
+            .toFile(`uploads/foregroundImage/${filename}`);
+    };
+
+    return filename;
+}
+
+
+async function processImages(req, res) {
+    try {
+        const backgroundImage = req.body.backgroundImage;
+        const foregroundImage = req.body.foregroundImage;
+
+        const bgFileName = await processAndSaveImage(backgroundImage, req);
+
+        const imageURL1 = `${process.env.BASE_URL}/backgroundImage/${bgFileName}`;
+        req.body.backgroundImage = imageURL1;
+
+        // Process the foreground image
+        const fgFileName = await processAndSaveImage(foregroundImage, req);
+        const imageURL2 = `${process.env.BASE_URL}/foregroundImage/${fgFileName}`;
+        req.body.foregroundImage = imageURL2;
+
+        const document = await Event.create(req.body);
+        res.status(201).json({ data: document });
+
+    } catch (error) {
+        console.error('Image processing error:', error);
+    }
+};
+
+// @desc   Create form
+// @route  POST /api/v1/form
+// @access Public
+exports.createEvent = (Model) => asyncHandler(async (req, res) => {
+
+    let form = new multiparty.Form();
+
+    form.parse(req, async function (err, fields, files) {
+
+        if (err) {
+            return res.status(500).json({ error: 'Error parsing form data' });
+        }
+
+        const { title, description, date, backgroundImage, foregroundImage, expired } = fields;
+        const { backgroundImage: bgImageFile, foregroundImage: fgImageFile } = files;
+
+        req.body.title = title[0];
+        req.body.slug = slugify(req.body.title);
+        req.body.description = description[0];
+        req.body.date = date[0];
+        req.body.backgroundImage = bgImageFile[0];
+        req.body.foregroundImage = fgImageFile[0];
+        req.body.expired = expired[0];
+
+        processImages(req, res);
+    });
 });
 
 // @desc   Get Model By ID
