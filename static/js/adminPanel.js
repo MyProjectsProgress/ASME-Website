@@ -117,21 +117,10 @@ function searchAdmin() {
 window.addEventListener("DOMContentLoaded", function () {
 
   axios.get('/api/v1/admin').then((res) => {
-
     const admins = res.data.data;
-
-    admins.map((admin) => {
-
-      const {
-        email,
-        password,
-        role,
-      } = admin;
-
-      console.log(email)
-      console.log(password)
-      console.log(role)
-    })
+    admins.forEach((admin) => {
+      addNewAdminRow(admin);
+    });
 
   }).catch((error) => {
     console.log('Error Message:', error.message);
@@ -194,3 +183,48 @@ addAdminButton.addEventListener("click", () => {
   });
 
 });
+
+let newAdminId = 0;
+
+
+
+
+function addNewAdminRow(admin) {
+  const tableBody = document.querySelector("tbody");
+  const newRow = document.createElement("tr");
+  newRow.setAttribute("id", "row" + newAdminId);
+
+
+  newRow.innerHTML = `
+    <td>${newAdminId}</td>
+    <td><label id="nameLabel${newAdminId}">${admin.name}</label><input type="text" id="nameInput${newAdminId}" style="display: none;" class="adminInput"></td>
+    <td><label id="phoneLabel${newAdminId}">${admin.role}</label><input type="text" id="phoneInput${newAdminId}" style="display: none;" class="adminInput"></td>
+    <td><label id="emailLabel${newAdminId}">${admin.email}</label><input class="adminInput" type="email" id="emailInput${newAdminId}" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" style="display: none;"></td>
+    <td><label id="passwordLabel${newAdminId}">${admin.password}</label>
+      <div class="passwords">
+        <input class="adminInput" type="password" id="currentPassword${newAdminId}" placeholder="Enter current password" style="display: none;">
+        <input class="adminInput" type="password" id="newPassword${newAdminId}" placeholder="Enter new password" style="display: none;">
+        <input class="adminInput" type="password" id="confirmPassword${newAdminId}" placeholder="Confirm password" style="display: none;">
+      </div>
+    </td>
+    <td>
+      <div class="btn">
+        <button type="button" onclick="editRow(${newAdminId})" class="Edit" id="Edit${newAdminId}">Edit</button>
+      </div>
+      <div class="btn">
+        <button type="button" onclick="editRow(${newAdminId})" class="Edit" id="Update${newAdminId}" hidden>Update</button>
+      </div>
+    </td>
+    <td>
+      <form method="POST" action="#">
+        <div class="btn">
+          <button type="button" value="" class="Delete" id="Delete${newAdminId}" onclick="deleteRow(${newAdminId})">Delete</button>
+        </div>
+      </form>
+    </td>
+  `;
+
+
+  tableBody.insertBefore(newRow, tableBody.lastElementChild);
+  newAdminId++;
+}

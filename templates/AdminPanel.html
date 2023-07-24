@@ -3,7 +3,7 @@
 
 <head>
     <title>Admin page</title>
-    <link rel="stylesheet" href="/css/AdminPanel.css">
+    <link rel="stylesheet" href="../static/css/AdminPanel.css">
 
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -29,7 +29,7 @@
                     <tr>
                         <th>id</th>
                         <th>Name</th>
-                        <th>Mobile Phone</th>
+                        <th>Role</th>
                         <th>Email</th>
                         <th>Password</th>
                         <th></th>
@@ -37,95 +37,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="row1">
-                        <form method="POST" action="#">
-                            <!-- Row 1 -->
-                            <td>1</td>
-                            <td><label id="nameLabel1">Talion</label><input type="text" id="nameInput1"
-                                    style="display: none;" class="adminInput"></td>
-                            <td><label id="phoneLabel1">011811188818</label><input type="text" id="phoneInput1"
-                                    style="display: none;" class="adminInput"> </td>
-                            <td><label id="emailLabel1">mohab@gmail.com</label><input class="adminInput" type="email"
-                                    id="emailInput1" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" style="display: none;"></td>
-                            <td><label id="passwordLabel1">••••••••</label>
-                                <div class="passwords">
-                                    <input class="adminInput" type="password" id="currentPassword1"
-                                        placeholder=" Enter current password" style="display: none;">
-                                    <input class="adminInput" type="password" id="newPassword1"
-                                        placeholder=" Enter new password" style="display: none;">
-                                    <input class="adminInput" type="password" id="confirmPassword1"
-                                        placeholder="confirm password" style="display: none;">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="btn">
-                                    <button type="button" onclick="editRow(1)" class="Edit" id="Edit1">Edit </button>
-                                </div>
-                                <div class="btn">
-                                    <button type="button" onclick="editRow(1)" class="Edit" id="Update1"
-                                        hidden>Update</button>
-                                </div>
-                            </td>
-                        </form>
-
-                        <td>
-                            <form method="POST" action="#">
-                                <div class="btn">
-                                    <button type="submit" value="" class="Delete" id="Delete1"
-                                        onclick="deleteRow(1)">Delete </button>
-                                </div>
-                            </form>
-                        </td>
-                    </tr>
-
-                    <tr id="row2">
-                        <form method="POST" action="#">
-                            <!-- Row 2 -->
-                            <td>2</td>
-                            <td><label id="nameLabel2">Talion</label><input type="text" id="nameInput2"
-                                    style="display: none;" class="adminInput"></td>
-                            <td><label id="phoneLabel2">011811188818</label><input type="text" id="phoneInput2"
-                                    style="display: none;" class="adminInput"> </td>
-                            <td><label id="emailLabel2">mohab@gmail.com</label><input class="adminInput" type="email"
-                                    id="emailInput2" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" style="display: none;"></td>
-                            <td><label id="passwordLabel2">••••••••</label>
-                                <div class="passwords">
-                                    <button type="button" onclick="showPasswordFields(1)" class="Edit"
-                                        id="ChangePassword1" hidden>Change Password</button>
-
-                                    <input class="adminInput" type="password" id="currentPassword2"
-                                        placeholder=" Enter current password" style="display: none;">
-                                    <input class="adminInput" type="password" id="newPassword2"
-                                        placeholder=" Enter new password" style="display: none;">
-                                    <input class="adminInput" type="password" id="confirmPassword2"
-                                        placeholder="confirm password" style="display: none;">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="btn">
-                                    <button type="button" onclick="editRow(2)" class="Edit" id="Edit2">Edit </button>
-                                </div>
-                                <div class="btn">
-                                    <button type="button" onclick="editRow(2)" class="Edit" id="Update2"
-                                        hidden>Update</button>
-                                </div>
-                            </td>
-                        </form>
-
-                        <td>
-                            <form method="POST" action="#">
-                                <div class="btn">
-                                    <button type="button" value="" class="Delete" id="Delete2"
-                                        onclick="deleteRow(2)">Delete </button>
-                                </div>
-                            </form>
-                        </td>
-                    </tr>
 
                     <!-- Add more rows here -->
 
                     <tr>
-                        <td colspan="8">
+                        <td colspan="7">
                             <!-- Add new admin -->
                             <div class="btn add-new">
                                 <button id="addAdminButton" value="">Add admin</button>
@@ -142,8 +58,8 @@
     <!-- axios -->
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
-    <script src="/js/adminPanel.js"></script>
-    <script src="/js/axiosRequest.js"></script>
+    <script src="../static/js/adminPanel.js"></script>
+    <script src="../static/js/axiosRequest.js"></script>
 </body>
 
 </html>
