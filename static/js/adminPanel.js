@@ -1,6 +1,9 @@
-// const axiosRequest = require("./axiosRequest");
+
 
 function editRow(rowId) {
+
+
+
   var nameInput = document.getElementById("nameInput" + rowId);
   var phoneInput = document.getElementById("phoneInput" + rowId);
   var emailInput = document.getElementById("emailInput" + rowId);
@@ -112,6 +115,30 @@ function searchAdmin() {
 }
 
 window.addEventListener("DOMContentLoaded", function () {
+
+  axios.get('/api/v1/admin').then((res) => {
+
+    const admins = res.data.data;
+
+    admins.map((admin) => {
+
+      const {
+        email,
+        password,
+        role,
+      } = admin;
+
+      console.log(email)
+      console.log(password)
+      console.log(role)
+    })
+
+  }).catch((error) => {
+    console.log('Error Message:', error.message);
+    console.log('Response Data:', error.response.data);
+    console.log('Response Status:', error.response.status);
+  });
+
   var adminInput = document.querySelectorAll(".adminInput");
 
   for (let input of adminInput) {
