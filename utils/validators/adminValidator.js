@@ -6,9 +6,13 @@ const { comparePasswords } = require('../../utils/helperFunctions');
 const Admin = require('../../models/adminModel');
 
 exports.createAdminValidator = [
+    check('name')
+        .notEmpty()
+        .withMessage('Name is required'),
+
     check('email')
         .notEmpty()
-        .withMessage('Email Is Required')
+        .withMessage('Email is required')
         .isEmail()
         .withMessage('Invalid email address')
         .custom(async (val) =>

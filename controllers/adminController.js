@@ -11,6 +11,7 @@ const Admin = require('../models/adminModel');
 exports.createAdmin = asyncHandler(async (req, res, next) => {
     // 1- Create Admin
     const admin = await Admin.create({
+        name: req.body.name,
         email: req.body.email,
         // passowrd will be hashed in adminModel.js
         password: req.body.password,

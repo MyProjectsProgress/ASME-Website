@@ -1,15 +1,30 @@
-
-
-function editRow(rowId) {
-
-
-
+function editRow(rowId, adminID) {
   var nameInput = document.getElementById("nameInput" + rowId);
-  var phoneInput = document.getElementById("phoneInput" + rowId);
+  var role = document.getElementById("role" + rowId);
   var emailInput = document.getElementById("emailInput" + rowId);
   var currentPasswordInput = document.getElementById("currentPassword" + rowId);
   var newPasswordInput = document.getElementById("newPassword" + rowId);
   var confirmPasswordInput = document.getElementById("confirmPassword" + rowId);
+
+  // fetching the admin data
+  const requestObject = {
+    url: `./admin/${adminID}`, // api/v1/admin/:id
+    method: 'GET',
+  };
+
+  const nextPage = './form';
+
+  axiosRequest(requestObject, nextPage, true, true).then((res) => {
+    // Set placeholders for each input field
+    nameInput.placeholder = res.data.name;
+    role.placeholder = res.data.role;
+    emailInput.placeholder = res.data.email;
+    currentPasswordInput.placeholder = "Enter current password";
+    newPasswordInput.placeholder = "Enter new password";
+    confirmPasswordInput.placeholder = "Confirm password";
+  }).catch((error) => {
+    console.error(error);
+  });
 
   var editButton = document.getElementById("Edit" + rowId);
   var updateButton = document.getElementById("Update" + rowId);
@@ -35,20 +50,20 @@ function editRow(rowId) {
 
     // Update the row with the new data
     document.getElementById("nameLabel" + rowId).textContent = nameInput.value || document.getElementById("nameLabel" + rowId).textContent;
-    document.getElementById("phoneLabel" + rowId).textContent = phoneInput.value || document.getElementById("phoneLabel" + rowId).textContent;
+    document.getElementById("roleLabel" + rowId).textContent = role.value || document.getElementById("roleLabel" + rowId).textContent;
     document.getElementById("emailLabel" + rowId).textContent = emailInput.value || document.getElementById("emailLabel" + rowId).textContent;
     document.getElementById("passwordLabel" + rowId).textContent = "••••••••";
 
     // Hide the input fields and show the labels
     nameInput.style.display = "none";
-    phoneInput.style.display = "none";
+    role.style.display = "none";
     emailInput.style.display = "none";
     currentPasswordInput.style.display = "none";
     newPasswordInput.style.display = "none";
     confirmPasswordInput.style.display = "none";
 
     document.getElementById("nameLabel" + rowId).style.display = "block";
-    document.getElementById("phoneLabel" + rowId).style.display = "block";
+    document.getElementById("roleLabel" + rowId).style.display = "block";
     document.getElementById("emailLabel" + rowId).style.display = "block";
     document.getElementById("passwordLabel" + rowId).style.display = "block";
 
@@ -60,20 +75,20 @@ function editRow(rowId) {
 
     // Show the labels and input fields
     nameInput.style.display = "inline-block";
-    phoneInput.style.display = "inline-block";
+    role.style.display = "inline-block";
     emailInput.style.display = "inline-block";
     currentPasswordInput.style.display = "inline-block";
     newPasswordInput.style.display = "inline-block";
     confirmPasswordInput.style.display = "inline-block";
 
     document.getElementById("nameLabel" + rowId).style.display = "none";
-    document.getElementById("phoneLabel" + rowId).style.display = "none";
+    document.getElementById("roleLabel" + rowId).style.display = "none";
     document.getElementById("emailLabel" + rowId).style.display = "none";
     document.getElementById("passwordLabel" + rowId).style.display = "none";
 
     // Set the input field values to the old values by default
     nameInput.value = document.getElementById("nameLabel" + rowId).textContent;
-    phoneInput.value = document.getElementById("phoneLabel" + rowId).textContent;
+    role.value = document.getElementById("roleLabel" + rowId).textContent;
     emailInput.value = document.getElementById("emailLabel" + rowId).textContent;
     currentPasswordInput.value = document.getElementById("passwordLabel" + rowId).textContent;
     // Clear the password fields
@@ -87,10 +102,19 @@ function editRow(rowId) {
   }
 }
 
-function deleteRow(rowId) {
+function deleteRow(rowId, adminID) {
   // Delete the specified row
   var row = document.getElementById("row" + rowId);
   row.parentNode.removeChild(row);
+
+  const requestObject = {
+    url: `/api/v1/admin/${adminID}`,
+    method: 'DELETE'
+  }
+
+  const nextPage = './adminPanel';
+
+  axiosRequest(requestObject, nextPage, false);
 }
 
 function searchAdmin() {
@@ -186,21 +210,19 @@ addAdminButton.addEventListener("click", () => {
 
 let newAdminId = 0;
 
-
-
-
 function addNewAdminRow(admin) {
   const tableBody = document.querySelector("tbody");
   const newRow = document.createElement("tr");
   newRow.setAttribute("id", "row" + newAdminId);
 
+  const adminID = admin._id.toString();
 
   newRow.innerHTML = `
     <td>${newAdminId}</td>
     <td><label id="nameLabel${newAdminId}">${admin.name}</label><input type="text" id="nameInput${newAdminId}" style="display: none;" class="adminInput"></td>
-    <td><label id="phoneLabel${newAdminId}">${admin.role}</label><input type="text" id="phoneInput${newAdminId}" style="display: none;" class="adminInput"></td>
+    <td><label id="roleLabel${newAdminId}">${admin.role}</label><input type="text" id="role${newAdminId}" style="display: none;" class="adminInput"></td>
     <td><label id="emailLabel${newAdminId}">${admin.email}</label><input class="adminInput" type="email" id="emailInput${newAdminId}" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" style="display: none;"></td>
-    <td><label id="passwordLabel${newAdminId}">${admin.password}</label>
+
       <div class="passwords">
         <input class="adminInput" type="password" id="currentPassword${newAdminId}" placeholder="Enter current password" style="display: none;">
         <input class="adminInput" type="password" id="newPassword${newAdminId}" placeholder="Enter new password" style="display: none;">
@@ -209,22 +231,20 @@ function addNewAdminRow(admin) {
     </td>
     <td>
       <div class="btn">
-        <button type="button" onclick="editRow(${newAdminId})" class="Edit" id="Edit${newAdminId}">Edit</button>
+        <button type="button" onclick="editRow(${newAdminId}, '${adminID}')" class="Edit" id="Edit${newAdminId}">Edit</button>
       </div>
       <div class="btn">
-        <button type="button" onclick="editRow(${newAdminId})" class="Edit" id="Update${newAdminId}" hidden>Update</button>
+        <button type="button" onclick="editRow(${newAdminId}, '${adminID}')" class="Edit" id="Update${newAdminId}" hidden>Update</button>
       </div>
     </td>
     <td>
       <form method="POST" action="#">
         <div class="btn">
-          <button type="button" value="" class="Delete" id="Delete${newAdminId}" onclick="deleteRow(${newAdminId})">Delete</button>
+          <button type="button" value="" class="Delete" id="Delete${newAdminId}" onclick="deleteRow(${newAdminId}, '${adminID}')">Delete</button>
         </div>
       </form>
     </td>
   `;
-
-
   tableBody.insertBefore(newRow, tableBody.lastElementChild);
   newAdminId++;
 }

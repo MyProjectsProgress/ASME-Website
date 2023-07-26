@@ -1,3 +1,4 @@
+const adminName = document.querySelector("#name");
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 const confirmPassword = document.querySelector("#confirm-password");
@@ -8,17 +9,22 @@ submit.addEventListener('click', (event) => {
 
     event.preventDefault();
 
-    const requestObject = {
+    const body = {
+        name: adminName.value,
         email: email.value,
         password: password.value,
         passwordConfirm: confirmPassword.value,
         role: role.value,
     }
 
-    const url = `/api/v1/admin`;
+    const requestObject = {
+        url: '/api/v1/admin',
+        method: 'POST',
+        data: body
+    }
 
-    const nextPage = '../templates/adminPanel.html';
+    const nextPage = './adminPanel';
 
-    axiosRequest(url, requestObject, nextPage);
+    axiosRequest(requestObject, nextPage, false);
 
 });
