@@ -27,7 +27,6 @@ const adminSchema = new mongoose.Schema(
             default: 'admin',
         },
 
-
         passwordChangedAt: Date,
 
         passwordResetCode: String,

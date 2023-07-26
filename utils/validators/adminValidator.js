@@ -63,6 +63,9 @@ exports.updateAdminValidator = [
         .isMongoId()
         .withMessage('Invalid admin ID format'),
 
+    check('name')
+        .optional(),
+
     check('email')
         .optional()
         .isEmail()

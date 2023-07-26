@@ -91,6 +91,7 @@ function editRow(rowId, adminID) {
     role.value = document.getElementById("roleLabel" + rowId).textContent;
     emailInput.value = document.getElementById("emailLabel" + rowId).textContent;
     currentPasswordInput.value = document.getElementById("passwordLabel" + rowId).textContent;
+
     // Clear the password fields
     // currentPasswordInput.value = "";
     newPasswordInput.value = "";

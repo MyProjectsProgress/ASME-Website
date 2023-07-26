@@ -43,8 +43,11 @@ exports.updateAdmin = asyncHandler(async (req, res, next) => {
     // updating email but not password
     const document = await Admin.findByIdAndUpdate(req.params.id,
         {
+            name: req.body.name,
             email: req.body.email,
             role: req.body.role,
+            password: await bcrypt.hash(req.body.password, 12),
+            passwordChangedAt: Date.now(),
         },
         { new: true });
 
