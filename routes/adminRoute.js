@@ -22,11 +22,11 @@ const {
 
 const router = express.Router();
 
-// router.use(protect);
+router.use(protect);
 
 router.put('/changePassword/:id', changeAdminPasswordValidator, changeAdminPassword);
 
-// router.use(allowedTo('admin'));
+router.use(allowedTo('admin'));
 
 router.route('/')
     .get(getAdmins)

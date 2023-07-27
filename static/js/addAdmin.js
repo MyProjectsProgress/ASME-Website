@@ -5,7 +5,7 @@ const confirmPassword = document.querySelector("#confirm-password");
 const role = document.querySelector("#role")
 const submit = document.querySelector('#submit');
 
-submit.addEventListener('click', (event) => {
+submit.addEventListener('click', async (event) => {
 
     event.preventDefault();
 
@@ -23,8 +23,17 @@ submit.addEventListener('click', (event) => {
         data: body
     }
 
-    const nextPage = './adminPanel';
+    const currentURL = window.location.href;
+    let refererSplit = currentURL.split('?');
+    token = refererSplit[refererSplit.length - 1].split('=')[1];
 
-    axiosRequest(requestObject, nextPage, false);
+    const nextPage = `./adminPanel?variable=${encodeURIComponent(token)}`;
 
+    try {
+        await axiosRequest(requestObject, nextPage, false);
+    } catch (error) {
+        console.error(error.response.status);
+        console.error(error.response.statusText);
+        console.error(error.response.data);
+    }
 });

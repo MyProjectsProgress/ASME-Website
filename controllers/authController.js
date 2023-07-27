@@ -43,14 +43,14 @@ exports.protect = asyncHandler(async (req, res, next) => {
     let token;
     // making sure authorization exist with bearer keyword
 
-    // let refererSplit = req.headers.referer.split('?');
-    // token = refererSplit[refererSplit.length - 1].split('=')[1];
+    let refererSplit = req.headers.referer.split('?');
+    token = refererSplit[refererSplit.length - 1].split('=')[1];
 
 
-    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        // accessing token
-        token = req.headers.authorization.split(' ')[1];
-    };
+    // if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    //     // accessing token
+    //     token = req.headers.authorization.split(' ')[1];
+    // };
 
     if (!token) {
         return next(new ApiError('You are not logged in. Please, login to get access this route', 401));

@@ -8,7 +8,7 @@ forgetPasswordButton.addEventListener('click', (event) => {
   window.location.href = './forgetPassword';
 });
 
-loginButton.addEventListener('click', (event) => {
+loginButton.addEventListener('click', async (event) => {
 
   event.preventDefault();
 
@@ -23,19 +23,9 @@ loginButton.addEventListener('click', (event) => {
     data: body,
   };
 
-  const nextPage = '../adminPanel';
-
-  axiosRequest(requestObject, nextPage).then((token) => {
-    // console.log(token);
+  axiosRequestToken(requestObject).then((token) => {
     const addBearerToeknToURL = `../adminPanel?variable=${encodeURIComponent(token)}`;
     window.location.href = addBearerToeknToURL;
-    // axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    // console.log(axios.defaults.headers.common['Authorization']);
-    // window.location.href = nextPage;
-    // axios.defaults.headers.common = {
-    //   'Authorization': `Bearer ${token}`
-    // };
-    // window.location.href = addBearerToeknToURL;
   })
     .catch((error) => {
       console.error(error);

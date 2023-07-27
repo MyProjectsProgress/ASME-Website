@@ -4,7 +4,6 @@ const { protect, allowedTo } = require('../controllers/authController');
 
 const {
     createEventValidator,
-    // saveDocument,
     deleteEventValidator,
     getEventValidator,
     updateEventValidator

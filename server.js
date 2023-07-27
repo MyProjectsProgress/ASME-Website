@@ -57,7 +57,6 @@ app.get('/api/v1/verificationCode', (req, res) => {
 });
 
 app.get('/api/v1/newPassword', (req, res) => {
-    console.log(__dirname, 'templates', 'newPassword.html')
     res.sendFile(path.join(__dirname, 'templates', 'newPassword.html'));
 });
 

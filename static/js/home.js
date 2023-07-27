@@ -7,7 +7,7 @@ document.getElementById('prev').onclick = function () {
     document.getElementById('slide').prepend(lists[lists.length - 1]);
 }
 
-//--------------------------- Events and Workshops fetching
+//--------------------------- Events and Workshops fetching data
 
 axios.get('/api/v1/event').then((res) => {
 
@@ -297,14 +297,14 @@ const counts = document.querySelectorAll('.count')
 const speed = 97
 
 counts.forEach((counter) => {
-    function upDate(){
+    function upDate() {
         const target = Number(counter.getAttribute('data-target'))
         const count = Number(counter.innerText)
-        const inc = target / speed        
-        if(count < target){
-            counter.innerText = Math.floor(inc + count) 
+        const inc = target / speed
+        if (count < target) {
+            counter.innerText = Math.floor(inc + count)
             setTimeout(upDate, 15)
-        }else{
+        } else {
             counter.innerText = target
         }
     }

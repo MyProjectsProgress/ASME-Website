@@ -184,7 +184,7 @@ function showPasswordFields(rowId) {
 
 const addAdminButton = document.getElementById("addAdminButton");
 
-addAdminButton.addEventListener("click", () => {
+addAdminButton.addEventListener("click", async () => {
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
@@ -194,17 +194,20 @@ addAdminButton.addEventListener("click", () => {
     headers: {
       'Authorization': `Bearer ${token}`, // Include the token in the request headers
     },
-    url: 'form', // api/v1/form
+    url: 'addAdmin', // api/v1/addAdmin
     method: 'GET',
   };
 
-  const nextPage = './form';
-
-  axiosRequest(requestObject, nextPage).then((token) => {
-    console.log(axios.defaults.headers.common['Authorization'])
+  axiosRequestToken(requestObject).then((token) => {
+    const currentURL = window.location.href;
+    let refererSplit = currentURL.split('?');
+    token = refererSplit[refererSplit.length - 1].split('=')[1];
+    const addBearerToeknToURL = `addAdmin?variable=${encodeURIComponent(token)}`;
+    window.location.href = addBearerToeknToURL;
   }).catch((error) => {
-    console.log(axios.defaults.headers.common['Authorization'])
-    console.error(error);
+    console.error(error.response.status);
+    console.error(error.response.statusText);
+    console.error(error.response.data);
   });
 
 });
