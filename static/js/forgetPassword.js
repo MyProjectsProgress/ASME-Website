@@ -2,7 +2,7 @@ const email = document.querySelector("#email");
 const form = document.querySelector("#form");
 const submitButton = document.querySelector("#submit");
 
-submitButton.addEventListener('click', (event) => {
+submitButton.addEventListener('click', async (event) => {
 
     event.preventDefault();
 
@@ -19,5 +19,5 @@ submitButton.addEventListener('click', (event) => {
 
     const nextPage = './verificationCode';
 
-    axiosRequest(requestObject, nextPage);
+    await axiosRequest(requestObject, nextPage);
 });

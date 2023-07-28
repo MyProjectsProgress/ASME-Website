@@ -60,8 +60,12 @@ app.get('/api/v1/newPassword', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'newPassword.html'));
 });
 
-app.get('/api/v1/form', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'templates/form.html'));
+app.get('/api/v1/memberForm', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/memberForm.html'));
+});
+
+app.get('/api/v1/participantForm', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/participantForm.html'));
 });
 
 app.get('/api/v1/form-succession', (req, res) => {

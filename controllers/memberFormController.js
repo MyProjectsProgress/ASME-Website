@@ -1,13 +1,13 @@
 const factory = require('./handlersFactory');
 
-const Form = require('../models/formModel');
+const MemberForm = require('../models/memberFormModel');
 
 // @desc   Create New Participant
 // @route  PUT /api/v1/member
 // @access Public
-exports.createForm = factory.createOne(Form);
+exports.createForm = factory.createOne(MemberForm);
 
 // @desc   Get all participants
 // @route  PUT /api/v1/member
 // @access Private/admin
-exports.getForms = factory.getAll(Form);
+exports.getForms = factory.getAll(MemberForm);

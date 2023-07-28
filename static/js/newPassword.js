@@ -2,7 +2,7 @@ const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 const submitButton = document.querySelector("#submit");
 
-submitButton.addEventListener('click', (event) => {
+submitButton.addEventListener('click', async (event) => {
 
     event.preventDefault();
 
@@ -19,20 +19,5 @@ submitButton.addEventListener('click', (event) => {
 
     const nextPage = './adminPanel';
 
-    axiosRequest(requestObject, nextPage);
-
-    // axios.put(`/api/v1/auth/resetPassword`, {
-    //     email: email.value,
-    //     newPassword: password.value,
-    // }).then((res) => {
-
-    //     window.location.href = './adminPanel';
-    //     const data = res.data
-    //     console.log(data)
-
-    // }).catch((error) => {
-    //     console.error(error.response.status);
-    //     console.error(error.response.statusText);
-    //     console.error(error.response.data);
-    // });
+    await axiosRequest(requestObject, nextPage);
 });

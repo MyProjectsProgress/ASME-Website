@@ -59,21 +59,17 @@ const formSchema = new mongoose.Schema(
             required: [true, 'Graduation year is required'],
         },
 
-        position: {
+        workshop: {
             type: String
         },
 
         comment: {
             type: String
         },
-
-        previousExperience: {
-            type: String
-        }
     },
     { timestamps: true }
 );
 
-const Form = mongoose.model('Form', formSchema);
+const ParticipantForm = mongoose.model('ParticipantForm', formSchema);
 
-module.exports = Form;
+module.exports = ParticipantForm;

@@ -14,7 +14,7 @@ input6.addEventListener('input', handleInput);
 
 const resendCode = document.querySelector("#resendCode");
 
-resendCode.addEventListener('click', (event) => {
+resendCode.addEventListener('click', async (event) => {
 
   event.preventDefault();
 
@@ -32,7 +32,7 @@ resendCode.addEventListener('click', (event) => {
 
   const nextPage = './verificationCode';
 
-  axiosRequest(url, requestObject, nextPage);
+  await axiosRequest(url, requestObject, nextPage);
 
 });
 
@@ -49,7 +49,7 @@ function handleInput(event) {
   };
 };
 
-function addPinNumber(first, last) {
+async function addPinNumber(first, last) {
   if (first.value.length) {
     let index = parseInt(first.id.slice(-1)) - 1;
     const input = document.querySelector(`#${last}`).value;
@@ -70,7 +70,7 @@ function addPinNumber(first, last) {
 
     const nextPage = './newPassword';
 
-    axiosRequest(requestObject, nextPage);
+    await axiosRequest(requestObject, nextPage);
   };
 };
 

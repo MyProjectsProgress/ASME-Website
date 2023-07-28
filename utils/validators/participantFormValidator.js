@@ -1,8 +1,7 @@
 const { check, body } = require('express-validator');
 
 const validatorMiddleware = require('../../middlewares/validatorMiddleware');
-const Form = require('../../models/formModel');
-
+const ParticipantForm = require('../../models/participantFormModel');
 
 exports.createFormValidator = [
     check('name')
@@ -25,7 +24,7 @@ exports.createFormValidator = [
         .isEmail()
         .withMessage('Invalid email address')
         .custom(async (val) => {
-            return Form.findOne({ email: val }).then((found) => {
+            return ParticipantForm.findOne({ email: val }).then((found) => {
                 if (found) {
                     return Promise.reject(new Error('Email is in use'));
                 }

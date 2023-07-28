@@ -46,7 +46,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     let refererSplit = req.headers.referer.split('?');
     token = refererSplit[refererSplit.length - 1].split('=')[1];
 
-
+    // uncomment when using postman and comment the previous couple of lines
     // if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     //     // accessing token
     //     token = req.headers.authorization.split(' ')[1];
