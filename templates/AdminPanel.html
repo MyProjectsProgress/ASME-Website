@@ -3,7 +3,7 @@
 
 <head>
     <title>Admin page</title>
-    <link rel="stylesheet" href="../static/css/AdminPanel.css">
+    <link rel="stylesheet" href="/css/AdminPanel.css">
 
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -20,11 +20,7 @@
     <div class="panel">
         <!-- box info -->
         <div class="admin-container">
-            <div class="search-container">
-                <input type="text" id="adminSearch" placeholder="Search by ID..." oninput="searchAdmin()">
-            </div>
             <table action="#">
-
                 <thead>
                     <tr>
                         <th>id</th>
@@ -36,15 +32,14 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     <!-- Add more rows here -->
-
                     <tr>
                         <td colspan="7">
                             <!-- Add new admin -->
                             <div class="btn add-new">
-                                <button id="addAdminButton" value="">Add admin</button>
-
+                                <button id="addAdminButton" value="">Add Admin</button>
+                                <button id="addWorkshopButton" value="">Add Workshop</button>
+                                <button id="addEventButton" value="">Add Event</button>
                             </div>
                         </td>
                     </tr>
@@ -52,13 +47,13 @@
             </table>
         </div>
     </div>
-    <!-- <button id="getFormsButton" value="">Get Forms</button> -->
 
     <!-- axios -->
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 
-    <script src="../static/js/adminPanel.js"></script>
-    <script src="../static/js/axiosRequest.js"></script>
+    <!-- JS Implementation -->
+    <script src="/js/adminPanel.js"></script>
+    <script src="/js/axiosRequest.js"></script>
 </body>
 
 </html>

@@ -5,7 +5,6 @@ const slugify = require('slugify');
 const multiparty = require('multiparty');
 
 const factory = require('./handlersFactory');
-
 const Workshop = require('../models/workshopModel');
 
 async function processAndSaveImage(imageFile, req) {
@@ -13,7 +12,7 @@ async function processAndSaveImage(imageFile, req) {
     const randomID = uuidv4();
     const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
 
-    if (imageFile.fieldName === 'image') {
+    if (imageFile.fieldName === 'workshopImage') {
         await sharp(imageFile.path)
             .withMetadata()
             .toFormat('jpeg')
@@ -23,7 +22,6 @@ async function processAndSaveImage(imageFile, req) {
 
     return filename;
 };
-
 
 async function processImages(req, res) {
     try {
@@ -56,12 +54,11 @@ exports.createWorkshop = asyncHandler(async (req, res) => {
         }
 
         const { title, description } = fields;
-        const { image: imageFile } = files;
 
         req.body.title = title[0];
         req.body.slug = slugify(req.body.title);
         req.body.description = description[0];
-        req.body.image = imageFile[0];
+        req.body.image = files.workshopImage[0];
 
         processImages(req, res);
     });

@@ -1,10 +1,9 @@
-function editRow(rowId, adminID) {
+async function editRow(rowId, adminID) {
+
   var nameInput = document.getElementById("nameInput" + rowId);
   var role = document.getElementById("role" + rowId);
   var emailInput = document.getElementById("emailInput" + rowId);
-  var currentPasswordInput = document.getElementById("currentPassword" + rowId);
   var newPasswordInput = document.getElementById("newPassword" + rowId);
-  var confirmPasswordInput = document.getElementById("confirmPassword" + rowId);
 
   // fetching the admin data
   const requestObject = {
@@ -19,9 +18,7 @@ function editRow(rowId, adminID) {
     nameInput.placeholder = res.data.name;
     role.placeholder = res.data.role;
     emailInput.placeholder = res.data.email;
-    currentPasswordInput.placeholder = "Enter current password";
     newPasswordInput.placeholder = "Enter new password";
-    confirmPasswordInput.placeholder = "Confirm password";
   }).catch((error) => {
     console.error(error);
   });
@@ -31,22 +28,6 @@ function editRow(rowId, adminID) {
 
   if (editButton.style.display === "none") {
     // User is currently editing the row, update the data
-
-    // Check if the password fields have been modified
-    var currentPassword = currentPasswordInput.value;
-    var newPassword = newPasswordInput.value;
-    var confirmPassword = confirmPasswordInput.value;
-
-    if (newPassword !== confirmPassword) {
-      // Passwords do not match, show an error message or take appropriate action
-      alert("New passwords do not match!");
-      return;
-    }
-
-    if (newPassword === "") {
-      // New password field is empty, set the value to the old password
-      newPassword = currentPassword;
-    }
 
     // Update the row with the new data
     document.getElementById("nameLabel" + rowId).textContent = nameInput.value || document.getElementById("nameLabel" + rowId).textContent;
@@ -58,9 +39,7 @@ function editRow(rowId, adminID) {
     nameInput.style.display = "none";
     role.style.display = "none";
     emailInput.style.display = "none";
-    currentPasswordInput.style.display = "none";
     newPasswordInput.style.display = "none";
-    confirmPasswordInput.style.display = "none";
 
     document.getElementById("nameLabel" + rowId).style.display = "block";
     document.getElementById("roleLabel" + rowId).style.display = "block";
@@ -70,6 +49,7 @@ function editRow(rowId, adminID) {
     // Show the Edit button and hide the Update button
     editButton.style.display = "inline-block";
     updateButton.style.display = "none";
+
   } else {
     // User wants to edit the row, enable the input fields
 
@@ -77,9 +57,7 @@ function editRow(rowId, adminID) {
     nameInput.style.display = "inline-block";
     role.style.display = "inline-block";
     emailInput.style.display = "inline-block";
-    currentPasswordInput.style.display = "inline-block";
     newPasswordInput.style.display = "inline-block";
-    confirmPasswordInput.style.display = "inline-block";
 
     document.getElementById("nameLabel" + rowId).style.display = "none";
     document.getElementById("roleLabel" + rowId).style.display = "none";
@@ -90,12 +68,9 @@ function editRow(rowId, adminID) {
     nameInput.value = document.getElementById("nameLabel" + rowId).textContent;
     role.value = document.getElementById("roleLabel" + rowId).textContent;
     emailInput.value = document.getElementById("emailLabel" + rowId).textContent;
-    currentPasswordInput.value = document.getElementById("passwordLabel" + rowId).textContent;
 
     // Clear the password fields
-    // currentPasswordInput.value = "";
     newPasswordInput.value = "";
-    confirmPasswordInput.value = "";
 
     // Show the Update button and hide the Edit button
     editButton.style.display = "none";
@@ -203,6 +178,65 @@ addAdminButton.addEventListener("click", async () => {
     let refererSplit = currentURL.split('?');
     token = refererSplit[refererSplit.length - 1].split('=')[1];
     const addBearerToeknToURL = `addAdmin?variable=${encodeURIComponent(token)}`;
+    window.location.href = addBearerToeknToURL;
+  }).catch((error) => {
+    console.error(error.response.status);
+    console.error(error.response.statusText);
+    console.error(error.response.data);
+  });
+
+});
+
+const addWorkshopButton = document.getElementById("addWorkshopButton");
+
+addWorkshopButton.addEventListener("click", async () => {
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const token = urlParams.get('variable');
+
+  const requestObject = {
+    headers: {
+      'Authorization': `Bearer ${token}`, // Include the token in the request headers
+    },
+    url: 'workshops', // api/v1/workshop
+    method: 'GET',
+  };
+
+  axiosRequestToken(requestObject).then((token) => {
+    const currentURL = window.location.href;
+    let refererSplit = currentURL.split('?');
+    token = refererSplit[refererSplit.length - 1].split('=')[1];
+    const addBearerToeknToURL = `workshops?variable=${encodeURIComponent(token)}`;
+    window.location.href = addBearerToeknToURL;
+  }).catch((error) => {
+    console.error(error.response.status);
+    console.error(error.response.statusText);
+    console.error(error.response.data);
+  });
+});
+
+const addEventButton = document.getElementById("addEventButton");
+
+addEventButton.addEventListener("click", async () => {
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const token = urlParams.get('variable');
+
+  const requestObject = {
+    headers: {
+      'Authorization': `Bearer ${token}`, // Include the token in the request headers
+    },
+    url: 'events', // api/v1/event
+    method: 'GET',
+  };
+
+  axiosRequestToken(requestObject).then((token) => {
+    const currentURL = window.location.href;
+    let refererSplit = currentURL.split('?');
+    token = refererSplit[refererSplit.length - 1].split('=')[1];
+    const addBearerToeknToURL = `events?variable=${encodeURIComponent(token)}`;
     window.location.href = addBearerToeknToURL;
   }).catch((error) => {
     console.error(error.response.status);

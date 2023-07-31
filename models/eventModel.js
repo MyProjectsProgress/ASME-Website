@@ -18,6 +18,7 @@ const eventSchema = new mongoose.Schema(
         description: {
             type: String,
             required: [true, 'You must enter event description'],
+            maxlength: [300, 'The field must not exceed 300 characters.'],
         },
 
         backgroundImage: {

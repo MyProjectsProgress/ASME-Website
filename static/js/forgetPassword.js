@@ -6,7 +6,7 @@ submitButton.addEventListener('click', async (event) => {
 
     event.preventDefault();
 
-    const addEmailToURL = `verificationCode.html?variable=${encodeURIComponent(email.value)}`;
+    const addEmailToURL = `verificationCode?variable=${encodeURIComponent(email.value)}`;
     window.location.href = addEmailToURL;
 
     const body = { email: email.value }

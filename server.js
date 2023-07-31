@@ -48,15 +48,15 @@ app.get('/api/v1/auth/adminLogin', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'adminLogin.html'));
 });
 
-app.get('/api/v1/forgetPassword', (req, res) => {
+app.get('/api/v1/auth/forgetPassword', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'forgetPassword.html'));
 });
 
-app.get('/api/v1/verificationCode', (req, res) => {
+app.get('/api/v1/auth/verificationCode', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'verificationCode.html'));
 });
 
-app.get('/api/v1/newPassword', (req, res) => {
+app.get('/api/v1/auth/newPassword', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'newPassword.html'));
 });
 
@@ -66,6 +66,14 @@ app.get('/api/v1/memberForm', (req, res, next) => {
 
 app.get('/api/v1/participantForm', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates/participantForm.html'));
+});
+
+app.get('/api/v1/workshops', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/workshopForm.html'));
+});
+
+app.get('/api/v1/events', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/eventForm.html'));
 });
 
 app.get('/api/v1/form-succession', (req, res) => {

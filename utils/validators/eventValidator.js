@@ -16,7 +16,6 @@ exports.createEventValidator = [
         .notEmpty()
         .withMessage('Date is required')
         .isDate()
-        // .toDate()
         .withMessage('Invalid date format'),
 
     check('description')
@@ -33,12 +32,6 @@ exports.createEventValidator = [
 
     validatorMiddleware,
 ];
-
-// exports.saveDocument = async (req, res) => {
-//     console.log('success')
-//     const document = await Event.create(req.body);
-//     res.status(201).json({ data: document });
-// }
 
 exports.updateEventValidator = [
     check('title')

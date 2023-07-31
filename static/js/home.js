@@ -7,54 +7,33 @@ document.getElementById('prev').onclick = function () {
     document.getElementById('slide').prepend(lists[lists.length - 1]);
 }
 
-//--------------------------- Events and Workshops fetching data
-
+//--------------------------- Events fetching data
 axios.get('/api/v1/event').then((res) => {
 
     const events = res.data.data;
 
     events.map((event) => {
-
-        const {
-            _id,
-            title,
-            slug,
-            date,
-            description,
-            backgroundImage,
-            foregroundImage,
-            expired,
-        } = event;
-
+        const date = event.date;
         event.date = date.split('T')[0];
-
         addEvent(event);
         swiper.update();
-    })
+    });
 
 }).catch((error) => {
-    console.log(error)
+    console.log(error);
 });
 
+//--------------------------- Workshops fetching data
 axios.get('/api/v1/workshop').then((res) => {
 
     const workshops = res.data.data;
 
     workshops.map((workshop) => {
-
-        const {
-            _id,
-            title,
-            slug,
-            description,
-            image,
-        } = workshop;
-
         addWorkshop(workshop);
-    })
+    });
 
 }).catch((error) => {
-    console.log(error)
+    console.log(error);
 });
 
 let slider = document.getElementById("event-slider");
@@ -106,14 +85,11 @@ function addEvent(event) {
     let dateText = document.createTextNode(event.date);
     let descriptionText = document.createTextNode(event.description);
 
-
     img_div.appendChild(event_img);
-
     title.appendChild(titleText);
     date.appendChild(dateText);
     description.appendChild(descriptionText);
     ctr.appendChild(description);
-
     content.appendChild(title);
     content.appendChild(date);
     content.appendChild(ctr);
@@ -135,7 +111,6 @@ function addEvent(event) {
     card.appendChild(overlay);
     card.appendChild(content);
     item.appendChild(card);
-
     event_pics.appendChild(img_div);
     slider.appendChild(item);
 }
@@ -207,7 +182,6 @@ var swiper = new Swiper(".event-slider", {
 
     on: {
         init: function () {
-
             var index = this.activeIndex;
             var target = $(".event-slider__item").eq(index).data("target");
             $(".event-img__item").removeClass("active");
@@ -229,13 +203,13 @@ swiper.on("slideChange", function () {
         $(".next").addClass("disabled");
     } else {
         $(".next").removeClass("disabled");
-    }
+    };
 
     if (swiper.isBeginning) {
         $(".prev").addClass("disabled");
     } else {
         $(".prev").removeClass("disabled");
-    }
+    };
 });
 
 // Get the button element
@@ -249,10 +223,9 @@ if (!hasBeenHovered) {
     aboutButton.addEventListener('mouseover', function () {
         aboutButton.classList.add('hovered');
     });
-
     // Set the flag in local storage to remember the hover state
     localStorage.setItem('hasBeenHovered', true);
-}
+};
 
 
 // navbar actions
@@ -289,24 +262,21 @@ about.onclick = function () {
     about.setAttribute("Class", "active");
 }
 
-
-
 // numbers counter 
-
-const counts = document.querySelectorAll('.count')
-const speed = 97
+const counts = document.querySelectorAll('.count');
+const speed = 97;
 
 counts.forEach((counter) => {
     function upDate() {
-        const target = Number(counter.getAttribute('data-target'))
-        const count = Number(counter.innerText)
-        const inc = target / speed
+        const target = Number(counter.getAttribute('data-target'));
+        const count = Number(counter.innerText);
+        const inc = target / speed;
         if (count < target) {
-            counter.innerText = Math.floor(inc + count)
-            setTimeout(upDate, 15)
+            counter.innerText = Math.floor(inc + count);
+            setTimeout(upDate, 15);
         } else {
-            counter.innerText = target
-        }
-    }
-    upDate()
-})
+            counter.innerText = target;
+        };
+    };
+    upDate();
+});

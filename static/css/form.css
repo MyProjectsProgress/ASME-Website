@@ -389,3 +389,15 @@ form .mulitple-input .input-field {
     }
 
 }
+
+.input-field,
+.mulitple-input,
+.triple-input {
+    margin: -5px 0;
+    width: 100%;
+}
+
+.submit {
+    margin-top: 5px 0;
+    width: 100%;
+}
