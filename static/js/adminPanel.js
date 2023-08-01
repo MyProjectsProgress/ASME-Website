@@ -5,35 +5,42 @@ async function editRow(rowId, adminID) {
   var emailInput = document.getElementById("emailInput" + rowId);
   var newPasswordInput = document.getElementById("newPassword" + rowId);
 
-  // fetching the admin data
-  const requestObject = {
-    url: `./admin/${adminID}`, // api/v1/admin/:id
-    method: 'GET',
-  };
-
-  const nextPage = './form';
-
-  axiosRequest(requestObject, nextPage, true, true).then((res) => {
-    // Set placeholders for each input field
-    nameInput.placeholder = res.data.name;
-    role.placeholder = res.data.role;
-    emailInput.placeholder = res.data.email;
-    newPasswordInput.placeholder = "Enter new password";
-  }).catch((error) => {
-    console.error(error);
-  });
-
   var editButton = document.getElementById("Edit" + rowId);
   var updateButton = document.getElementById("Update" + rowId);
 
+  // User is currently editing the row, update the data
   if (editButton.style.display === "none") {
-    // User is currently editing the row, update the data
 
     // Update the row with the new data
     document.getElementById("nameLabel" + rowId).textContent = nameInput.value || document.getElementById("nameLabel" + rowId).textContent;
     document.getElementById("roleLabel" + rowId).textContent = role.value || document.getElementById("roleLabel" + rowId).textContent;
     document.getElementById("emailLabel" + rowId).textContent = emailInput.value || document.getElementById("emailLabel" + rowId).textContent;
-    document.getElementById("passwordLabel" + rowId).textContent = "••••••••";
+    // document.getElementById("passwordLabel" + rowId).textContent = "••••••••"; generate error
+
+    const currentURL = window.location.href;
+    let refererSplit = currentURL.split('?');
+    token = refererSplit[refererSplit.length - 1].split('=')[1];
+
+    body = {
+      name: nameInput.value,
+      role: role.value,
+      email: emailInput.value,
+      password: newPasswordInput.value
+    }
+
+    const requestObject = {
+      url: `./admin/${adminID}`, // api/v1/admin/:id
+      method: 'PUT',
+      data: body,
+    };
+
+    const nextPage = `adminPanel?variable=${encodeURIComponent(token)}`;
+
+    axiosRequest(requestObject, nextPage, false).then((res) => {
+      // pass
+    }).catch((error) => {
+      console.error(error);
+    });
 
     // Hide the input fields and show the labels
     nameInput.style.display = "none";
@@ -62,7 +69,7 @@ async function editRow(rowId, adminID) {
     document.getElementById("nameLabel" + rowId).style.display = "none";
     document.getElementById("roleLabel" + rowId).style.display = "none";
     document.getElementById("emailLabel" + rowId).style.display = "none";
-    document.getElementById("passwordLabel" + rowId).style.display = "none";
+    // document.getElementById("passwordLabel" + rowId).style.display = "none"; Generates error
 
     // Set the input field values to the old values by default
     nameInput.value = document.getElementById("nameLabel" + rowId).textContent;
@@ -243,7 +250,6 @@ addEventButton.addEventListener("click", async () => {
     console.error(error.response.statusText);
     console.error(error.response.data);
   });
-
 });
 
 let newAdminId = 0;

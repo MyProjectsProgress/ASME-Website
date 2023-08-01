@@ -36,6 +36,26 @@ app.get('/api/v1/home', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'home.html'));
 });
 
+app.get('/api/v1/memberForm', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/memberForm.html'));
+});
+
+app.get('/api/v1/events', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/eventForm.html'));
+});
+
+app.get('/api/v1/participantForm', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/participantForm.html'));
+});
+
+app.get('/api/v1/workshops', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates/workshopForm.html'));
+});
+
+app.get('/api/v1/form-succession', (req, res) => {
+    res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
+});
+
 app.get('/api/v1/adminPanel', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'adminPanel.html'));
 });
@@ -60,27 +80,6 @@ app.get('/api/v1/auth/newPassword', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'newPassword.html'));
 });
 
-app.get('/api/v1/memberForm', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'templates/memberForm.html'));
-});
-
-app.get('/api/v1/participantForm', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'templates/participantForm.html'));
-});
-
-app.get('/api/v1/workshops', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'templates/workshopForm.html'));
-});
-
-app.get('/api/v1/events', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'templates/eventForm.html'));
-});
-
-app.get('/api/v1/form-succession', (req, res) => {
-    res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
-});
-
-
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
     console.log(`${process.env.NODE_ENV}`);
@@ -99,7 +98,6 @@ app.use(globalError);
 const PORT = process.env.PORT || 8000;
 
 const server = app.listen(PORT, () => {
-    // console.log(res);
     console.log(`App is Runinng  on Port http://localhost:${PORT}/api/v1/home`);
 });
 

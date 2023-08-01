@@ -69,14 +69,7 @@ exports.updateAdminValidator = [
     check('email')
         .optional()
         .isEmail()
-        .withMessage('Invalid email address')
-        .custom(async (val) => {
-            return Admin.findOne({ email: val }).then((found) => {
-                if (found) {
-                    return Promise.reject(new Error('Email is in use'));
-                }
-            });
-        }),
+        .withMessage('Invalid email address'),
 
     validatorMiddleware,
 ];
