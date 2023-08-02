@@ -7,7 +7,7 @@ async function editRow(rowId, adminID) {
 
   var editButton = document.getElementById("Edit" + rowId);
   var updateButton = document.getElementById("Update" + rowId);
-
+  var EditPassword = document.getElementById("EditPassword");
   // User is currently editing the row, update the data
   if (editButton.style.display === "none") {
 
@@ -52,6 +52,7 @@ async function editRow(rowId, adminID) {
     document.getElementById("roleLabel" + rowId).style.display = "block";
     document.getElementById("emailLabel" + rowId).style.display = "block";
     document.getElementById("passwordLabel" + rowId).style.display = "block";
+    EditPassword.setAttribute("hidden", "");
 
     // Show the Edit button and hide the Update button
     editButton.style.display = "inline-block";
@@ -65,7 +66,7 @@ async function editRow(rowId, adminID) {
     role.style.display = "inline-block";
     emailInput.style.display = "inline-block";
     newPasswordInput.style.display = "inline-block";
-
+    EditPassword.removeAttribute("hidden")
     document.getElementById("nameLabel" + rowId).style.display = "none";
     document.getElementById("roleLabel" + rowId).style.display = "none";
     document.getElementById("emailLabel" + rowId).style.display = "none";

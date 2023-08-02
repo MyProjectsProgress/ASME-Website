@@ -166,8 +166,8 @@ table input {
 }
 
 .passwords input {
-    margin-bottom: 10px;
-    text-indent: 1px;
+margin-top: 20px;    
+text-indent: 1px;
 }
 
 /* make it responsive  */
