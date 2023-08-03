@@ -23,7 +23,7 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
 
     if (!admin || !isEqual) {
         // can't clearify that the problem in the password only to not allow admin to keep trying different passwords, 401 unauthenticated
-        return next(new ApiError('Incorrect Email Or Password', 401));
+        return next(new ApiError('Incorrect email or password', 401));
     };
 
     // 3- generate token

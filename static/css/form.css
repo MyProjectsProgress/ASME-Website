@@ -401,3 +401,21 @@ form .mulitple-input .input-field {
     margin-top: 5px 0;
     width: 100%;
 }
+
+/* CSS to style the error message */
+.form-error {
+    display: none;
+    margin-top: 10px;
+    color: #d32f2f;
+    /* Red color for the error message text */
+}
+
+.error-message {
+    padding: 5px 10px;
+    background-color: #ffcdd2;
+    /* Light red background color for the error message */
+    border: 1px solid #f44336;
+    /* Darker red border for the error message */
+    border-radius: 4px;
+    display: inline-block;
+}

@@ -20,7 +20,8 @@ var errorMap = {
     university: university,
     faculty: faculty,
     department: department,
-    graduationYear: graduationYear
+    graduationYear: graduationYear,
+    position: position
 };
 
 submitButton.addEventListener('click', async (event) => {
@@ -49,13 +50,19 @@ submitButton.addEventListener('click', async (event) => {
 
     const nextPage = './form-succession';
 
-    await axiosRequest(requestObject, nextPage)
+    await axiosRequest(requestObject, nextPage, false)
         .then((res) => {
             clearErrors();
+            let previousError = "";
             res["errors"].map((error) => {
-                showError(errorMap[error.path], error.msg);
+                if (previousError === errorMap[error.path]) {
+                    // continue
+                } else {
+                    showError(errorMap[error.path], error.msg);
+                }
+                previousError = errorMap[error.path];
             });
-        })
+        });
 });
 
 for (let input of inputs) {
@@ -66,7 +73,6 @@ for (let input of inputs) {
         if (input.value !== "") {
             input.style.border = "solid 2px var(--light-blue)";
         }
-
         else {
             input.style.border = "solid 2px rgb(182, 182, 182)";
         }
@@ -74,6 +80,7 @@ for (let input of inputs) {
 }
 
 function showError(field, message) {
+
     let errorMessage = document.createElement("div");
     let errorSpan = document.createElement("span");
     let text = document.createTextNode(message);

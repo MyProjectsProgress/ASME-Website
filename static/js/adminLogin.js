@@ -24,12 +24,30 @@ loginButton.addEventListener('click', async (event) => {
   };
 
   axiosRequestToken(requestObject).then((token) => {
-    const addBearerToeknToURL = `../adminPanel?variable=${encodeURIComponent(token)}`;
-    window.location.href = addBearerToeknToURL;
-  })
-    .catch((error) => {
-      console.error(error);
-    });
+    if (token.status || token.errors) {
+
+      let errorMessage = document.createElement("div");
+      let errorSpan = document.createElement("span");
+      let text = document.createTextNode('Incorrect email or password');
+
+      errorMessage.className = "error-message";
+      errorSpan.appendChild(text);
+      errorMessage.appendChild(errorSpan);
+
+      let formError = document.getElementById("formError");
+
+      while (formError.firstChild) {
+        formError.removeChild(formError.firstChild);
+      }
+
+      formError.appendChild(errorMessage);
+      formError.style.display = "block";
+
+    } else {
+      const addBearerToeknToURL = `../adminPanel?variable=${encodeURIComponent(token)}`;
+      window.location.href = addBearerToeknToURL;
+    }
+  });
 });
 
 window.addEventListener("DOMContentLoaded", function () {

@@ -7,21 +7,21 @@ const MemberForm = require('../../models/memberFormModel');
 exports.createFormValidator = [
     check('name')
         .notEmpty()
-        .withMessage('Name is required')
+        .withMessage('Name should be between 9 - 40 characters')
         .isLength({ min: 9 })
-        .withMessage('Please write your first, middle and last name')
+        .withMessage('Name should be between 9 - 40 characters')
         .isLength({ max: 40 })
-        .withMessage('Name is too long'),
+        .withMessage('Name should be between 9 - 40 characters'),
 
     check('phoneNumber')
         .notEmpty()
-        .withMessage('Phone number is required')
+        .withMessage('Please, enter a valid Egyptian phone number')
         .isMobilePhone(['ar-EG'])
-        .withMessage('Invalid phone number, accept Egyptian phone numbers only'),
+        .withMessage('Please, enter a valid Egyptian phone number'),
 
     check('email')
         .notEmpty()
-        .withMessage('Email is required')
+        .withMessage('Invalid email address')
         .isEmail()
         .withMessage('Invalid email address')
         .custom(async (val) => {
@@ -34,31 +34,23 @@ exports.createFormValidator = [
 
     check('university')
         .notEmpty()
-        .withMessage('University is required')
-        .isLength({ min: 2 })
-        .withMessage('University name should be between 2 and 40 characters')
-        .isLength({ max: 40 })
-        .withMessage('University name should be between 2 and 40 characters'),
+        .withMessage('University is required'),
 
     check('faculty')
         .notEmpty()
-        .withMessage('Faculty is required')
-        .isLength({ min: 2 })
-        .withMessage('Faculty name should be between 2 and 40 characters')
-        .isLength({ max: 40 })
-        .withMessage('Faculty name should be between 2 and 40 characters'),
+        .withMessage('Faculty is required'),
 
     check('department')
         .notEmpty()
-        .withMessage('Deparment is required')
-        .isLength({ min: 2 })
-        .withMessage('Department name should be between 2 and 40 characters')
-        .isLength({ max: 40 })
-        .withMessage('Department name should be between 2 and 40 characters'),
+        .withMessage('Dept is required'),
 
     check('graduationYear')
         .notEmpty()
-        .withMessage('Graduation year is required'),
+        .withMessage('Select a grad year'),
+
+    check('position')
+        .notEmpty()
+        .withMessage('Position is required'),
 
     validatorMiddleware,
 ];
