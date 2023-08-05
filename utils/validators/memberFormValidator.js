@@ -7,7 +7,7 @@ const MemberForm = require('../../models/memberFormModel');
 exports.createFormValidator = [
     check('name')
         .notEmpty()
-        .withMessage('Name should be between 9 - 40 characters')
+        .withMessage('Name is reuired')
         .isLength({ min: 9 })
         .withMessage('Name should be between 9 - 40 characters')
         .isLength({ max: 40 })
@@ -15,13 +15,13 @@ exports.createFormValidator = [
 
     check('phoneNumber')
         .notEmpty()
-        .withMessage('Please, enter a valid Egyptian phone number')
+        .withMessage('Phone number is required')
         .isMobilePhone(['ar-EG'])
         .withMessage('Please, enter a valid Egyptian phone number'),
 
     check('email')
         .notEmpty()
-        .withMessage('Invalid email address')
+        .withMessage('Email is required')
         .isEmail()
         .withMessage('Invalid email address')
         .custom(async (val) => {
@@ -34,15 +34,27 @@ exports.createFormValidator = [
 
     check('university')
         .notEmpty()
-        .withMessage('University is required'),
+        .withMessage('University is required')
+        .isLength({ min: 2 })
+        .withMessage('Invalid university name')
+        .isLength({ max: 40 })
+        .withMessage('Invalid university name'),
 
     check('faculty')
         .notEmpty()
-        .withMessage('Faculty is required'),
+        .withMessage('Faculty is required')
+        .isLength({ min: 2 })
+        .withMessage('Invaid faculty name')
+        .isLength({ max: 40 })
+        .withMessage('Invalid faculty name'),
 
     check('department')
         .notEmpty()
-        .withMessage('Dept is required'),
+        .withMessage('Dept. is required')
+        .isLength({ min: 2 })
+        .withMessage('Invalid Dept. name')
+        .isLength({ max: 40 })
+        .withMessage('Invalid Dept. name'),
 
     check('graduationYear')
         .notEmpty()

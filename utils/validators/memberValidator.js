@@ -8,9 +8,9 @@ const Member = require('../../models/memberModel');
 exports.createMemberValidator = [
     check('name')
         .notEmpty()
-        .withMessage('Name should be between 9 and 40 characters')
+        .withMessage('Name iis required')
         .isLength({ min: 9 })
-        .withMessage('Too short name')
+        .withMessage('Name should be between 9 and 40 characters')
         .isLength({ max: 40 })
         .withMessage('Name should be between 9 and 40 characters'),
 
@@ -18,7 +18,7 @@ exports.createMemberValidator = [
         .notEmpty()
         .withMessage('Phone number is required')
         .isMobilePhone(['ar-EG'])
-        .withMessage('invalid phone number, accept Egyptian phone numbers only'),
+        .withMessage('Invalid phone number, accept Egyptian phone numbers only'),
 
     check('email')
         .notEmpty()

@@ -47,13 +47,19 @@ submitButton.addEventListener('click', async (event) => {
 
     const nextPage = './form-succession';
 
-    await axiosRequest(requestObject, nextPage)
+    await axiosRequest(requestObject, nextPage, false)
         .then((res) => {
             clearErrors();
+            let previousError = "";
             res["errors"].map((error) => {
-                showError(errorMap[error.path], error.msg);
+                if (previousError === errorMap[error.path]) {
+                    // continue
+                } else {
+                    showError(errorMap[error.path], error.msg);
+                }
+                previousError = errorMap[error.path];
             });
-        })
+        });
 });
 
 for (let input of inputs) {

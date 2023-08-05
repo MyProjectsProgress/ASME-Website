@@ -87,6 +87,11 @@ async function editRow(rowId, adminID) {
 }
 
 function deleteRow(rowId, adminID) {
+
+  const currentURL = window.location.href;
+  let refererSplit = currentURL.split('?');
+  token = refererSplit[refererSplit.length - 1].split('=')[1];
+
   // Delete the specified row
   var row = document.getElementById("row" + rowId);
   row.parentNode.removeChild(row);
@@ -96,7 +101,7 @@ function deleteRow(rowId, adminID) {
     method: 'DELETE'
   }
 
-  const nextPage = './adminPanel';
+  const nextPage = `adminPanel?variable=${encodeURIComponent(token)}`;
 
   axiosRequest(requestObject, nextPage, false);
 }

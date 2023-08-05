@@ -8,9 +8,9 @@ exports.createFormValidator = [
         .notEmpty()
         .withMessage('Name is required')
         .isLength({ min: 9 })
-        .withMessage('Please write your first, middle and last name')
+        .withMessage('Name should be between 9 and 40 characters')
         .isLength({ max: 40 })
-        .withMessage('Name is too long'),
+        .withMessage('Name should be between 9 and 40 characters'),
 
     check('phoneNumber')
         .notEmpty()
@@ -35,29 +35,29 @@ exports.createFormValidator = [
         .notEmpty()
         .withMessage('University is required')
         .isLength({ min: 2 })
-        .withMessage('University name should be between 2 and 40 characters')
+        .withMessage('Invalid university name')
         .isLength({ max: 40 })
-        .withMessage('University name should be between 2 and 40 characters'),
+        .withMessage('Invalid university name'),
 
     check('faculty')
         .notEmpty()
         .withMessage('Faculty is required')
         .isLength({ min: 2 })
-        .withMessage('Faculty name should be between 2 and 40 characters')
+        .withMessage('Invaid faculty name')
         .isLength({ max: 40 })
-        .withMessage('Faculty name should be between 2 and 40 characters'),
+        .withMessage('Invalid faculty name'),
 
     check('department')
         .notEmpty()
-        .withMessage('Deparment is required')
+        .withMessage('Dept. is required')
         .isLength({ min: 2 })
-        .withMessage('Department name should be between 2 and 40 characters')
+        .withMessage('Invalid Dept. name')
         .isLength({ max: 40 })
-        .withMessage('Department name should be between 2 and 40 characters'),
+        .withMessage('Invalid Dept. name'),
 
     check('graduationYear')
         .notEmpty()
-        .withMessage('Graduation year is required'),
+        .withMessage('Select a grad year'),
 
     validatorMiddleware,
 ];
