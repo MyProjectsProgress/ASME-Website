@@ -5,7 +5,6 @@ const slugify = require('slugify');
 const multiparty = require('multiparty');
 
 const factory = require('./handlersFactory');
-
 const Member = require('../models/memberModel');
 
 async function processAndSaveImage(imageFile, req) {

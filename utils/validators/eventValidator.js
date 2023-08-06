@@ -7,10 +7,6 @@ exports.createEventValidator = [
     check('title')
         .notEmpty()
         .withMessage('Event title is required'),
-    // .custom(async (val, { req }) => {
-    //     req.body.slug = slugify(val);
-    //     return true;
-    // }),
 
     check('date')
         .notEmpty()

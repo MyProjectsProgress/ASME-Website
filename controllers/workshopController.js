@@ -7,7 +7,7 @@ const multiparty = require('multiparty');
 const factory = require('./handlersFactory');
 const Workshop = require('../models/workshopModel');
 
-async function processAndSaveImage(imageFile, req) {
+asyncHandler(async function processAndSaveImage(imageFile, req) {
 
     const randomID = uuidv4();
     const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
@@ -21,26 +21,22 @@ async function processAndSaveImage(imageFile, req) {
     }
 
     return filename;
-};
+});
 
-async function processImages(req, res) {
-    try {
-        const image = req.body.image;
+asyncHandler(async function processImages(req, res) {
 
-        const imageFileName = await processAndSaveImage(image, req);
+    const image = req.body.image;
 
-        const imageURL = `${process.env.BASE_URL}/workshops/${imageFileName}`;
-        req.body.image = imageURL;
+    const imageFileName = await processAndSaveImage(image, req);
 
-        const document = await Workshop.create(req.body);
-        res.status(201).json({ data: document });
+    const imageURL = `${process.env.BASE_URL}/workshops/${imageFileName}`;
+    req.body.image = imageURL;
 
-    } catch (error) {
-        console.error('Image processing error:', error.message);
-    }
-};
+    const document = await Workshop.create(req.body);
+    res.status(201).json({ data: document });
+});
 
-// @desc   Create New Participant
+// @desc   Create New Workshop
 // @route  PUT /api/v1/workshop
 // @access Private/admin
 exports.createWorkshop = asyncHandler(async (req, res) => {
@@ -60,11 +56,11 @@ exports.createWorkshop = asyncHandler(async (req, res) => {
         req.body.description = description[0];
         req.body.image = files.workshopImage[0];
 
-        processImages(req, res);
+        await processImages(req, res);
     });
 });
 
-// @desc   Get All Participants
+// @desc   Get All Workshops
 // @route  PUT /api/v1/workshop
 // @access Private/admin
 exports.getWorkshops = factory.getAll(Workshop);

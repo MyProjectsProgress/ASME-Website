@@ -5,10 +5,9 @@ const slugify = require('slugify');
 const multiparty = require('multiparty');
 
 const factory = require('./handlersFactory');
-
 const Event = require('../models/eventModel');
 
-async function processAndSaveImage(imageFile, req) {
+asyncHandler(async function processAndSaveImage(imageFile, req) {
 
     const randomID = uuidv4();
     const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
@@ -29,32 +28,28 @@ async function processAndSaveImage(imageFile, req) {
     };
 
     return filename;
-};
+});
 
 
-async function processImages(req, res) {
-    try {
-        const backgroundImage = req.body.backgroundImage;
-        const foregroundImage = req.body.foregroundImage;
+asyncHandler(async function processImages(req, res) {
 
-        // Process the background image
-        const bgFileName = await processAndSaveImage(backgroundImage, req);
+    const backgroundImage = req.body.backgroundImage;
+    const foregroundImage = req.body.foregroundImage;
 
-        const imageURL1 = `${process.env.BASE_URL}/backgroundImage/${bgFileName}`;
-        req.body.backgroundImage = imageURL1;
+    // Process the background image
+    const bgFileName = await processAndSaveImage(backgroundImage, req);
 
-        // Process the foreground image
-        const fgFileName = await processAndSaveImage(foregroundImage, req);
-        const imageURL2 = `${process.env.BASE_URL}/foregroundImage/${fgFileName}`;
-        req.body.foregroundImage = imageURL2;
+    const imageURL1 = `${process.env.BASE_URL}/backgroundImage/${bgFileName}`;
+    req.body.backgroundImage = imageURL1;
 
-        const document = await Event.create(req.body);
-        res.status(201).json({ data: document });
+    // Process the foreground image
+    const fgFileName = await processAndSaveImage(foregroundImage, req);
+    const imageURL2 = `${process.env.BASE_URL}/foregroundImage/${fgFileName}`;
+    req.body.foregroundImage = imageURL2;
 
-    } catch (error) {
-        console.error('Image processing error:', error);
-    }
-};
+    const document = await Event.create(req.body);
+    res.status(201).json({ data: document });
+});
 
 // @desc   Create New Event
 // @route  PUT /api/v1/event
@@ -80,7 +75,7 @@ exports.createEvent = asyncHandler(async (req, res) => {
         req.body.foregroundImage = fgImageFile[0];
         req.body.expired = expired[0];
 
-        processImages(req, res);
+        await processImages(req, res);
     });
 });
 

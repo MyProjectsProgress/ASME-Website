@@ -32,6 +32,10 @@ app.use(express.json());
 // MOUNT ROUTES
 mountRoutes(app);
 
+app.get('/', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates', 'home.html'));
+});
+
 app.get('/api/v1/home', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'home.html'));
 });

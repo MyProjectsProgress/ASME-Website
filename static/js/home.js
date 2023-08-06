@@ -152,7 +152,7 @@ function addWorkshop(workshop) {
     card.appendChild(register);
 
     register_btn.addEventListener("click", function () {
-        window.location.href = "http://localhost:8000/api/v1/participantForm";
+        window.location.href = "https://asme-cusb.onrender.com/api/v1/participantForm";
     });
 
     workshops_wrap.appendChild(card);

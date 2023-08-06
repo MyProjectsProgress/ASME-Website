@@ -11,8 +11,7 @@ const Admin = require('../models/adminModel');
 // @route  POST /api/v1/auth/login
 // @access Public
 exports.adminLogin = asyncHandler(async (req, res, next) => {
-    // 1- check if password and email in the body (validation layer)
-    // 2- check if admin exist & check if password matches the password admin password in database
+
     const admin = await Admin.findOne({ email: req.body.email });
 
     let isEqual = false
@@ -22,14 +21,11 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
     };
 
     if (!admin || !isEqual) {
-        // can't clearify that the problem in the password only to not allow admin to keep trying different passwords, 401 unauthenticated
         return next(new ApiError('Incorrect email or password', 401));
     };
 
-    // 3- generate token
     const token = await createToken(admin._id);
 
-    // 4- send response to client side
     res.setHeader('Authorization', `Bearer ${token}`);
 
     res.status(200).json({ data: admin, token });
@@ -41,8 +37,8 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
 exports.protect = asyncHandler(async (req, res, next) => {
     // 1- Check if token exist, if true get it
     let token;
-    // making sure authorization exist with bearer keyword
 
+    // making sure authorization exist with bearer keyword
     let refererSplit = req.headers.referer.split('?');
     token = refererSplit[refererSplit.length - 1].split('=')[1];
 

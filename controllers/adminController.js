@@ -19,7 +19,6 @@ exports.createAdmin = asyncHandler(async (req, res, next) => {
     });
 
     // 2- Generate Json Web Token
-    // token consists of three parts: headers, data, security checl jwt.io
     const token = await createToken(admin._id);
 
     res.status(201).json({ data: admin, token });
