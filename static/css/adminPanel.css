@@ -32,10 +32,16 @@ h1 {
 .admin-container {
     width: 100%;
     max-width: 1000px;
-    margin: 50px auto;
     padding: 0 20px;
-}
+    margin: auto;
 
+}
+.editing {
+    max-width: 1000px;
+    width: 100%;
+
+    margin-right: 450px;
+  }
 table {
     width: 100%;
     margin-top: 20px;
@@ -204,6 +210,9 @@ text-indent: 1px;
       font-weight: bold;
       margin-bottom: 5px;
     }
+    .passwords input {
+        margin-left: 20px;
+                }
   }
   
 
@@ -221,6 +230,10 @@ text-indent: 1px;
     table {
         font-size: 12px;
     }
+    .passwords input {
+margin-left: 20px;
+        }
+        
 }
 
 @media only screen and (max-width: 320px) {
@@ -239,4 +252,5 @@ text-indent: 1px;
         margin: 10px auto;
         padding: 0 5px;
     }
+
 }

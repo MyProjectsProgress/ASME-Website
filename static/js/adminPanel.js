@@ -1,16 +1,19 @@
 async function editRow(rowId, adminID) {
-
   var nameInput = document.getElementById("nameInput" + rowId);
   var role = document.getElementById("role" + rowId);
   var emailInput = document.getElementById("emailInput" + rowId);
   var newPasswordInput = document.getElementById("newPassword" + rowId);
-
   var editButton = document.getElementById("Edit" + rowId);
   var updateButton = document.getElementById("Update" + rowId);
   var EditPassword = document.getElementById("EditPassword");
+  var lastCol = document.getElementById("lastcol");
+
+  
+  const adminContainer = document.querySelector(".admin-container");
+
   // User is currently editing the row, update the data
   if (editButton.style.display === "none") {
-
+    adminContainer.classList.remove("editing");
     // Update the row with the new data
     document.getElementById("nameLabel" + rowId).textContent = nameInput.value || document.getElementById("nameLabel" + rowId).textContent;
     document.getElementById("roleLabel" + rowId).textContent = role.value || document.getElementById("roleLabel" + rowId).textContent;
@@ -53,6 +56,7 @@ async function editRow(rowId, adminID) {
     document.getElementById("emailLabel" + rowId).style.display = "block";
     document.getElementById("passwordLabel" + rowId).style.display = "block";
     EditPassword.setAttribute("hidden", "");
+    lastCol.removeAttribute("hidden")
 
     // Show the Edit button and hide the Update button
     editButton.style.display = "inline-block";
@@ -60,13 +64,16 @@ async function editRow(rowId, adminID) {
 
   } else {
     // User wants to edit the row, enable the input fields
+    adminContainer.classList.add("editing");
 
     // Show the labels and input fields
     nameInput.style.display = "inline-block";
     role.style.display = "inline-block";
     emailInput.style.display = "inline-block";
     newPasswordInput.style.display = "inline-block";
-    EditPassword.removeAttribute("hidden")
+    EditPassword.removeAttribute("hidden");
+    lastCol.setAttribute("hidden", "");
+
     document.getElementById("nameLabel" + rowId).style.display = "none";
     document.getElementById("roleLabel" + rowId).style.display = "none";
     document.getElementById("emailLabel" + rowId).style.display = "none";
