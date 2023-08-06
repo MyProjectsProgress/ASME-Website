@@ -131,7 +131,7 @@ function addWorkshop(workshop) {
     let descriptionText = document.createTextNode(workshop.description);
     let registerText = document.createTextNode("Join now");
 
-    workshop_img.src = "/static/images/event1.jpeg";
+    workshop_img.src = workshop.image;
     title.appendChild(titleText);
     description.appendChild(descriptionText);
     register_btn.appendChild(registerText);
