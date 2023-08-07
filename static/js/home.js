@@ -264,7 +264,7 @@ about.onclick = function () {
 
 // numbers counter 
 const counts = document.querySelectorAll('.count');
-const speed = 97;
+const speed = 200;
 
 counts.forEach((counter) => {
     function upDate() {
@@ -280,3 +280,61 @@ counts.forEach((counter) => {
     };
     upDate();
 });
+
+
+// Partners section
+const imageNames = [
+    '1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png', '11.png', '12.png', '13.png', '14.png',
+    '15.png', '16.png', '17.png', '18.png', '19.png', '20.png', '21.png', '22.png', '23.png', '24.png', '25.png', '26.png', '27.png',
+    '28.png', '29.png', '30.png', '31.png', '32.png', '33.png', '34.png', '35.png', '36.png', '37.png'
+];
+
+const swiperWrapper = document.getElementById('partner-slider');
+
+imageNames.forEach(imageName => {
+
+    const slide = document.createElement('div');
+    slide.classList.add('swiper-slide');
+
+    const image = document.createElement('img');
+    image.src = `/partners/${imageName}`;
+    image.alt = 'Image';
+
+    slide.appendChild(image);
+    swiperWrapper.appendChild(slide);
+});
+
+const swiper2 = new Swiper(".customer-logos-slider", {
+    slidesPerView: 4,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+        delay: 2000,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+});
+
+// swiper2.on("slideChange", function () {
+
+//     var index = this.activeIndex;
+//     var target = $(".partner-slider__item").eq(index).data("target");
+
+//     $(".partner-img__item").removeClass("active");
+//     $(".partner-img__item#" + target).addClass("active");
+
+//     if (swiper2.isEnd) {
+//         $(".swiper-button-prev").removeClass("disabled");
+//         $(".swiper-button-next").addClass("disabled");
+//     } else {
+//         $(".swiper-button-next").removeClass("disabled");
+//     };
+
+//     if (swiper2.isBeginning) {
+//         $(".swiper-button-prev").addClass("disabled");
+//     } else {
+//         $(".swiper-button-prev").removeClass("disabled");
+//     };
+// });

@@ -30,7 +30,7 @@ async function editRow(rowId, adminID) {
 
     const requestObject = {
       url: `./admin/${adminID}`, // api/v1/admin/:id
-      method: 'PUT',
+      method: 'PATCH',
       data: body,
     };
 
