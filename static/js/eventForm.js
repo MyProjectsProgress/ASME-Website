@@ -34,9 +34,3 @@ eventForm.addEventListener('submit', async (event) => {
         console.error(error.response.data);
     }
 });
-
-
-
-
-
-

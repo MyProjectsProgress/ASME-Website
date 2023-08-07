@@ -7,34 +7,40 @@ const multiparty = require('multiparty');
 const factory = require('./handlersFactory');
 const Workshop = require('../models/workshopModel');
 
-asyncHandler(async function processAndSaveImage(imageFile, req) {
+async function processAndSaveImage(imageFile, req) {
+    try {
+        const randomID = uuidv4();
+        const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
 
-    const randomID = uuidv4();
-    const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
+        if (imageFile.fieldName === 'workshopImage') {
+            await sharp(imageFile.path)
+                .withMetadata()
+                .toFormat('jpeg')
+                .jpeg({ quality: 99 })
+                .toFile(`uploads/workshops/${filename}`);
+        }
 
-    if (imageFile.fieldName === 'workshopImage') {
-        await sharp(imageFile.path)
-            .withMetadata()
-            .toFormat('jpeg')
-            .jpeg({ quality: 99 })
-            .toFile(`uploads/workshops/${filename}`);
+        return filename;
+    } catch (error) {
+        console.error('Image processing error:', error);
     }
+};
 
-    return filename;
-});
+async function processImages(req, res) {
+    try {
+        const image = req.body.image;
 
-asyncHandler(async function processImages(req, res) {
+        const imageFileName = await processAndSaveImage(image, req);
 
-    const image = req.body.image;
+        const imageURL = `${process.env.BASE_URL}/workshops/${imageFileName}`;
+        req.body.image = imageURL;
 
-    const imageFileName = await processAndSaveImage(image, req);
-
-    const imageURL = `${process.env.BASE_URL}/workshops/${imageFileName}`;
-    req.body.image = imageURL;
-
-    const document = await Workshop.create(req.body);
-    res.status(201).json({ data: document });
-});
+        const document = await Workshop.create(req.body);
+        res.status(201).json({ data: document });
+    } catch (error) {
+        console.error('Image processing error:', error);
+    }
+};
 
 // @desc   Create New Workshop
 // @route  PUT /api/v1/workshop

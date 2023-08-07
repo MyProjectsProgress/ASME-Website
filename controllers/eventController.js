@@ -7,49 +7,55 @@ const multiparty = require('multiparty');
 const factory = require('./handlersFactory');
 const Event = require('../models/eventModel');
 
-asyncHandler(async function processAndSaveImage(imageFile, req) {
+async function processAndSaveImage(imageFile, req) {
+    try {
+        const randomID = uuidv4();
+        const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
 
-    const randomID = uuidv4();
-    const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
+        if (imageFile.fieldName === 'backgroundImage') {
+            await sharp(imageFile.path)
+                .withMetadata()
+                .toFormat('jpeg')
+                .jpeg({ quality: 99 })
+                .toFile(`uploads/backgroundImage/${filename}`);
 
-    if (imageFile.fieldName === 'backgroundImage') {
-        await sharp(imageFile.path)
-            .withMetadata()
-            .toFormat('jpeg')
-            .jpeg({ quality: 99 })
-            .toFile(`uploads/backgroundImage/${filename}`);
+        } else if (imageFile.fieldName === 'foregroundImage') {
+            await sharp(imageFile.path)
+                .withMetadata()
+                .toFormat('jpeg')
+                .jpeg({ quality: 99 })
+                .toFile(`uploads/foregroundImage/${filename}`);
+        };
 
-    } else if (imageFile.fieldName === 'foregroundImage') {
-        await sharp(imageFile.path)
-            .withMetadata()
-            .toFormat('jpeg')
-            .jpeg({ quality: 99 })
-            .toFile(`uploads/foregroundImage/${filename}`);
-    };
-
-    return filename;
-});
+        return filename;
+    } catch (error) {
+        console.error('Image processing error:', error);
+    }
+};
 
 
-asyncHandler(async function processImages(req, res) {
+async function processImages(req, res) {
+    try {
+        const backgroundImage = req.body.backgroundImage;
+        const foregroundImage = req.body.foregroundImage;
 
-    const backgroundImage = req.body.backgroundImage;
-    const foregroundImage = req.body.foregroundImage;
+        // Process the background image
+        const bgFileName = await processAndSaveImage(backgroundImage, req);
 
-    // Process the background image
-    const bgFileName = await processAndSaveImage(backgroundImage, req);
+        const imageURL1 = `${process.env.BASE_URL}/backgroundImage/${bgFileName}`;
+        req.body.backgroundImage = imageURL1;
 
-    const imageURL1 = `${process.env.BASE_URL}/backgroundImage/${bgFileName}`;
-    req.body.backgroundImage = imageURL1;
+        // Process the foreground image
+        const fgFileName = await processAndSaveImage(foregroundImage, req);
+        const imageURL2 = `${process.env.BASE_URL}/foregroundImage/${fgFileName}`;
+        req.body.foregroundImage = imageURL2;
 
-    // Process the foreground image
-    const fgFileName = await processAndSaveImage(foregroundImage, req);
-    const imageURL2 = `${process.env.BASE_URL}/foregroundImage/${fgFileName}`;
-    req.body.foregroundImage = imageURL2;
-
-    const document = await Event.create(req.body);
-    res.status(201).json({ data: document });
-});
+        const document = await Event.create(req.body);
+        res.status(201).json({ data: document });
+    } catch (error) {
+        console.error('Image processing error:', error);
+    }
+};
 
 // @desc   Create New Event
 // @route  PUT /api/v1/event
