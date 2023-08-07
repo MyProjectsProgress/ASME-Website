@@ -216,16 +216,17 @@ swiper.on("slideChange", function () {
 const aboutButton = document.getElementById('aboutButton');
 
 // Check if the button has been hovered before
-const hasBeenHovered = localStorage.getItem('hasBeenHovered');
+// const hasBeenHovered = localStorage.getItem('hasBeenHovered');
+// console.log(hasBeenHovered)
 
-// Add the "hovered" class if it hasn't been hovered before
-if (!hasBeenHovered) {
-    aboutButton.addEventListener('mouseover', function () {
-        aboutButton.classList.add('hovered');
-    });
-    // Set the flag in local storage to remember the hover state
-    localStorage.setItem('hasBeenHovered', true);
-};
+// // Add the "hovered" class if it hasn't been hovered before
+// if (!hasBeenHovered) {
+//     aboutButton.addEventListener('mouseover', function () {
+//         aboutButton.classList.add('hovered');
+//     });
+//     // Set the flag in local storage to remember the hover state
+//     localStorage.setItem('hasBeenHovered', true);
+// };
 
 
 // navbar actions
