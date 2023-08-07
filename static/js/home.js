@@ -305,36 +305,21 @@ imageNames.forEach(imageName => {
 });
 
 const swiper2 = new Swiper(".customer-logos-slider", {
-    slidesPerView: 4,
-    spaceBetween: 30,
+    // slidesPerView: 4,
+    // spaceBetween: 25,
+    slidesPerView: 5,
+    grid: {
+        rows: 3,
+    },
+    mousewheel: {
+        forceToAxis: true,
+    },
     loop: true,
     autoplay: {
-        delay: 2000,
+        delay: 1500,
     },
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
     },
 });
-
-// swiper2.on("slideChange", function () {
-
-//     var index = this.activeIndex;
-//     var target = $(".partner-slider__item").eq(index).data("target");
-
-//     $(".partner-img__item").removeClass("active");
-//     $(".partner-img__item#" + target).addClass("active");
-
-//     if (swiper2.isEnd) {
-//         $(".swiper-button-prev").removeClass("disabled");
-//         $(".swiper-button-next").addClass("disabled");
-//     } else {
-//         $(".swiper-button-next").removeClass("disabled");
-//     };
-
-//     if (swiper2.isBeginning) {
-//         $(".swiper-button-prev").addClass("disabled");
-//     } else {
-//         $(".swiper-button-prev").removeClass("disabled");
-//     };
-// });
