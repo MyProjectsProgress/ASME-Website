@@ -427,7 +427,7 @@
     }    
 
     .event-slider-panigation{
-        top: 520px;
+        top: 450px;
     }
 }
 
@@ -480,7 +480,7 @@
     }
 
     .event-slider-panigation{
-        top: 480px;
+        top: 450px;
     }
 
 }
@@ -542,7 +542,7 @@
 
 }
 
-@media screen and (max-width: 280px) {
+@media screen and (max-width: 300px) {
     
     .event-img{
         width: 250px;

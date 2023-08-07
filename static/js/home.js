@@ -12,6 +12,8 @@ axios.get('/api/v1/event').then((res) => {
 
     const events = res.data.data;
 
+    events.reverse();
+
     events.map((event) => {
         const date = event.date;
         event.date = date.split('T')[0];
@@ -94,18 +96,18 @@ function addEvent(event) {
     content.appendChild(date);
     content.appendChild(ctr);
 
-    if (event.application) {
-        let btm = document.createElement("div");
-        let apply = document.createElement("button");
+    // if (!(event.expired)) {
+    //     let btm = document.createElement("div");
+    //     let apply = document.createElement("button");
 
-        btm.className = "event-slider__bottom";
-        apply.className = "event-slider__apply";
-        let applyText = document.createTextNode("Apply now");
+    //     btm.className = "event-slider__bottom";
+    //     apply.className = "event-slider__apply";
+    //     let applyText = document.createTextNode("Apply now");
 
-        apply.appendChild(applyText);
-        btm.appendChild(apply);
-        content.appendChild(btm);
-    }
+    //     apply.appendChild(applyText);
+    //     btm.appendChild(apply);
+    //     content.appendChild(btm);
+    // }
 
     card.appendChild(background);
     card.appendChild(overlay);
@@ -211,22 +213,6 @@ swiper.on("slideChange", function () {
         $(".prev").removeClass("disabled");
     };
 });
-
-// Get the button element
-const aboutButton = document.getElementById('aboutButton');
-
-// Check if the button has been hovered before
-// const hasBeenHovered = localStorage.getItem('hasBeenHovered');
-// console.log(hasBeenHovered)
-
-// // Add the "hovered" class if it hasn't been hovered before
-// if (!hasBeenHovered) {
-//     aboutButton.addEventListener('mouseover', function () {
-//         aboutButton.classList.add('hovered');
-//     });
-//     // Set the flag in local storage to remember the hover state
-//     localStorage.setItem('hasBeenHovered', true);
-// };
 
 
 // navbar actions

@@ -1256,6 +1256,7 @@ footer .bottom-footer {
    padding: 50px 0;
    background-color: #f0f0f0;
    text-align: center;
+   overflow-x: hidden;
 }
 
 .partners-section h1 {
