@@ -10,20 +10,18 @@ const Event = require('../models/eventModel');
 async function processAndSaveImage(imageFile, req) {
     try {
         const randomID = uuidv4();
-        const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
+        const filename = `${req.body.slug}-${randomID}-${Date.now()}.png`;
 
         if (imageFile.fieldName === 'backgroundImage') {
             await sharp(imageFile.path)
                 .withMetadata()
-                .toFormat('jpeg')
-                .jpeg({ quality: 99 })
+                .toFormat('png')
                 .toFile(`uploads/backgroundImage/${filename}`);
 
         } else if (imageFile.fieldName === 'foregroundImage') {
             await sharp(imageFile.path)
                 .withMetadata()
-                .toFormat('jpeg')
-                .jpeg({ quality: 99 })
+                .toFormat('png')
                 .toFile(`uploads/foregroundImage/${filename}`);
         };
 

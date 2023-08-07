@@ -10,13 +10,12 @@ const Workshop = require('../models/workshopModel');
 async function processAndSaveImage(imageFile, req) {
     try {
         const randomID = uuidv4();
-        const filename = `${req.body.slug}-${randomID}-${Date.now()}.jpeg`;
+        const filename = `${req.body.slug}-${randomID}-${Date.now()}.png`;
 
         if (imageFile.fieldName === 'workshopImage') {
             await sharp(imageFile.path)
                 .withMetadata()
-                .toFormat('jpeg')
-                .jpeg({ quality: 99 })
+                .toFormat('png')
                 .toFile(`uploads/workshops/${filename}`);
         }
 
