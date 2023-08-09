@@ -251,7 +251,7 @@ about.onclick = function () {
 
 // numbers counter 
 const counts = document.querySelectorAll('.count');
-const speed = 200;
+const speed = 300;
 
 counts.forEach((counter) => {
     function upDate() {
