@@ -39,8 +39,10 @@ html {
    overflow-x: hidden;
    scroll-behavior: smooth;
    scroll-padding-top: 8rem;
-   right: 0;
-}
+   margin-right: 0;
+   margin-left: 0;
+   max-width: 100%;
+   }
 
 ::-webkit-scrollbar {
    height: .5rem;
@@ -58,7 +60,7 @@ html {
 
 section {
    width: 100%;
-   margin: 1 auto;
+   /* margin: 1 auto; */
    padding-left: 2rem;
    padding-right: 2rem;
    padding-top: 2rem;
@@ -610,6 +612,9 @@ section {
       font-size: 55%;
    }
 
+   ::-webkit-scrollbar {
+      width: 0.8rem;
+   }
 
    .workshops-card {
       width: 360px;
@@ -643,6 +648,10 @@ section {
 
 @media (max-width:768px) {
 
+   ::-webkit-scrollbar {
+      width: 0.8rem;
+   }
+
    #menu-btn {
       display: inline-block;
    }
@@ -671,6 +680,10 @@ section {
 @media (max-width:450px) {
    html {
       font-size: 50%;
+   }
+
+   ::-webkit-scrollbar {
+      width: 0.7rem;
    }
 
    .title {
@@ -714,6 +727,11 @@ section {
 
 
 @media (max-width:320px) {
+
+   ::-webkit-scrollbar {
+      width: 0.6rem;
+   }
+
    .workshop-description {
       font-size: 14px;
    }
