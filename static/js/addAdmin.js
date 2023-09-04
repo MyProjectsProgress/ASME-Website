@@ -25,13 +25,28 @@ submit.addEventListener('click', async (event) => {
 
     const nextPage = `/adminPanel`;
 
-    try {
-        await axiosRequest(requestObject, nextPage);
-    } catch (error) {
-        console.error(error.response.status);
-        console.error(error.response.statusText);
-        console.error(error.response.data);
-    }
+    await axiosRequest(requestObject, nextPage).then((res) => {
+
+        if (res.status || res.errors) {
+
+            let errorMessage = document.createElement("div");
+            let errorSpan = document.createElement("span");
+            let text = document.createTextNode(res.errors[0].msg);
+
+            errorMessage.className = "error-message";
+            errorSpan.appendChild(text);
+            errorMessage.appendChild(errorSpan);
+
+            let formError = document.getElementById("formError");
+
+            while (formError.firstChild) {
+                formError.removeChild(formError.firstChild);
+            };
+
+            formError.appendChild(errorMessage);
+            formError.style.display = "block";
+        };
+    });
 });
 
 // hashing password in the frontend

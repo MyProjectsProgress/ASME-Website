@@ -112,7 +112,7 @@ app.use(globalError);
 const PORT = process.env.PORT || 8000;
 
 const server = app.listen(PORT, () => {
-    console.log(`App is Runinng  on Port http://localhost:${PORT}/api/v1/home`);
+    console.log(`App is Runinng  on Port http://localhost:${PORT}/home`);
 });
 
 // HANDLING REJECTION OUTSIDE EXPRESS

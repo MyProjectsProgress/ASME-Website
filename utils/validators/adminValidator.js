@@ -103,15 +103,15 @@ exports.changeAdminPasswordValidator = [
 
     check('currentPassword')
         .notEmpty()
-        .withMessage('You must enter your current password'),
+        .withMessage('Enter your current password'),
 
     check('confirmPassword')
         .notEmpty()
-        .withMessage('You must enter the password confirmation'),
+        .withMessage('Enter the password confirmation'),
 
     body('newPassword')
         .notEmpty()
-        .withMessage('You must enter a new passowrd')
+        .withMessage('Enter a new passowrd')
         .custom(async (val, { req }) => {
 
             const admin = await Admin.findById(req.params.id);
@@ -133,7 +133,7 @@ exports.changeAdminPasswordValidator = [
             };
 
             if (val !== req.body.confirmPassword) {
-                throw new Error('Password doesn\'t match with password confirmation');
+                throw new Error('Password doesn\'t match password confirmation');
             };
 
             return true;

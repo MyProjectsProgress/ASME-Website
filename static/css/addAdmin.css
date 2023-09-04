@@ -189,8 +189,23 @@ input[type="date"] {
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
-  }
+}
 
-  .form input[type="date"]:focus {
+.form input[type="date"]:focus {
     border-color: hsl(var(--input-focus-h), var(--input-focus-s), var(--input-focus-l));
+}
+
+/* CSS to style the error message */
+.form-error {
+    display: none;
+    margin-top: 5px;
+    color: #d32f2f;
+}
+
+.error-message {
+    padding: 5px 10px;
+    background-color: #ffcdd2;
+    border: 1px solid #f44336;
+    border-radius: 4px;
+    display: inline-block;
 }
