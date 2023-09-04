@@ -17,7 +17,7 @@ submitButton.addEventListener('click', async (event) => {
         data: body
     };
 
-    const nextPage = './adminLogin';
+    const nextPage = '/adminLogin';
 
     await axiosRequest(requestObject, nextPage);
 });

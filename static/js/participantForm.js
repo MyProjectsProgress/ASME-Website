@@ -45,9 +45,9 @@ submitButton.addEventListener('click', async (event) => {
         data: body,
     }
 
-    const nextPage = './form-succession';
+    const nextPage = '/form-succession';
 
-    await axiosRequest(requestObject, nextPage, false)
+    await axiosRequest(requestObject, nextPage)
         .then((res) => {
             clearErrors();
             let previousError = "";

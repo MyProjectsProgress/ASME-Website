@@ -100,38 +100,41 @@ exports.adminLoginValidator = [
 ];
 
 exports.changeAdminPasswordValidator = [
+
     check('currentPassword')
         .notEmpty()
         .withMessage('You must enter your current password'),
 
-    check('passwordConfirm')
+    check('confirmPassword')
         .notEmpty()
         .withMessage('You must enter the password confirmation'),
 
-    body('password')
+    body('newPassword')
         .notEmpty()
         .withMessage('You must enter a new passowrd')
         .custom(async (val, { req }) => {
+
             const admin = await Admin.findById(req.params.id);
+
             if (!admin) {
                 throw new Error('There is no admin for this id');
-            }
+            };
 
             const isCorrectPassword = await comparePasswords(req.body.currentPassword, admin.password);
 
             if (!isCorrectPassword) {
                 throw new Error('Incorrect password');
-            }
+            };
 
             const equalOldPassword = await comparePasswords(val, admin.password);
 
             if (equalOldPassword) {
                 throw new Error('Please, enter a new password');
-            }
+            };
 
-            if (val !== req.body.passwordConfirm) {
+            if (val !== req.body.confirmPassword) {
                 throw new Error('Password doesn\'t match with password confirmation');
-            }
+            };
 
             return true;
         }),

@@ -17,14 +17,12 @@ const {
     updateAdmin,
     deleteAdmin,
     deleteAll,
-    changeAdminPassword,
+    updateAdminPassword,
 } = require('../controllers/adminController');
 
 const router = express.Router();
 
 router.use(protect);
-
-router.put('/changePassword/:id', changeAdminPasswordValidator, changeAdminPassword);
 
 router.use(allowedTo('admin'));
 
@@ -35,7 +33,9 @@ router.route('/')
 
 router.route('/:id')
     .get(getAdminValidator, getAdmin)
-    .put(updateAdminValidator, updateAdmin)
+    .patch(updateAdminValidator, updateAdmin)
     .delete(deleteAdminValidator, deleteAdmin)
+
+router.patch('/changePassword/:id', changeAdminPasswordValidator, updateAdminPassword);
 
 module.exports = router;

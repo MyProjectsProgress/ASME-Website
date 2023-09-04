@@ -3,14 +3,19 @@ const password = document.querySelector("#password");
 const forgetPasswordButton = document.querySelector("#forgetPassword");
 const loginButton = document.querySelector('#loginButton');
 
+// for the sake of logout
+window.history.pushState({}, '', '/');
+
 forgetPasswordButton.addEventListener('click', (event) => {
   event.preventDefault();
-  window.location.href = './forgetPassword';
+  window.location.href = '/forgetPassword';
 });
 
 loginButton.addEventListener('click', async (event) => {
 
   event.preventDefault();
+
+  const nextPage = `/adminPanel`;
 
   const body = {
     email: email.value,
@@ -23,8 +28,8 @@ loginButton.addEventListener('click', async (event) => {
     data: body,
   };
 
-  axiosRequestToken(requestObject).then((token) => {
-    if (token.status || token.errors) {
+  axiosRequest(requestObject, nextPage).then((res) => {
+    if (res.status || res.errors) {
 
       let errorMessage = document.createElement("div");
       let errorSpan = document.createElement("span");
@@ -38,19 +43,19 @@ loginButton.addEventListener('click', async (event) => {
 
       while (formError.firstChild) {
         formError.removeChild(formError.firstChild);
-      }
+      };
 
       formError.appendChild(errorMessage);
       formError.style.display = "block";
 
     } else {
-      const addBearerToeknToURL = `../adminPanel?variable=${encodeURIComponent(token)}`;
-      window.location.href = addBearerToeknToURL;
-    }
+      window.location.href = `/adminPanel`;
+    };
   });
 });
 
 window.addEventListener("DOMContentLoaded", function () {
+
   var adminInput = document.querySelectorAll(".adminInput");
 
   for (let input of adminInput) {
@@ -59,11 +64,11 @@ window.addEventListener("DOMContentLoaded", function () {
         input.style.border = "solid 2px rgba(15, 90, 170, 0.7)";
       } else {
         input.style.border = "solid 2px rgb(182, 182, 182)";
-      }
+      };
     });
 
     input.addEventListener("invalid", function () {
       input.style.border = "solid 2px rgba(211, 25, 15, 0.6)";
     });
-  }
+  };
 });

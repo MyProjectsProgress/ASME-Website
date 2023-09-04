@@ -44,6 +44,8 @@ let first_event = true;
 
 let workshops_wrap = document.getElementById("workshops-wrap");
 
+// --------------------------------------------------------------
+
 function addEvent(event) {
 
     let img_div = document.createElement("div");
@@ -96,6 +98,7 @@ function addEvent(event) {
     content.appendChild(date);
     content.appendChild(ctr);
 
+    // apply for certain event button is not needed currently
     // if (!(event.expired)) {
     //     let btm = document.createElement("div");
     //     let apply = document.createElement("button");
@@ -116,6 +119,8 @@ function addEvent(event) {
     event_pics.appendChild(img_div);
     slider.appendChild(item);
 }
+
+// --------------------------------------------------------------
 
 function addWorkshop(workshop) {
 
@@ -154,7 +159,7 @@ function addWorkshop(workshop) {
     card.appendChild(register);
 
     register_btn.addEventListener("click", function () {
-        window.location.href = "https://asme-cusb.onrender.com/api/v1/participantForm";
+        window.location.href = "https://asme-cusb.onrender.com/participantForm";
     });
 
     workshops_wrap.appendChild(card);
@@ -214,6 +219,7 @@ swiper.on("slideChange", function () {
     };
 });
 
+// --------------------------------------------------------------
 
 // navbar actions
 var home = document.getElementById("Home");
@@ -249,6 +255,8 @@ about.onclick = function () {
     about.setAttribute("Class", "active");
 }
 
+// --------------------------------------------------------------
+
 // numbers counter 
 const counts = document.querySelectorAll('.count');
 const speed = 300;
@@ -268,6 +276,7 @@ counts.forEach((counter) => {
     upDate();
 });
 
+// --------------------------------------------------------------
 
 // Partners section
 const imageNames = [

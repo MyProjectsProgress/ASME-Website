@@ -30,9 +30,9 @@ resendCode.addEventListener('click', async (event) => {
     data: body
   };
 
-  const nextPage = './verificationCode';
+  const nextPage = '/verificationCode';
 
-  await axiosRequest(url, requestObject, nextPage);
+  await axiosRequest(requestObject, nextPage);
 
 });
 
@@ -68,7 +68,7 @@ async function addPinNumber(first, last) {
       data: body
     };
 
-    const nextPage = './newPassword';
+    const nextPage = '/newPassword';
 
     await axiosRequest(requestObject, nextPage);
   };

@@ -26,27 +26,27 @@ exports.adminLogin = asyncHandler(async (req, res, next) => {
 
     const token = await createToken(admin._id);
 
-    res.setHeader('Authorization', `Bearer ${token}`);
+    res.cookie('authToken', token);
 
     res.status(200).json({ data: admin, token });
-
-    res.authorization = token
 });
+
+// @desc   Logout Admin
+// @route  GET /api/v1/auth/login
+// @access Public
+exports.adminLogout = asyncHandler(async (req, res, next) => {
+
+    res.clearCookie('authToken');
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private, max-age=0');
+    res.status(200).json({ message: "Cookie is deleted successfully" });
+});
+
 
 // @desc    make sure the admin is logged in
 exports.protect = asyncHandler(async (req, res, next) => {
-    // 1- Check if token exist, if true get it
-    let token;
 
-    // making sure authorization exist with bearer keyword
-    let refererSplit = req.headers.referer.split('?');
-    token = refererSplit[refererSplit.length - 1].split('=')[1];
-
-    // uncomment when using postman and comment the previous couple of lines
-    // if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-    //     // accessing token
-    //     token = req.headers.authorization.split(' ')[1];
-    // };
+    // 1- check the token existance
+    const token = req.cookies.authToken;
 
     if (!token) {
         return next(new ApiError('You are not logged in. Please, login to get access this route', 401));

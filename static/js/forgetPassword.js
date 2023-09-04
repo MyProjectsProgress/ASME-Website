@@ -6,18 +6,17 @@ submitButton.addEventListener('click', async (event) => {
 
     event.preventDefault();
 
-    const addEmailToURL = `verificationCode?variable=${encodeURIComponent(email.value)}`;
-    window.location.href = addEmailToURL;
+    window.location.href = `/verificationCode`;
 
-    const body = { email: email.value }
+    const body = { email: email.value };
 
     const requestObject = {
         url: '/api/v1/auth/forgetPassword',
         method: 'POST',
-        data: body
+        data: body,
     };
 
-    const nextPage = './verificationCode';
+    const nextPage = '/verificationCode';
 
     await axiosRequest(requestObject, nextPage);
 });

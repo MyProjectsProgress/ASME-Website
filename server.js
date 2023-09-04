@@ -1,6 +1,7 @@
 // Core Modules
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 
 // Third Party Modules
 const express = require('express');
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'templates')));
 
 // Middlewares
 app.use(express.json());
+app.use(cookieParser());
 
 // MOUNT ROUTES
 mountRoutes(app);
@@ -36,52 +38,60 @@ app.get('/', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'home.html'));
 });
 
-app.get('/api/v1/home', (req, res, next) => {
+app.get('/home', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'home.html'));
 });
 
-app.get('/api/v1/memberForm', (req, res, next) => {
+app.get('/memberForm', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates/memberForm.html'));
 });
 
-app.get('/api/v1/events', (req, res, next) => {
+app.get('/events', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates/eventForm.html'));
 });
 
-app.get('/api/v1/participantForm', (req, res, next) => {
+app.get('/participantForm', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates/participantForm.html'));
 });
 
-app.get('/api/v1/workshops', (req, res, next) => {
+app.get('/workshops', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates/workshopForm.html'));
 });
 
-app.get('/api/v1/form-succession', (req, res) => {
+app.get('/form-succession', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'form-succession.html'));
 });
 
-app.get('/api/v1/adminPanel', (req, res, next) => {
+app.get('/adminPanel', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'adminPanel.html'));
 });
 
-app.get('/api/v1/addAdmin', (req, res, next) => {
+app.get('/addAdmin', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'addAdmin.html'));
 });
 
-app.get('/api/v1/auth/adminLogin', (req, res, next) => {
+app.get('/adminLogin', (req, res, next) => {
     res.sendFile(path.join(__dirname, 'templates', 'adminLogin.html'));
 });
 
-app.get('/api/v1/auth/forgetPassword', (req, res) => {
+app.get('/forgetPassword', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'forgetPassword.html'));
 });
 
-app.get('/api/v1/auth/verificationCode', (req, res) => {
+app.get('/verificationCode', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'verificationCode.html'));
 });
 
-app.get('/api/v1/auth/newPassword', (req, res) => {
+app.get('/newPassword', (req, res) => {
     res.sendFile(path.join(__dirname, 'templates', 'newPassword.html'));
+});
+
+app.get('/changePassword', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates', 'changePassword.html'));
+});
+
+app.get('/errorPage', (req, res, next) => {
+    res.sendFile(path.join(__dirname, 'templates', 'errorPage.html'));
 });
 
 if (process.env.NODE_ENV === 'development') {

@@ -5,6 +5,7 @@ const {
 } = require('../utils/validators/adminValidator');
 
 const {
+    adminLogout,
     adminLogin,
     forgetPassword,
     verifyPassResetCode,
@@ -17,5 +18,6 @@ router.post('/adminLogin', adminLoginValidator, adminLogin);
 router.post('/forgetPassword', forgetPassword);
 router.post('/verifyResetCode', verifyPassResetCode);
 router.put('/resetPassword', resetPassword);
+router.get('/adminLogout', adminLogout);
 
 module.exports = router;

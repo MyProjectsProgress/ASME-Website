@@ -45,8 +45,6 @@ exports.updateAdmin = asyncHandler(async (req, res, next) => {
             name: req.body.name,
             email: req.body.email,
             role: req.body.role,
-            password: await bcrypt.hash(req.body.password, 12),
-            passwordChangedAt: Date.now(),
         },
         { new: true });
 
@@ -57,24 +55,28 @@ exports.updateAdmin = asyncHandler(async (req, res, next) => {
     res.status(200).json({ data: document });
 });
 
-// @desc   Update Admins' Password
-// @route  PUT /api/v1/admin
+// @desc   Update Admin Password
+// @route  PATCH /api/v1/admin/changePassword
 // @access Private
-exports.changeAdminPassword = asyncHandler(async (req, res, next) => {
+exports.updateAdminPassword = asyncHandler(async (req, res, next) => {
 
-    // updating password
-    const document = await Admin.findByIdAndUpdate(req.params.id,
+    const adminId = req.params.id;
+
+    const admin = await Admin.findByIdAndUpdate(
+        adminId,
         {
-            password: await bcrypt.hash(req.body.password, 12),
+            password: await bcrypt.hash(req.body.newPassword, 12),
             passwordChangedAt: Date.now(),
         },
-        { new: true });
+        { new: true }
+    );
 
-    if (!document) {
-        return next(new ApiError(`No document for this ID: ${id}`, 404));
-    }
+    if (!admin) {
+        return next(new ApiError(`No document for this ID: ${adminId}`, 404));
+    };
 
-    res.status(200).json({ data: document });
+    res.status(200).json({ data: admin });
+
 });
 
 // @desc   Delete Admins' Data

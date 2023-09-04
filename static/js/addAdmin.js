@@ -15,25 +15,38 @@ submit.addEventListener('click', async (event) => {
         password: password.value,
         passwordConfirm: confirmPassword.value,
         role: role.value,
-    }
+    };
 
     const requestObject = {
         url: '/api/v1/admin',
         method: 'POST',
-        data: body
-    }
+        data: body,
+    };
 
-    const currentURL = window.location.href;
-    let refererSplit = currentURL.split('?');
-    token = refererSplit[refererSplit.length - 1].split('=')[1];
-
-    const nextPage = `./adminPanel?variable=${encodeURIComponent(token)}`;
+    const nextPage = `/adminPanel`;
 
     try {
-        await axiosRequest(requestObject, nextPage, false);
+        await axiosRequest(requestObject, nextPage);
     } catch (error) {
         console.error(error.response.status);
         console.error(error.response.statusText);
         console.error(error.response.data);
     }
 });
+
+// hashing password in the frontend
+/*
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.0.2/sha.js"></script>
+    if (password.value != confirmPassword.value) {
+
+        alert("Passowrd and confirmation password don't match");
+        window.location.href = window.location.href;
+        return;
+    }
+
+    const hashedPasswordObject = new jsSHA("SHA-512", "TEXT", { numRounds: 12 });
+    hashedPasswordObject.update(password.value);
+    const hashedPassword = hashedPasswordObject.getHash("HEX");
+
+    console.log(hashedPassword)
+*/

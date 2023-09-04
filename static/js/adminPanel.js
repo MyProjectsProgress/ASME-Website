@@ -1,138 +1,4 @@
-async function editRow(rowId, adminID) {
-  var nameInput = document.getElementById("nameInput" + rowId);
-  var role = document.getElementById("role" + rowId);
-  var emailInput = document.getElementById("emailInput" + rowId);
-  var newPasswordInput = document.getElementById("newPassword" + rowId);
-  var editButton = document.getElementById("Edit" + rowId);
-  var updateButton = document.getElementById("Update" + rowId);
-  var EditPassword = document.getElementById("EditPassword");
-  var lastCol = document.getElementById("lastcol");
-
-  
-  const adminContainer = document.querySelector(".admin-container");
-
-  // User is currently editing the row, update the data
-  if (editButton.style.display === "none") {
-    adminContainer.classList.remove("editing");
-    // Update the row with the new data
-    document.getElementById("nameLabel" + rowId).textContent = nameInput.value || document.getElementById("nameLabel" + rowId).textContent;
-    document.getElementById("roleLabel" + rowId).textContent = role.value || document.getElementById("roleLabel" + rowId).textContent;
-    document.getElementById("emailLabel" + rowId).textContent = emailInput.value || document.getElementById("emailLabel" + rowId).textContent;
-    // document.getElementById("passwordLabel" + rowId).textContent = "••••••••"; generate error
-
-    const currentURL = window.location.href;
-    let refererSplit = currentURL.split('?');
-    token = refererSplit[refererSplit.length - 1].split('=')[1];
-
-    body = {
-      name: nameInput.value,
-      role: role.value,
-      email: emailInput.value,
-      password: newPasswordInput.value
-    }
-
-    const requestObject = {
-      url: `./admin/${adminID}`, // api/v1/admin/:id
-      method: 'PATCH',
-      data: body,
-    };
-
-    const nextPage = `adminPanel?variable=${encodeURIComponent(token)}`;
-
-    axiosRequest(requestObject, nextPage, false).then((res) => {
-      // pass
-    }).catch((error) => {
-      console.error(error);
-    });
-
-    // Hide the input fields and show the labels
-    nameInput.style.display = "none";
-    role.style.display = "none";
-    emailInput.style.display = "none";
-    newPasswordInput.style.display = "none";
-
-    document.getElementById("nameLabel" + rowId).style.display = "block";
-    document.getElementById("roleLabel" + rowId).style.display = "block";
-    document.getElementById("emailLabel" + rowId).style.display = "block";
-    document.getElementById("passwordLabel" + rowId).style.display = "block";
-    EditPassword.setAttribute("hidden", "");
-    lastCol.removeAttribute("hidden")
-
-    // Show the Edit button and hide the Update button
-    editButton.style.display = "inline-block";
-    updateButton.style.display = "none";
-
-  } else {
-    // User wants to edit the row, enable the input fields
-    adminContainer.classList.add("editing");
-
-    // Show the labels and input fields
-    nameInput.style.display = "inline-block";
-    role.style.display = "inline-block";
-    emailInput.style.display = "inline-block";
-    newPasswordInput.style.display = "inline-block";
-    EditPassword.removeAttribute("hidden");
-    lastCol.setAttribute("hidden", "");
-
-    document.getElementById("nameLabel" + rowId).style.display = "none";
-    document.getElementById("roleLabel" + rowId).style.display = "none";
-    document.getElementById("emailLabel" + rowId).style.display = "none";
-    // document.getElementById("passwordLabel" + rowId).style.display = "none"; Generates error
-
-    // Set the input field values to the old values by default
-    nameInput.value = document.getElementById("nameLabel" + rowId).textContent;
-    role.value = document.getElementById("roleLabel" + rowId).textContent;
-    emailInput.value = document.getElementById("emailLabel" + rowId).textContent;
-
-    // Clear the password fields
-    newPasswordInput.value = "";
-
-    // Show the Update button and hide the Edit button
-    editButton.style.display = "none";
-    updateButton.style.display = "inline-block";
-  }
-}
-
-function deleteRow(rowId, adminID) {
-
-  const currentURL = window.location.href;
-  let refererSplit = currentURL.split('?');
-  token = refererSplit[refererSplit.length - 1].split('=')[1];
-
-  // Delete the specified row
-  var row = document.getElementById("row" + rowId);
-  row.parentNode.removeChild(row);
-
-  const requestObject = {
-    url: `/api/v1/admin/${adminID}`,
-    method: 'DELETE'
-  }
-
-  const nextPage = `adminPanel?variable=${encodeURIComponent(token)}`;
-
-  axiosRequest(requestObject, nextPage, false);
-}
-
-function searchAdmin() {
-  // Perform a search based on the input value
-  var input = document.getElementById("adminSearch");
-  var filter = input.value.toUpperCase();
-  var table = document.querySelector("table");
-  var rows = table.getElementsByTagName("tr");
-
-  for (var i = 0; i < rows.length; i++) {
-    var idColumn = rows[i].getElementsByTagName("td")[0];
-
-    if (idColumn) {
-      var id = idColumn.textContent || idColumn.innerText;
-      if (id.toUpperCase().indexOf(filter) > -1) {
-        rows[i].style.display = "";
-      } else {
-        rows[i].style.display = "none";
-      }
-    }
-  }
-}
+// --------------------------------------------------------------Get Admins-------------------------------------------
 
 window.addEventListener("DOMContentLoaded", function () {
 
@@ -143,9 +9,7 @@ window.addEventListener("DOMContentLoaded", function () {
     });
 
   }).catch((error) => {
-    console.log('Error Message:', error.message);
-    console.log('Response Data:', error.response.data);
-    console.log('Response Status:', error.response.status);
+    window.location.href = '/errorPage';
   });
 
   var adminInput = document.querySelectorAll(".adminInput");
@@ -156,114 +20,16 @@ window.addEventListener("DOMContentLoaded", function () {
         input.style.border = "solid 2px rgba(15, 90, 170, 0.7)";
       } else {
         input.style.border = "solid 2px rgb(182, 182, 182)";
-      }
+      };
     });
 
     input.addEventListener("invalid", function () {
       input.style.border = "solid 2px rgba(211, 25, 15, 0.6)";
     });
-  }
-});
-
-function showPasswordFields(rowId) {
-  const changePasswordButton = document.getElementById(`ChangePassword${rowId}`);
-  const currentPasswordInput = document.getElementById(`currentPassword${rowId}`);
-  const newPasswordInput = document.getElementById(`newPassword${rowId}`);
-  const confirmPasswordInput = document.getElementById(`confirmPassword${rowId}`);
-
-  changePasswordButton.hidden = true;
-  currentPasswordInput.style.display = "inline-block";
-  newPasswordInput.style.display = "inline-block";
-  confirmPasswordInput.style.display = "inline-block";
-}
-
-const addAdminButton = document.getElementById("addAdminButton");
-
-addAdminButton.addEventListener("click", async () => {
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const token = urlParams.get('variable');
-
-  const requestObject = {
-    headers: {
-      'Authorization': `Bearer ${token}`, // Include the token in the request headers
-    },
-    url: 'addAdmin', // api/v1/addAdmin
-    method: 'GET',
   };
-
-  axiosRequestToken(requestObject).then((token) => {
-    const currentURL = window.location.href;
-    let refererSplit = currentURL.split('?');
-    token = refererSplit[refererSplit.length - 1].split('=')[1];
-    const addBearerToeknToURL = `addAdmin?variable=${encodeURIComponent(token)}`;
-    window.location.href = addBearerToeknToURL;
-  }).catch((error) => {
-    console.error(error.response.status);
-    console.error(error.response.statusText);
-    console.error(error.response.data);
-  });
-
 });
 
-const addWorkshopButton = document.getElementById("addWorkshopButton");
-
-addWorkshopButton.addEventListener("click", async () => {
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const token = urlParams.get('variable');
-
-  const requestObject = {
-    headers: {
-      'Authorization': `Bearer ${token}`, // Include the token in the request headers
-    },
-    url: 'workshops', // api/v1/workshop
-    method: 'GET',
-  };
-
-  axiosRequestToken(requestObject).then((token) => {
-    const currentURL = window.location.href;
-    let refererSplit = currentURL.split('?');
-    token = refererSplit[refererSplit.length - 1].split('=')[1];
-    const addBearerToeknToURL = `workshops?variable=${encodeURIComponent(token)}`;
-    window.location.href = addBearerToeknToURL;
-  }).catch((error) => {
-    console.error(error.response.status);
-    console.error(error.response.statusText);
-    console.error(error.response.data);
-  });
-});
-
-const addEventButton = document.getElementById("addEventButton");
-
-addEventButton.addEventListener("click", async () => {
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const token = urlParams.get('variable');
-
-  const requestObject = {
-    headers: {
-      'Authorization': `Bearer ${token}`, // Include the token in the request headers
-    },
-    url: 'events', // api/v1/event
-    method: 'GET',
-  };
-
-  axiosRequestToken(requestObject).then((token) => {
-    const currentURL = window.location.href;
-    let refererSplit = currentURL.split('?');
-    token = refererSplit[refererSplit.length - 1].split('=')[1];
-    const addBearerToeknToURL = `events?variable=${encodeURIComponent(token)}`;
-    window.location.href = addBearerToeknToURL;
-  }).catch((error) => {
-    console.error(error.response.status);
-    console.error(error.response.statusText);
-    console.error(error.response.data);
-  });
-});
+// --------------------------------------------------------------Admins UI-------------------------------------------
 
 let newAdminId = 0;
 
@@ -279,12 +45,12 @@ function addNewAdminRow(admin) {
     <td><label id="nameLabel${newAdminId}">${admin.name}</label><input type="text" id="nameInput${newAdminId}" style="display: none;" class="adminInput"></td>
     <td><label id="roleLabel${newAdminId}">${admin.role}</label><input type="text" id="role${newAdminId}" style="display: none;" class="adminInput"></td>
     <td><label id="emailLabel${newAdminId}">${admin.email}</label><input class="adminInput" type="email" id="emailInput${newAdminId}" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" style="display: none;"></td>
-
-      <div class="passwords">
-        <input class="adminInput" type="password" id="currentPassword${newAdminId}" placeholder="Enter current password" style="display: none;">
-        <input class="adminInput" type="password" id="newPassword${newAdminId}" placeholder="Enter new password" style="display: none;">
-        <input class="adminInput" type="password" id="confirmPassword${newAdminId}" placeholder="Confirm password" style="display: none;">
-      </div>
+    <td class="change-password-cell">
+    <a href="/changePassword?adminId=${admin._id}" class="change-password-link">
+    <button class="change-password-button">
+        <i class="fas fa-key"></i> 
+    </button>
+</a>
     </td>
     <td>
       <div class="btn">
@@ -304,4 +70,180 @@ function addNewAdminRow(admin) {
   `;
   tableBody.insertBefore(newRow, tableBody.lastElementChild);
   newAdminId++;
+};
+
+// --------------------------------------------------------------Edit Admin-------------------------------------------
+
+async function editRow(rowId, adminID) {
+
+  const nameInput = document.getElementById("nameInput" + rowId);
+  const role = document.getElementById("role" + rowId);
+  const emailInput = document.getElementById("emailInput" + rowId);
+
+  const editButton = document.getElementById("Edit" + rowId);
+  const updateButton = document.getElementById("Update" + rowId);
+  const lastCol = document.getElementById("lastcol");
+
+  const adminContainer = document.querySelector(".admin-container");
+
+  // User is currently editing the row, update the data
+  if (editButton.style.display === "none") {
+    adminContainer.classList.remove("editing");
+
+    // Update the row with the new data
+    document.getElementById("nameLabel" + rowId).textContent = nameInput.value || document.getElementById("nameLabel" + rowId).textContent;
+    document.getElementById("roleLabel" + rowId).textContent = role.value || document.getElementById("roleLabel" + rowId).textContent;
+    document.getElementById("emailLabel" + rowId).textContent = emailInput.value || document.getElementById("emailLabel" + rowId).textContent;
+
+    const body = {
+      name: nameInput.value,
+      role: role.value,
+      email: emailInput.value,
+    };
+
+    const requestObject = {
+      url: `api/v1/admin/${adminID}`,
+      method: 'PATCH',
+      data: body,
+    };
+
+    const nextPage = `/adminPanel`;
+
+    axiosRequest(requestObject, nextPage).then((res) => {
+      // pass
+    }).catch((error) => {
+      console.error(error);
+    });
+
+    // Hide the input fields and show the labels
+    nameInput.style.display = "none";
+    role.style.display = "none";
+    emailInput.style.display = "none";
+    passwordInput.style.display = "none"; // Hide the password field
+
+    document.getElementById("nameLabel" + rowId).style.display = "block";
+    document.getElementById("roleLabel" + rowId).style.display = "block";
+    document.getElementById("emailLabel" + rowId).style.display = "block";
+
+    lastCol.removeAttribute("hidden");
+
+    // Show the Edit button and hide the Update button
+    editButton.style.display = "inline-block";
+    updateButton.style.display = "none";
+  } else {
+    // User wants to edit the row, enable the input fields
+    adminContainer.classList.add("editing");
+
+    // Show the labels and input fields
+    nameInput.style.display = "inline-block";
+    role.style.display = "inline-block";
+    emailInput.style.display = "inline-block";
+    lastCol.setAttribute("hidden", "");
+
+    document.getElementById("nameLabel" + rowId).style.display = "none";
+    document.getElementById("roleLabel" + rowId).style.display = "none";
+    document.getElementById("emailLabel" + rowId).style.display = "none";
+
+    // Set the input field values to the old values by default
+    nameInput.value = document.getElementById("nameLabel" + rowId).textContent;
+    role.value = document.getElementById("roleLabel" + rowId).textContent;
+    emailInput.value = document.getElementById("emailLabel" + rowId).textContent;
+
+    // Show the Update button and hide the Edit button
+    editButton.style.display = "none";
+    updateButton.style.display = "inline-block";
+  }
 }
+
+
+// --------------------------------------------------------------Delete Admin-------------------------------------------
+
+function deleteRow(rowId, adminID) {
+
+  const userConfirmed = confirm('Are you sure you want to perform this action?');
+
+  if (userConfirmed) {
+
+    // Delete the specified row
+    var row = document.getElementById("row" + rowId);
+    row.parentNode.removeChild(row);
+
+    const requestObject = {
+      url: `/api/v1/admin/${adminID}`,
+      method: 'DELETE',
+    }
+
+    const nextPage = `/adminPanel`;
+
+    axiosRequest(requestObject, nextPage);
+  };
+};
+
+
+// --------------------------------------------------------------Add Admin-------------------------------------------
+
+const addAdminButton = document.getElementById("addAdminButton");
+
+addAdminButton.addEventListener("click", async () => {
+
+  const nextPage = `/addAdmin`;
+
+  const requestObject = {
+    url: 'addAdmin',
+    method: 'GET',
+  };
+
+  axiosRequest(requestObject, nextPage);
+
+});
+
+// --------------------------------------------------------------Add Workshop-------------------------------------------
+
+const addWorkshopButton = document.getElementById("addWorkshopButton");
+
+addWorkshopButton.addEventListener("click", async () => {
+
+  const nextPage = `/workshops`;
+
+  const requestObject = {
+    url: 'workshops',
+    method: 'GET',
+  };
+
+  axiosRequest(requestObject, nextPage);
+
+});
+
+// --------------------------------------------------------------Add Event-------------------------------------------
+
+const addEventButton = document.getElementById("addEventButton");
+
+addEventButton.addEventListener("click", async () => {
+
+  const nextPage = `/events`;
+
+  const requestObject = {
+    url: 'events',
+    method: 'GET',
+  };
+
+  axiosRequest(requestObject, nextPage);
+});
+
+// --------------------------------------------------------------Logout Button-------------------------------------------
+
+const logoutButton = document.querySelector('#logout');
+
+logoutButton.addEventListener('click', async (event) => {
+
+  event.preventDefault();
+
+  axios.get('/api/v1/auth/adminLogout').then((res) => {
+
+    window.history.pushState({}, '', '/');
+    window.location.href = '/adminLogin';
+
+  }).catch((error) => {
+    window.location.href = '/errorPage';
+  });
+});

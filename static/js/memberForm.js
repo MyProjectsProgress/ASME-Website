@@ -21,7 +21,7 @@ var errorMap = {
     faculty: faculty,
     department: department,
     graduationYear: graduationYear,
-    position: position
+    position: position,
 };
 
 submitButton.addEventListener('click', async (event) => {
@@ -40,17 +40,17 @@ submitButton.addEventListener('click', async (event) => {
         position: position.value,
         previousExperience: previousExperience.value,
         comment: comment.value,
-    }
+    };
 
     requestObject = {
         url: '/api/v1/memberForm',
         method: 'POST',
         data: body,
-    }
+    };
 
-    const nextPage = './form-succession';
+    const nextPage = '/form-succession';
 
-    await axiosRequest(requestObject, nextPage, false)
+    await axiosRequest(requestObject, nextPage)
         .then((res) => {
             clearErrors();
             let previousError = "";
@@ -59,7 +59,7 @@ submitButton.addEventListener('click', async (event) => {
                     // continue
                 } else {
                     showError(errorMap[error.path], error.msg);
-                }
+                };
                 previousError = errorMap[error.path];
             });
         });
@@ -75,9 +75,9 @@ for (let input of inputs) {
         }
         else {
             input.style.border = "solid 2px rgb(182, 182, 182)";
-        }
+        };
     });
-}
+};
 
 function showError(field, message) {
 
@@ -87,15 +87,15 @@ function showError(field, message) {
 
     errorMessage.className = "error-message";
     errorSpan.appendChild(text);
-    errorMessage.appendChild(errorSpan)
+    errorMessage.appendChild(errorSpan);
 
     field.insertAdjacentElement("afterend", errorMessage);
     field.style.border = "solid 2px var(--error-red)";
-}
+};
 
 function clearErrors() {
     let messages = document.querySelectorAll(".error-message");
     messages.forEach((message) => {
         message.remove();
     });
-}
+};
